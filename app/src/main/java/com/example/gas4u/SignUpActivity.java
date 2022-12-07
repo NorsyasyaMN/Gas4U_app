@@ -55,7 +55,7 @@ public class SignUpActivity extends AppCompatActivity {
             editTextPassword.requestFocus();
         }
         if (txtPhoneNo.isEmpty()){
-            editTextMobileNo.setError("Please Enter Phone No");
+            editTextMobileNo.setError("Please Enter Mobile No");
             editTextMobileNo.requestFocus();
         }
         if (txtEmail.isEmpty()){
