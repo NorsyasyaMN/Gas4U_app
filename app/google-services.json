@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "26542579435",
+    "project_id": "gas4uapp",
+    "storage_bucket": "gas4uapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:26542579435:android:7806ff731ff09b446868ae",
+        "android_client_info": {
+          "package_name": "com.example.gas4u"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "26542579435-2s9jvc4tjpq41cu1218nbsv7efpd7r04.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA1n9UIBeuUWplhfWhOq-fWSG0Hcjqkoco"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "26542579435-2s9jvc4tjpq41cu1218nbsv7efpd7r04.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
