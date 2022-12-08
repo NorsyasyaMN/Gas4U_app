@@ -4,9 +4,11 @@ import androidx.annotation.NonNull;
         import androidx.appcompat.app.ActionBarDrawerToggle;
         import androidx.appcompat.app.AppCompatActivity;
         import androidx.appcompat.widget.Toolbar;
-        import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
-        import android.view.MenuItem;
+import android.content.Intent;
+import android.view.MenuItem;
         import android.view.View;
         import android.widget.FrameLayout;
 
@@ -37,6 +39,22 @@ public class DrawerBaseActivity extends AppCompatActivity implements NavigationV
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        drawerLayout.closeDrawer(GravityCompat.START);
+
+        switch (item.getItemId()){
+            case R.id.nav_brand:
+                startActivity(new Intent(this, BrandActivity.class));
+                overridePendingTransition(0,0);
+                break;
+            case R.id.nav_shopping_bag:
+                startActivity(new Intent(this, OrderActivity.class));
+                overridePendingTransition(0,0);
+                break;
+            case R.id.nav_shopping_cart:
+                startActivity(new Intent(this, CartActivity.class));
+                overridePendingTransition(0,0);
+                break;
+        }
         return false;
     }
 

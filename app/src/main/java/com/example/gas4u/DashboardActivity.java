@@ -23,6 +23,7 @@ public class DashboardActivity extends DrawerBaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activityDashboardBinding = ActivityDashboardBinding.inflate(getLayoutInflater());
+        allocateActivityTitle("Dashboard");
         setContentView(activityDashboardBinding.getRoot());
     }
 }
