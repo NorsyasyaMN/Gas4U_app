@@ -51,7 +51,7 @@ public class SignUpActivity extends AppCompatActivity {
             editTextUsername.requestFocus();
         }
         if (txtPassword.isEmpty() || txtPassword.length() < 6){
-            editTextPassword.setError("Please Enter Password Containing atleast six characters");
+            editTextPassword.setError("Please Enter Password Containing at least 6 characters");
             editTextPassword.requestFocus();
         }
         if (txtPhoneNo.isEmpty()){
