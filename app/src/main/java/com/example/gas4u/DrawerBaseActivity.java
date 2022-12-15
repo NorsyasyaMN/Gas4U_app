@@ -54,6 +54,9 @@ public class DrawerBaseActivity extends AppCompatActivity implements NavigationV
                 startActivity(new Intent(this, CartActivity.class));
                 overridePendingTransition(0,0);
                 break;
+            case R.id.nav_logout:
+                startActivity(new Intent(this, LogoutActivity.class));
+                break;
         }
         return false;
     }
