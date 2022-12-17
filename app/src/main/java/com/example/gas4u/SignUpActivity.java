@@ -10,6 +10,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.Checkable;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
@@ -37,6 +40,7 @@ public class SignUpActivity extends AppCompatActivity{
     EditText editTextEmail;
     ProgressBar progressBar;
     Button btnSignUp;
+    CheckBox isCustomerBox, isRiderBox, isAdminBox;
 
     FirebaseAuth mAuth;
     FirebaseFirestore fStore;
@@ -53,8 +57,41 @@ public class SignUpActivity extends AppCompatActivity{
         editTextEmail = findViewById(R.id.editTextEmail);
         btnSignUp = findViewById(R.id.signUpBtn);
         progressBar = findViewById(R.id.progressBar);
+        isCustomerBox = findViewById(R.id.checkCustomer);
+        isRiderBox = findViewById(R.id.checkRider);
+        isAdminBox = findViewById(R.id.checkAdmin);
         mAuth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();
+
+        isCustomerBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(compoundButton.isChecked()){
+                    isAdminBox.setChecked(false);
+                    isRiderBox.setChecked(false);
+                }
+            }
+        });
+
+        isAdminBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(compoundButton.isChecked()){
+                    isCustomerBox.setChecked(false);
+                    isRiderBox.setChecked(false);
+                }
+            }
+        });
+
+        isRiderBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(compoundButton.isChecked()){
+                    isCustomerBox.setChecked(false);
+                    isAdminBox.setChecked(false);
+                }
+            }
+        });
 
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,6 +118,12 @@ public class SignUpActivity extends AppCompatActivity{
                     editTextEmail.requestFocus();
                 }
 
+                // checkbox validation
+                if(!(isCustomerBox.isChecked() || isAdminBox.isChecked() || isRiderBox.isChecked())){
+                    Toast.makeText(SignUpActivity.this, "Select The Account Type",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 progressBar.setVisibility(View.VISIBLE);
 
                 mAuth.createUserWithEmailAndPassword(editTextEmail.getText().toString(),editTextPassword.getText().toString()).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
@@ -96,7 +139,15 @@ public class SignUpActivity extends AppCompatActivity{
                         userInfo.put("Email", editTextEmail.getText().toString());
                         userInfo.put("PhoneNumber", editTextMobileNo.getText().toString());
                         // Specify if the user is admin
-                        userInfo.put("isUser","1");
+                        if(isCustomerBox.isChecked()){
+                            userInfo.put("isUser","1");
+                        }
+                        if(isAdminBox.isChecked()){
+                            userInfo.put("isAdmin","1");
+                        }
+                        if(isRiderBox.isChecked()){
+                            userInfo.put("isRider","1");
+                        }
                         df.set(userInfo);
                         startActivity(new Intent(getApplicationContext(),SignInActivity.class));
                         finish();

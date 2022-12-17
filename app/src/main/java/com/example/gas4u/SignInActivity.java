@@ -108,6 +108,7 @@ public class SignInActivity extends AppCompatActivity {
                 }
                 if(documentSnapshot.get("isRider") != null){
                     startActivity(new Intent(getApplicationContext(), RiderActivity.class));
+                    finish();
                 }
             }
         });
