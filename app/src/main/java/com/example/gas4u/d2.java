@@ -4,11 +4,16 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class d2 extends AppCompatActivity {
+import com.example.gas4u.databinding.ActivityD2Binding;
 
+public class d2 extends DrawerAdminActivity{
+
+    ActivityD2Binding activityD2Binding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_d2);
+        activityD2Binding = ActivityD2Binding.inflate(getLayoutInflater());
+        setContentView(activityD2Binding.getRoot());
+        allocateActivityTitle("Orders");
     }
 }

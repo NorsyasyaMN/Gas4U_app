@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item android:id= "@+id/nav_add_product"
+            android:icon= "@drawable/brand"
+            android:title= " Add Products"/>
+
+        <item android:id= "@+id/nav_order"
+            android:icon= "@drawable/shopping_bag"
+            android:title= "Orders"/>
+
+        <item android:id= "@+id/nav_customer"
+            android:icon= "@drawable/customer"
+            android:title= "Customer"/>
+
+        <item android:id= "@+id/nav_logout"
+            android:icon= "@drawable/unlock"
+            android:title= "Logout"/>
+    </group>
+</menu>
