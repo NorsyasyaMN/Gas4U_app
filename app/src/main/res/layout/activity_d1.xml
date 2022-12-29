@@ -14,16 +14,15 @@
 
         <com.blogspot.atifsoftwares.circularimageview.CircularImageView
             android:id="@+id/productIconIv"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="107dp"
+            android:layout_height="101dp"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="30dp"
-            android:src="@drawable/add_product"
             android:minHeight="160dp"
+            android:src="@drawable/add_product"
             app:c_border="true"
             app:c_border_color="@color/colorPrimaryDark"
-            app:c_border_width="1dp"
-            />
+            app:c_border_width="1dp" />
 
         <EditText
             android:id="@+id/titleEt"
@@ -146,7 +145,6 @@
             android:layout_height="wrap_content">
 
         </Button>
-
 
 
     </RelativeLayout>

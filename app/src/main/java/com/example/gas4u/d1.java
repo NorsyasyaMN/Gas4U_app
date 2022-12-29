@@ -33,6 +33,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.gas4u.databinding.ActivityD1Binding;
+import com.google.android.gms.cast.framework.media.ImagePicker;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -58,6 +59,7 @@ public class d1 extends DrawerAdminActivity{
     TextView categoryTv, quantityEt, priceEt, discountedPriceEt, discountedNoteEt;
     SwitchCompat discountSwitch;
     Button addProductBtn;
+
 
     //permission connection
     private static final int CAMERA_REQUEST_CODE = 200;
@@ -128,12 +130,13 @@ public class d1 extends DrawerAdminActivity{
             }
         });
 
-        productIconIv.setOnClickListener(new View.OnClickListener(){
+        activityAddProduct.productIconIv.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View v){
                 //show dialog to pick image
-                showImagePickDialog();
+                //showImagePickDialog();
+               launcher.launch("image/*");
             }
         });
 
@@ -156,6 +159,7 @@ public class d1 extends DrawerAdminActivity{
             }
         });
     }
+
 
     private String productTitle, productDescription, productCategory, productQuantity, originalPrice, discountPrice, discountNote;
     private boolean discountAvailable = false;
@@ -229,7 +233,7 @@ public class d1 extends DrawerAdminActivity{
             hashMap.put("uid", firebaseFirestore.collection("Users").document(user.getUid()));
 
             //add to db
-            firebaseFirestore.collection("Users").document(user.getUid())
+            firebaseFirestore.collection("Users").document(user.getUid()).collection("Product").document()
                     .set(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
@@ -256,7 +260,7 @@ public class d1 extends DrawerAdminActivity{
             //first upload image to storage
 
             //name and path of image to be uploaded
-            String filePathAndName = "product_images/" + "" + timestamp;
+            String filePathAndName = "product_images/" + timestamp;
 
             StorageReference storageReference = FirebaseStorage.getInstance().getReference(filePathAndName);
             storageReference.putFile(image_uri)
@@ -287,7 +291,7 @@ public class d1 extends DrawerAdminActivity{
                                 hashMap.put("uid", firebaseFirestore.collection("Users").document(user.getUid()));
 
                                 //add to db
-                                firebaseFirestore.collection("Users").document(user.getUid())
+                                firebaseFirestore.collection("Users").document(user.getUid()).collection("Product").document()
                                         .set(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
                                             @Override
                                             public void onSuccess(Void aVoid) {
@@ -348,152 +352,133 @@ public class d1 extends DrawerAdminActivity{
                 }).show();
     }
 
-    private void showImagePickDialog() {
-        //options to display in dialog
-        String[] options = {"Camera","Gallery"};
-        //dialog
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Pick Image")
-                .setItems(options, new DialogInterface.OnClickListener(){
-                    @Override
-                    public void onClick(DialogInterface dialog, int which){
-                        //handle items clicks
-                        if (which == 0){
-                            //camera clicked
-                            if (checkCameraPermission()){
-                                //permission granted
-                                pickFromCamera();
-                            }
-                            else{
-                                //permission not granted, request
-                                requestCameraPermission();
-                            }
-                        }
-                        else{
-                            //gallery clicked
-                            if (checkStoragePermission()){
-                                //permission granted
-                                pickFromGallery();
-                            }
-                            else{
-                                //permission not granted
-                                requestStoragePermission();
-                            }
-                        }
-                    }
-                }).show();
-    }
-
-    private void pickFromGallery(){
-        //intent to pick image from gallery
-        Intent intent = new Intent(Intent.ACTION_PICK);
-        intent.setType("image/*");
-        someActivityResultLauncher.launch(intent);
-        //(intent, IMAGE_PICK_GALLERY_CODE);
-    }
-
-    private void pickFromCamera(){
-        //intent to pick image from camera
-
-        //using media store to pick high/original quality image
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(MediaStore.Images.Media.TITLE, "Temp_Image_Title");
-        contentValues.put(MediaStore.Images.Media.DESCRIPTION, "Temp_Image_Description");
-
-        image_uri = getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues);
-
-        Intent intent= new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, image_uri);
-        someActivityResultLauncher.launch(intent);
-        //startActivityForResult(intent, IMAGE_PICK_CAMERA_CODE);
-    }
-
-    private boolean checkStoragePermission(){
-        boolean result = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) ==
-                (PackageManager.PERMISSION_GRANTED);
-        return result; //returns true or false
-    }
-
-    private void requestStoragePermission(){
-        ActivityCompat.requestPermissions(this, storagePermission, STORAGE_REQUEST_CODE);
-    }
-
-    private boolean checkCameraPermission(){
-        boolean result = ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) ==
-                (PackageManager.PERMISSION_GRANTED);
-
-        boolean result1 = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) ==
-                (PackageManager.PERMISSION_GRANTED);
-
-        return result && result1;
-    }
-
-    private void requestCameraPermission(){
-        ActivityCompat.requestPermissions(this, cameraPermissions, CAMERA_REQUEST_CODE);
-    }
-
-
-    //handle permission results
-    public void onRequestPermissionResult(int requestCode, @NonNull String[] permission, @NonNull int[] grantResults){
-        switch (requestCode){
-            case CAMERA_REQUEST_CODE:{
-                if (grantResults.length>0){
-                    boolean cameraAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
-                    boolean storageAccepted = grantResults[1] == PackageManager.PERMISSION_GRANTED;
-                    if (cameraAccepted && storageAccepted){
-                        //both permission granted
-                        pickFromCamera();
-                    }
-                    else{
-                        //both or one permissions denied
-                        Toast.makeText(this, "Camera & Storage permissions are required...", Toast.LENGTH_SHORT).show();
-                    }
-                }
-            }
-            case STORAGE_REQUEST_CODE:{
-                if (grantResults.length>0){
-                    boolean storageAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
-                    if (storageAccepted){
-                        //permission granted
-                        pickFromGallery();
-                    }else{
-                        //permission denied
-                        Toast.makeText(this, "Storage permissions is required...", Toast.LENGTH_SHORT).show();
-                    }
-                }
-            }
+    ActivityResultLauncher<String> launcher = registerForActivityResult(new ActivityResultContracts.GetContent(), new ActivityResultCallback<Uri>() {
+        @Override
+        public void onActivityResult(Uri result) {
+            activityAddProduct.productIconIv.setImageURI(result);
+            image_uri = result;
         }
-        super.onRequestPermissionsResult(requestCode, permission, grantResults);
-    }
+    });
 
-    // You can do the assignment inside onAttach or onCreate, i.e, before the activity is displayed
-    ActivityResultLauncher<Intent> someActivityResultLauncher = registerForActivityResult(
-            new ActivityResultContracts.StartActivityForResult(),
-            new ActivityResultCallback<ActivityResult>() {
-                @Override
-                public void onActivityResult(ActivityResult result) {
-                    if (result.getResultCode() == Activity.RESULT_OK) {
-                        // There are no request codes
-                        Intent data = result.getData();
+//    private void showImagePickDialog() {
+//        //options to display in dialog
+//        String[] options = {"Camera","Gallery"};
+//        //dialog
+//        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//        builder.setTitle("Pick Image")
+//                .setItems(options, new DialogInterface.OnClickListener(){
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which){
+//                        //handle items clicks
+//                        if (which == 0){
+//                            //camera clicked
+//                            if (checkCameraPermission()){
+//                                //permission granted
+//                                pickFromCamera();
+//                            }
+//                            else{
+//                                //permission not granted, request
+//                                requestCameraPermission();
+//                            }
+//                        }
+//                        else{
+//                            //gallery clicked
+//                            if (checkStoragePermission()){
+//                                //permission granted
+//                                pickFromGallery();
+//                            }
+//                            else{
+//                                //permission not granted
+//                                requestStoragePermission();
+//                            }
+//                        }
+//                    }
+//                }).show();
+//    }
 
-                        if (result.getResultCode() == IMAGE_PICK_GALLERY_CODE){
-                            //image picked from gallery
 
-                            //save picked image uri
-                            image_uri = data.getData();
+//    private void pickFromGallery(){
+//        //intent to pick image from gallery
+//        Intent intent = new Intent(Intent.ACTION_PICK);
+//        intent.setType("image/*");
+//        someActivityResultLauncher.launch(intent);
+//        //(intent, IMAGE_PICK_GALLERY_CODE);
+//    }
+//
+//    private void pickFromCamera(){
+//        //intent to pick image from camera
+//
+//        //using media store to pick high/original quality image
+//        ContentValues contentValues = new ContentValues();
+//        contentValues.put(MediaStore.Images.Media.TITLE, "Temp_Image_Title");
+//        contentValues.put(MediaStore.Images.Media.DESCRIPTION, "Temp_Image_Description");
+//
+//        image_uri = getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues);
+//
+//        Intent intent= new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//        intent.putExtra(MediaStore.EXTRA_OUTPUT, image_uri);
+//        someActivityResultLauncher.launch(intent);
+//        //startActivityForResult(intent, IMAGE_PICK_CAMERA_CODE);
+//    }
+//
+//    private boolean checkStoragePermission(){
+//        boolean result = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) ==
+//                (PackageManager.PERMISSION_GRANTED);
+//        return result; //returns true or false
+//    }
+//
+//    private void requestStoragePermission(){
+//        ActivityCompat.requestPermissions(this, storagePermission, STORAGE_REQUEST_CODE);
+//    }
+//
+//    private boolean checkCameraPermission(){
+//        boolean result = ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) ==
+//                (PackageManager.PERMISSION_GRANTED);
+//
+//        boolean result1 = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) ==
+//                (PackageManager.PERMISSION_GRANTED);
+//
+//        return result && result1;
+//    }
+//
+//    private void requestCameraPermission(){
+//        ActivityCompat.requestPermissions(this, cameraPermissions, CAMERA_REQUEST_CODE);
+//    }
+//
+//
+//    //handle permission results
+//    public void onRequestPermissionResult(int requestCode, @NonNull String[] permission, @NonNull int[] grantResults){
+//        switch (requestCode){
+//            case CAMERA_REQUEST_CODE:{
+//                if (grantResults.length>0){
+//                    boolean cameraAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
+//                    boolean storageAccepted = grantResults[1] == PackageManager.PERMISSION_GRANTED;
+//                    if (cameraAccepted && storageAccepted){
+//                        //both permission granted
+//                        pickFromCamera();
+//                    }
+//                    else{
+//                        //both or one permissions denied
+//                        Toast.makeText(this, "Camera & Storage permissions are required...", Toast.LENGTH_SHORT).show();
+//                    }
+//                }
+//            }
+//            case STORAGE_REQUEST_CODE:{
+//                if (grantResults.length>0){
+//                    boolean storageAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
+//                    if (storageAccepted){
+//                        //permission granted
+//                        pickFromGallery();
+//                    }else{
+//                        //permission denied
+//                        Toast.makeText(this, "Storage permissions is required...", Toast.LENGTH_SHORT).show();
+//                    }
+//                }
+//            }
+//        }
+//        super.onRequestPermissionsResult(requestCode, permission, grantResults);
+//    }
 
-                            //set image
-                            productIconIv.setImageURI(image_uri);
-                        }
-                        else if (result.getResultCode() == IMAGE_PICK_CAMERA_CODE){
-                            //image picked from camera
-
-                            productIconIv.setImageURI(image_uri);
-                        }
-
-                    }
-                }
-            });
 //    //handle image pick results
 //    @Override
 //    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data){
