@@ -13,7 +13,6 @@ android {
         targetSdk 32
         versionCode 1
         versionName "1.0"
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -53,4 +52,5 @@ dependencies {
     implementation 'com.airbnb.android:lottie:5.2.0'
     implementation 'com.github.AtifSayings:CircularImageView:1.0.2'
     implementation 'com.github.dhaval2404:imagepicker:2.1'
-  }
+    implementation 'com.squareup.picasso:picasso:2.8'
+}
