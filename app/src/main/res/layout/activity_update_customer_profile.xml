@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UpdateCustomerProfile">
+
+    <!--    Form to input data-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.blogspot.atifsoftwares.circularimageview.CircularImageView
+            android:id="@+id/userPhoto"
+            android:layout_width="107dp"
+            android:layout_height="101dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:minHeight="160dp"
+            android:src="@drawable/profile_photo"
+            app:c_border="true"
+            app:c_border_color="@color/colorPrimaryDark"
+            app:c_border_width="1dp" />
+
+        <EditText
+            android:id="@+id/nameEt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="@drawable/shapre_rect02"
+            android:drawableStart="@drawable/ic_title_gray"
+            android:drawablePadding='10dp'
+            android:inputType="textPersonName|textCapWords"
+            android:layout_below="@id/userPhoto"
+            android:padding="10dp"
+            android:hint="Name">
+        </EditText>
+
+        <EditText
+            android:id="@+id/emailEt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="@drawable/shapre_rect02"
+            android:drawableStart="@drawable/ic_title_gray"
+            android:drawablePadding='10dp'
+            android:inputType="textCapSentences|textMultiLine"
+            android:padding="10dp"
+            android:layout_below="@id/nameEt"
+            android:hint="Email">
+        </EditText>
+
+
+        <EditText
+            android:id="@+id/phoneEt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="@drawable/shapre_rect02"
+            android:drawableStart="@drawable/ic_title_gray"
+            android:drawablePadding='10dp'
+            android:inputType="numberDecimal"
+            android:padding="10dp"
+            android:layout_below="@id/emailEt"
+            android:hint="Phone">
+        </EditText>
+
+        <EditText
+            android:id="@+id/addressEt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="@drawable/shapre_rect02"
+            android:drawableStart="@drawable/ic_title_gray"
+            android:drawablePadding='10dp'
+            android:inputType="textCapSentences|textMultiLine"
+            android:padding="10dp"
+            android:layout_below="@id/phoneEt"
+            android:hint="Address">
+        </EditText>
+
+        <Button
+            android:id="@+id/updateBtn"
+            android:text="Update"
+            android:layout_below="@id/addressEt"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/button_sign_in"
+            android:layout_marginTop="250dp"
+            app:backgroundTint="@null"
+            android:layout_width="400dp"
+            android:layout_height="wrap_content">
+        </Button>
+        <Button
+            android:id="@+id/cancelBtn"
+            android:text="Cancel"
+            android:layout_below="@id/updateBtn"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/button_cancel"
+            android:layout_marginTop="10dp"
+            android:layout_width="400dp"
+            android:layout_height="wrap_content">
+        </Button>
+
+    </RelativeLayout>
+</LinearLayout>

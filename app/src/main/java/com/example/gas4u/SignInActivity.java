@@ -75,7 +75,6 @@ public class SignInActivity extends AppCompatActivity {
                         progressBar.setVisibility(View.GONE);
                         Toast.makeText(SignInActivity.this, "User is Successfully Signed In", Toast.LENGTH_LONG).show();
                         checkUserAccessLevel(authResult.getUser().getUid());
-                        startActivity(new Intent(SignInActivity.this, DashboardActivity.class));
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
@@ -111,6 +110,13 @@ public class SignInActivity extends AppCompatActivity {
                     finish();
                 }
             }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                FirebaseAuth.getInstance().signOut();
+                startActivity(new Intent(getApplicationContext(),SignInActivity.class));
+                finish();
+            }
         });
     }
 
@@ -125,38 +131,6 @@ public class SignInActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-//    @Override
-//    protected void onStart(){
-//        super.onStart();
-//        if(FirebaseAuth.getInstance().getCurrentUser() != null){
-//            DocumentReference df = FirebaseFirestore.getInstance().collection("Users").document(FirebaseAuth.getInstance().getCurrentUser().getUid());
-//            df.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-//                @Override
-//                public void onSuccess(DocumentSnapshot documentSnapshot) {
-//                    if(documentSnapshot.getString("isCustomer") != null){
-//                        startActivity(new Intent(getApplicationContext(),DashboardActivity.class));
-//                        finish();
-//                    }
-//                    if(documentSnapshot.getString("isRider") != null){
-//                        startActivity(new Intent(getApplicationContext(),RiderActivity.class));
-//                        finish();
-//                    }
-//                    if(documentSnapshot.getString("isAdmin") != null){
-//                        startActivity(new Intent(getApplicationContext(),AdminActivity.class));
-//                        finish();
-//                    }
-//                }
-//            }).addOnFailureListener(new OnFailureListener() {
-//                @Override
-//                public void onFailure(@NonNull Exception e) {
-//                    FirebaseAuth.getInstance().signOut();
-//                    startActivity(new Intent(getApplicationContext(),SignInActivity.class));
-//                    finish();
-//                }
-//            });
-//
-//        }
-//    }
 }
 
 
