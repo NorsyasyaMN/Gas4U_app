@@ -123,4 +123,17 @@ public class Constants {
                 put("protocolVersion", "ECv2");
                 put("publicKey", DIRECT_TOKENIZATION_PUBLIC_KEY);
             }};
+    public static final String[] productCategories={
+    "LPG 14kg Petro Cooking Gas",
+    "LPG 12kg Petro Cooking Gas",
+    "LPG 10kg Petro Cooking Gas",
+
+    };
+    public static final String[] productCategories1={
+            "All",
+            "LPG 14kg Petro Cooking Gas",
+            "LPG 12kg Petro Cooking Gas",
+            "LPG 10kg Petro Cooking Gas",
+
+    };
 }
