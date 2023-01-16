@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.gas4u.databinding.ActivityD1Binding;
 import com.example.gas4u.databinding.ActivityUpdateCustomerProfileBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -48,7 +49,9 @@ public class UpdateCustomerProfile extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_update_customer_profile);
+        activityUpdateCustomerProfileBinding = ActivityUpdateCustomerProfileBinding.inflate(getLayoutInflater());
+        setContentView(activityUpdateCustomerProfileBinding.getRoot());
+//        setContentView(R.layout.activity_update_customer_profile);
 
         //init ui views
         userPhoto = findViewById(R.id.userPhoto);
@@ -67,17 +70,16 @@ public class UpdateCustomerProfile extends AppCompatActivity {
         progressDialog.setTitle("Please wait");
         progressDialog.setCanceledOnTouchOutside(false);
 
-        activityUpdateCustomerProfileBinding.userPhoto.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                launcher.launch("image/*");
-            }
-        });
-
         cancelBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
                 startActivity(new Intent(getApplicationContext(), CustomerProfileActivity.class));
+            }
+        });
+        activityUpdateCustomerProfileBinding.userPhoto.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                launcher.launch("image/*");
             }
         });
 

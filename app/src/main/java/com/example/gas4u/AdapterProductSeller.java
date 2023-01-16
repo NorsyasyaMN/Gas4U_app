@@ -42,7 +42,6 @@ public class AdapterProductSeller extends RecyclerView.Adapter<AdapterProductSel
         //get data
         ModelProduct modelProduct=productList.get(position);
         String id= modelProduct.getProductId();
-        String uid= modelProduct.getUid();
         String discountAvailable= modelProduct.getDiscountAvailable();
         String discountNote= modelProduct.getDiscountNote();
         String discountPrice= modelProduct.getDiscountPrice();

@@ -1,7 +1,7 @@
 package com.example.gas4u;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.AlertDialog;
@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -19,6 +20,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.gas4u.databinding.ActivityBrandBinding;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -26,6 +29,14 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -37,15 +48,16 @@ public class BrandActivity extends DrawerBaseActivity {
 
     TextView nameTv,emailTv,phoneTv, tabProductsTv, filterProductsTv;
     EditText searchProductEt;
-    ImageButton logoutBtn,addToCart,filterProductBtn; //editProfileBtn;
+    ImageButton logoutBtn,addToCart,filterProductBtn,editProfileBtn;
     ImageView profileIv;
     RelativeLayout productsRl;
     RecyclerView productsRv;
 
+    FirebaseFirestore db;
     FirebaseAuth firebaseAuth;
     ProgressDialog progressDialog;
-    private ArrayList<ModelProduct> productList;
-    private AdapterProductSeller adapterProductSeller;
+    ArrayList<ModelProduct> productList;
+    AdapterProductSeller adapterProductSeller;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,7 +74,6 @@ public class BrandActivity extends DrawerBaseActivity {
         logoutBtn = findViewById(R.id.logoutBtn);
         addToCart = findViewById(R.id.addToCart);
         filterProductBtn = findViewById(R.id.filterProductBtn);
-//        editProfileBtn = findViewById(R.id.editProfileBtn);
         profileIv = findViewById(R.id.profileIv);
         productsRl = findViewById(R.id.productsRl);
         productsRv = findViewById(R.id.productsRv);
@@ -71,6 +82,7 @@ public class BrandActivity extends DrawerBaseActivity {
         progressDialog.setTitle("Please wait");
         progressDialog.setCanceledOnTouchOutside(false);
         firebaseAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
         checkUser();
         loadAllProducts();
 
@@ -110,12 +122,6 @@ public class BrandActivity extends DrawerBaseActivity {
                 startActivity(new Intent(BrandActivity.this, CartActivity.class));
             }
         });
-                //   editProfileBtn.setOnClickListener(new View.OnClickListener() {
-//           @Override
-//            public void onClick(View view) {
-//               startActivity((new Intent(BrandActivity.this, ProfileEditUserActivity.class)));
-//           }
-//       });
 
         tabProductsTv.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -147,60 +153,64 @@ public class BrandActivity extends DrawerBaseActivity {
         });
         }
     private void loadFilteredProducts(String selected) {
-        productList = new ArrayList<>();
-        //get all products
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users");
-        reference.child(firebaseAuth.getUid()).child("Products").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                //before getting reset list
-                productList.clear();
-                for (DataSnapshot ds: snapshot.getChildren()){
-                    String productCategory =""+ds.child("productCategory").getValue();
-
-                    //if selected category matches product category then add in list
-                    if(selected.equals(productCategory)){
-                        ModelProduct modelProduct = ds.getValue(ModelProduct.class);
-                        productList.add(modelProduct);
-                    }
-                    ModelProduct modelProduct = ds.getValue(ModelProduct.class);
-                    productList.add(modelProduct);
-                }
-                //setup adapter
-                adapterProductSeller = new AdapterProductSeller(BrandActivity.this, productList);
-                //set adapter
-                productsRv.setAdapter(adapterProductSeller);
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
+//        productList = new ArrayList<>();
+//        //get all products
+//        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users");
+//        reference.child(firebaseAuth.getUid()).child("Products").addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                //before getting reset list
+//                productList.clear();
+//                for (DataSnapshot ds: snapshot.getChildren()){
+//                    String productCategory =""+ds.child("productCategory").getValue();
+//
+//                    //if selected category matches product category then add in list
+//                    if(selected.equals(productCategory)){
+//                        ModelProduct modelProduct = ds.getValue(ModelProduct.class);
+//                        productList.add(modelProduct);
+//                    }
+//                    ModelProduct modelProduct = ds.getValue(ModelProduct.class);
+//                    productList.add(modelProduct);
+//                }
+//                //setup adapter
+//                adapterProductSeller = new AdapterProductSeller(BrandActivity.this, productList);
+//                //set adapter
+//                productsRv.setAdapter(adapterProductSeller);
+//            }
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
     }
     private void loadAllProducts() {
         productList = new ArrayList<>();
-        //get all products
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users");
-        reference.child(firebaseAuth.getUid()).child("Products").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                //before getting reset list
-                productList.clear();
-                for (DataSnapshot ds: snapshot.getChildren()){
-                    ModelProduct modelProduct = ds.getValue(ModelProduct.class);
-                    productList.add(modelProduct);
-                }
-                //setup adapter
-                adapterProductSeller = new AdapterProductSeller(BrandActivity.this, productList);
-                //set adapter
-                productsRv.setAdapter(adapterProductSeller);
-            }
+        //setup adapter
+        adapterProductSeller = new AdapterProductSeller(BrandActivity.this, productList);
+        //set adapter
+        productsRv.setAdapter(adapterProductSeller);
+        db.collection("Product").orderBy("productTitle", Query.Direction.ASCENDING)
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
 
-            }
-        });
+                        productList.clear();
+                        if (error != null) {
+
+                            Log.e("Firestore error", error.getMessage());
+                            return;
+                        }
+                        for (DocumentChange dc : value.getDocumentChanges()) {
+
+                            if (dc.getType() == DocumentChange.Type.ADDED) {
+                                productList.add(dc.getDocument().toObject(ModelProduct.class));
+                            }
+                            adapterProductSeller.notifyDataSetChanged();
+                        }
+
+                    }
+                });
     }
     private void showProductsUI() {
         productsRl.setVisibility(View.VISIBLE);
@@ -219,37 +229,36 @@ public class BrandActivity extends DrawerBaseActivity {
         }
     }
     private void loadMyInfo() {
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users");
-        ref.orderByChild("uid").equalTo(firebaseAuth.getUid()).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for(DataSnapshot ds:dataSnapshot.getChildren()){
-                    //get user data
-                    String username = ""+ds.child("Username").getValue();
-                    String email = ""+ds.child("Email").getValue();
-                    String phone = ""+ds.child("Phone").getValue();
-                    String profileImage = ""+ds.child("ProfileImage").getValue();
-                    String accountType = ""+ds.child("AccountType").getValue();
-                    String city = ""+ds.child("City").getValue();
 
-                    // set user data
-                    nameTv.setText(username);
-                    emailTv.setText(email);
-                    phoneTv.setText(phone);
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        DocumentReference reference;
+        FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+        reference = firestore.collection("Customers").document(user.getUid());
+        reference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.getResult().exists()) {
+
+                    String nameResult = task.getResult().getString("userName");
+                    String url = task.getResult().getString("profilePhoto");
+                    String emailResult = task.getResult().getString("userEmail");
+                    String phoneResult = task.getResult().getString("userPhone");
+
+//                    Picasso.get().load(url).into(profileIv);
+                    nameTv.setText(nameResult);
+                    emailTv.setText(emailResult);
+                    phoneTv.setText(phoneResult);
                     try{
-                        Picasso.get().load(profileImage).placeholder(R.drawable.ic_baseline_person_24).into(profileIv);
+                        Picasso.get().load(url).placeholder(R.drawable.ic_baseline_person_24).into(profileIv);
                     }
                     catch(Exception e){
                         profileIv.setImageResource(R.drawable.ic_baseline_person_24);
                     }
                 }
             }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
         });
     }
+
     private void makeMeOffline() {
         progressDialog.setMessage("Logging Out...");
         HashMap<String, Object> hashMap = new HashMap<>();

@@ -18,7 +18,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="30dp"
             android:minHeight="160dp"
-            android:src="@drawable/profile_photo"
+            android:src="@drawable/customer"
             app:c_border="true"
             app:c_border_color="@color/colorPrimaryDark"
             app:c_border_width="1dp" />

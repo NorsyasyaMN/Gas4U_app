@@ -2,7 +2,7 @@ package com.example.gas4u;
 
 public class ModelProduct {
     private String productId, productTitle, productDescription, productCategory, productQuantity, productIcon,
-            originalPrice, discountPrice, discountNote, discountAvailable, timestamp, uid;
+            originalPrice, discountPrice, discountNote, discountAvailable, timestamp;
 
     public ModelProduct() {
     }
@@ -10,7 +10,7 @@ public class ModelProduct {
     public ModelProduct(String productId, String productTitle, String productDescription,
                         String productCategory, String productQuantity, String productIcon,
                         String originalPrice, String discountPrice, String discountNote,
-                        String discountAvailable, String timestamp, String uid) {
+                        String discountAvailable, String timestamp) {
         this.productId = productId;
         this.productTitle = productTitle;
         this.productDescription = productDescription;
@@ -22,7 +22,6 @@ public class ModelProduct {
         this.discountNote = discountNote;
         this.discountAvailable = discountAvailable;
         this.timestamp = timestamp;
-        this.uid = uid;
     }
 
     public String getProductId() {
@@ -113,11 +112,4 @@ public class ModelProduct {
         this.timestamp = timestamp;
     }
 
-    public String getUid() {
-        return uid;
-    }
-
-    public void setUid(String uid) {
-        this.uid = uid;
-    }
 }
