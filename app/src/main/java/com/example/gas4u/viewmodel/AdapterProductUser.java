@@ -23,6 +23,9 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 import p32929.androideasysql_library.Column;
+import p32929.androideasysql_library.EasyDB;
+
+
 
 public class AdapterProductUser extends RecyclerView.Adapter<AdapterProductUser.HolderProductUser> implements Filterable {
 
@@ -123,7 +126,7 @@ public class AdapterProductUser extends RecyclerView.Adapter<AdapterProductUser.
         TextView discountNotedTv  = view.findViewById(R.id.discountedNoteTv);
         TextView originalPriceTv  = view.findViewById(R.id.originalPriceTv);
         TextView priceDiscountedTv  = view.findViewById(R.id.priceDiscountedTv);
-        TextView finalTv  = view.findViewById(R.id.finalTv);
+        TextView finalPriceTv  = view.findViewById(R.id.finalTv);
         ImageButton decrementBtn  = view.findViewById(R.id.decrementBtn);
         TextView quantityTv  = view.findViewById(R.id.quantityTv);
         ImageButton incrementBtn  = view.findViewById(R.id.incrementBtn);
@@ -134,7 +137,7 @@ public class AdapterProductUser extends RecyclerView.Adapter<AdapterProductUser.
         String  title = modelProduct.getProductTitle();
         String  productQuantity = modelProduct.getProductQuantity();
         String  description = modelProduct.getProductDescription();
-        String  discountNote = modelProduct.getProductdiscountNote();
+        String  discountNote = modelProduct.getDiscountNote();
         String  image = modelProduct.getProductIcon();
 
         String price;
@@ -147,7 +150,7 @@ public class AdapterProductUser extends RecyclerView.Adapter<AdapterProductUser.
         else{
             //product dont have discount
             discountNotedTv.setVisibility(View.GONE);
-            priceDiscountedTv.setVisibility(View.VISIBLE);
+            priceDiscountedTv.setVisibility(View.GONE);
             price = modelProduct.getOriginalPrice();
         }
 
@@ -159,6 +162,7 @@ public class AdapterProductUser extends RecyclerView.Adapter<AdapterProductUser.
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setView(view);
 
+        //set data
         try {
             Picasso.get().load(image).placeholder(R.drawable.ic_cart_gray).into(productIv);
         }
@@ -170,14 +174,14 @@ public class AdapterProductUser extends RecyclerView.Adapter<AdapterProductUser.
         descriptionTv.setText(""+description);
         discountNotedTv.setText(""+discountNote);
         quantityTv.setText(""+quantityTv);
-        originalPriceTv.setText(""+ modelProduct.getOriginalPrice());
-        priceDiscountedTv.setText(""+ modelProduct.getDiscountPrice());
-        finalPriceTv.setText(""+ finalCost);
+        originalPriceTv.setText("$"+ modelProduct.getOriginalPrice());
+        priceDiscountedTv.setText("$"+ modelProduct.getDiscountPrice());
+        finalPriceTv.setText("$"+ finalCost);
 
         AlertDialog dialog= builder.create();
         dialog.show();
 
-        //increase quantity od the product
+        //increase quantity of the product
         incrementBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -188,22 +192,23 @@ public class AdapterProductUser extends RecyclerView.Adapter<AdapterProductUser.
                 quantityTv.setText(""+ quantity);
             }
         });
+
         // decrement quantity of product, only if quantity is >1
         decrementBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
                 if (quantity>1){
                     finalCost = finalCost - cost;
                     quantity--;
 
-                    finalPricetv.setText("$"+finalCost);
+                    finalPriceTv.setText("$"+finalCost);
                     quantityTv.setText(""+quantity);
                 }
             }
         });
         continueBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
                 String title = titleTv.getText().toString().trial();
                 String priceEach = originalPriceTv.getText().toString().trim().replace("$","" );
                 String price = finalPriceTv.getText().toString().trim().replace("$","" );
