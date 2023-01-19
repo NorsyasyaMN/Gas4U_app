@@ -60,17 +60,6 @@ public class d1 extends DrawerAdminActivity{
     SwitchCompat discountSwitch;
     Button addProductBtn;
 
-
-    //permission connection
-    private static final int CAMERA_REQUEST_CODE = 200;
-    private static final int STORAGE_REQUEST_CODE= 300;
-    //image pick connection
-    private static final int IMAGE_PICK_GALLERY_CODE = 400;
-    private static final int IMAGE_PICK_CAMERA_CODE = 500;
-    //permission arrays
-    private String[] cameraPermissions;
-    private String[] storagePermission;
-    //image picked uri
     Uri image_uri;
 
     FirebaseAuth firebaseAuth;
@@ -108,10 +97,6 @@ public class d1 extends DrawerAdminActivity{
         progressDialog = new ProgressDialog(this);
         progressDialog.setTitle("Please wait");
         progressDialog.setCanceledOnTouchOutside(false);
-
-        //init permission arrays
-        cameraPermissions = new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
-        storagePermission = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE};
 
         //if discountSwitch is checked: show discountPriceEt, discountNoteEt | if discountSwitch is not checked: hide discountPriceEt, discountNoteEt
         discountSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -194,9 +179,9 @@ public class d1 extends DrawerAdminActivity{
                 return; // don't proceed further
             }
             else{
-                //product is without discount
-                discountPrice = "0";
-                discountNote = "";
+                //product is with discount
+                discountPrice = discountedPriceEt.getText().toString();;
+                discountNote = discountedNoteEt.getText().toString();
             }
         }
 
@@ -228,12 +213,12 @@ public class d1 extends DrawerAdminActivity{
             hashMap.put("originalPrice", originalPrice);
             hashMap.put("discountPrice", discountPrice);
             hashMap.put("discountNote", discountNote);
-            hashMap.put("discountAvailable", discountAvailable);
+            hashMap.put("discountAvailable", String.valueOf(discountAvailable));
             hashMap.put("timestamp", timestamp);
             hashMap.put("uid", firebaseFirestore.collection("Users").document(user.getUid()));
 
             //add to db
-            firebaseFirestore.collection("Users").document(user.getUid()).collection("Product").document()
+            firebaseFirestore.collection("Product").document()
                     .set(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
@@ -286,12 +271,12 @@ public class d1 extends DrawerAdminActivity{
                                 hashMap.put("originalPrice", originalPrice);
                                 hashMap.put("discountPrice", discountPrice);
                                 hashMap.put("discountNote", discountNote);
-                                hashMap.put("discountAvailable", discountAvailable);
+                                hashMap.put("discountAvailable", String.valueOf(discountAvailable));
                                 hashMap.put("timestamp", timestamp);
                                 hashMap.put("uid", firebaseFirestore.collection("Users").document(user.getUid()));
 
                                 //add to db
-                                firebaseFirestore.collection("Users").document(user.getUid()).collection("Product").document()
+                                firebaseFirestore.collection("Product").document()
                                         .set(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
                                             @Override
                                             public void onSuccess(Void aVoid) {

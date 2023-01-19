@@ -19,4 +19,5 @@
     <color name="pink">#D242EC</color>
     <color name="red2">#F73E7C</color>
     <color name="lightGrey">#c1c1c1</color>
+    <color name="headerTextColor">#ECE3E3</color>
 </resources>
