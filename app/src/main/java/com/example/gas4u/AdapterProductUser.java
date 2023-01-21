@@ -1,4 +1,4 @@
-package com.example.gas4u.viewmodel;
+package com.example.gas4u;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -6,6 +6,7 @@ import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageButton;
@@ -16,16 +17,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.gas4u.ModelProduct;
-import com.example.gas4u.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-
-import p32929.androideasysql_library.Column;
-import p32929.androideasysql_library.EasyDB;
-
-
 
 public class AdapterProductUser extends RecyclerView.Adapter<AdapterProductUser.HolderProductUser> implements Filterable {
 
@@ -37,7 +31,6 @@ public class AdapterProductUser extends RecyclerView.Adapter<AdapterProductUser.
     public AdapterProductUser(Context context, ArrayList<ModelProduct> productList) {
         this.context = context;
         this.productList = productList;
-        this.filterList = productList;
     }
 
     @NonNull
@@ -45,6 +38,7 @@ public class AdapterProductUser extends RecyclerView.Adapter<AdapterProductUser.
     public HolderProductUser onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         //inflate layout
         View view = LayoutInflater.from(context).inflate(R.layout.row_product_user, parent, false);
+
         return new HolderProductUser(view);
     }
 
@@ -87,7 +81,7 @@ public class AdapterProductUser extends RecyclerView.Adapter<AdapterProductUser.
         }
 
         try {
-            Picasso.get().load(productIcon.placeholder(R.drawable.shopping_cart).into(holder.productIconTv);
+            Picasso.get().load(productIcon.placeholder(R.drawable.ic_add_shopping_primary).into(holder.productIconTv);
         }
         catch (Exception e){
             holder.productIconTv.setImageResource(R.drawable.ic_add_shopping_primary);
@@ -98,7 +92,6 @@ public class AdapterProductUser extends RecyclerView.Adapter<AdapterProductUser.
             public void onClick(View v) {
                 //add product to cart
                 showQuantityDialog(modelProduct);
-
             }
             });
 
@@ -116,119 +109,118 @@ public class AdapterProductUser extends RecyclerView.Adapter<AdapterProductUser.
     private double finalCost = 0;
     private int quantity = 0;
     private void showQuantityDialog(ModelProduct modelProduct) {
+
         //inflate layout for dialog
-        View view = LayoutInflater.from (context).inflate(R.layout.dialog_quantity, null);
-        //init layout view
-        ImageView product = view.findViewById(R.id.productIv);
-        TextView productIv  = view.findViewById(R.id.titleTv);
-        TextView pQuantity  = view.findViewById(R.id.pQuantityTv);
-        TextView descriptionTv  = view.findViewById(R.id.descriptionTv);
-        TextView discountNotedTv  = view.findViewById(R.id.discountedNoteTv);
-        TextView originalPriceTv  = view.findViewById(R.id.originalPriceTv);
-        TextView priceDiscountedTv  = view.findViewById(R.id.priceDiscountedTv);
-        TextView finalPriceTv  = view.findViewById(R.id.finalTv);
-        ImageButton decrementBtn  = view.findViewById(R.id.decrementBtn);
-        TextView quantityTv  = view.findViewById(R.id.quantityTv);
-        ImageButton incrementBtn  = view.findViewById(R.id.incrementBtn);
-        ImageButton continueBtn  = view.findViewById(R.id.continueBtn);
+        View view = LayoutInflater.from(context).inflate(R.layout.dialog_quantity, null);
+        //init layout views
+        ImageView productIv = view.findViewById(R.id.productIv);
+        TextView titleTv = view.findViewById(R.id.titleTv);
+        TextView pQuantityTv = view.findViewById(R.id.pQuantityTv);
+        TextView descriptionTv = view.findViewById(R.id.descriptionTv);
+        TextView discountedNoteTv = view.findViewById(R.id.discountedNoteTv);
+        TextView originalPriceTv = view.findViewById(R.id.originalPriceTv);
+        TextView priceDiscountedTv = view.findViewById(R.id.priceDiscountedTv);
+        TextView finalPriceTv = view.findViewById(R.id.finalPriceTv);
+        ImageButton decrementBtn = view.findViewById(R.id.quantityTv);
+        TextView quantityTv = view.findViewById(R.id.quantityTv);
+        ImageButton incrementBtn = view.findViewById(R.id.incrementBtn);
+        Button continueBtn = view.findViewById(R.id.continueBtn);
 
         //get data from model
-        String  productId = modelProduct.getProductId();
-        String  title = modelProduct.getProductTitle();
-        String  productQuantity = modelProduct.getProductQuantity();
-        String  description = modelProduct.getProductDescription();
-        String  discountNote = modelProduct.getDiscountNote();
-        String  image = modelProduct.getProductIcon();
+        String productId = modelProduct.getProductId();
+        String title = modelProduct.getProductTitle();
+        String productQuantity = modelProduct.getProductQuantity();
+        String description = modelProduct.getProductDescription();
+        String discountNote = modelProduct.getDiscountNote();
+        String image = modelProduct.getProductIcon();
 
         String price;
-        if(modelProduct.getDiscountPrice().equals("true")){
+        if (modelProduct.getDiscountAvailable().equals("true")){
             //product have discount
-            price = modelProduct.getDiscountPrice();
+            price = modelProduct.getDixcountPrice();
             discountedNoteTv.setVisibility(View.VISIBLE);
-            originalPriceTv.setPaintFlags(originalPriceTv.getPaintFlags()| Paint.STRIKE_THRU_TEXT_FLAG);//add strike through on original price
+            originalPriceTv.setPaintFlags(originalPriceTv.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG); // add strike through on original price
         }
         else{
-            //product dont have discount
-            discountNotedTv.setVisibility(View.GONE);
+            //product no discount
+            discountedNoteTv.setVisibility(View.GONE);
             priceDiscountedTv.setVisibility(View.GONE);
             price = modelProduct.getOriginalPrice();
         }
-
-        cost = Double.parseDouble(price.replaceAll("$",""));
-        finalCost = Double.parseDouble(price.replaceAll("$",""));
+        cost = Double.parseDouble(price.replaceAll("$", ""));
+        finalCost = Double.parseDouble(price.replaceAll("$", ""));
         quantity = 1;
 
         //dialog
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setView(view);
 
-        //set data
-        try {
+        try{
             Picasso.get().load(image).placeholder(R.drawable.ic_cart_gray).into(productIv);
         }
-            catch (Exception e){
+        catch (Exception e){
                 productIv.setImageResource(R.drawable.ic_cart_gray);
             }
-        titleTv.setText(""+title);
-        pQuantityTv.setText(""+productQuantity);
-        descriptionTv.setText(""+description);
-        discountNotedTv.setText(""+discountNote);
-        quantityTv.setText(""+quantityTv);
-        originalPriceTv.setText("$"+ modelProduct.getOriginalPrice());
-        priceDiscountedTv.setText("$"+ modelProduct.getDiscountPrice());
-        finalPriceTv.setText("$"+ finalCost);
+            titleTv.setText(""+title);
+            pQuantityTv.setText(""+productQuantity);
+            descriptionTv.setText(""+description);
+            discountedNoteTv.setText(""+discountNote);
+            quantityTv.setText(""+quantity);
+            originalPriceTv.setText("$"+modelProduct.getOriginalPrice());
+            priceDiscountedTv.setText("$"+modelProduct.getDiscountPrice());
+            finalPriceTv.setText("$"+finalCost);
 
-        AlertDialog dialog= builder.create();
-        dialog.show();
+            AlertDialog dialog = builder.create();
+            dialog.show();
 
-        //increase quantity of the product
-        incrementBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finalCost = finalCost + cost;
-                quantity++;
-
-                finalPriceTv.setText("$"+finalCost);
-                quantityTv.setText(""+ quantity);
-            }
-        });
-
-        // decrement quantity of product, only if quantity is >1
-        decrementBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (quantity>1){
-                    finalCost = finalCost - cost;
-                    quantity--;
+            //increase quantity of the product
+            incrementBtn.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v){
+                    finalCost = finalCost + cost;
+                    quantity++;
 
                     finalPriceTv.setText("$"+finalCost);
                     quantityTv.setText(""+quantity);
                 }
-            }
-        });
-        continueBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String title = titleTv.getText().toString().trial();
-                String priceEach = originalPriceTv.getText().toString().trim().replace("$","" );
-                String price = finalPriceTv.getText().toString().trim().replace("$","" );
-                String quantity = quantityTv.getText().toString().trim();
+            });
+            // decrement quantity of product, only if quantity is > 1
+            decrementBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (quantity>1){
+                        finalCost = finalCost - cost;
+                        quantity --;
 
-                addtoCart(productId, title, priceEach, price, quantity);
+                        finalPriceTv.setText("$"+finalCost);
+                        quantityTv.setText(""+quantity);
+                    }
+                }
+            });
+            continueBtn.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v) {
+                    String title = titleTv.getText().toString().trim();
+                    String priceEach = originalPriceTv.getText().toString().trim().replace("$", "");
+                    String price = finalPriceTv.getText().toString().trim().replace("$","");
+                    String quantity = quantityTv.getText().toString().trim();
 
-                dialog.dismiss();
+                    //add to db(SQLite)
+                    addToCart(productId, title, priceEach,price, quantity);
 
-            }
-        });
+                    dialog.dismiss();
+                }
+
+            });
     }
 
     private int itemId = 1;
-    private void addtoCart(String productId, String title, String priceEach, String price, String quantity) {
+    private void addToCart(String productId, String title, String priceEach, String price, String quantity) {
         itemId++;
 
-        EasyDb easyDb = EasyDb.init(context,"ITEMS_DB")
-                .setTableName("ITEM_TABLE")
-                .addColumn(new Column("item_Id", new String(){"text","unique"}))
+        EasyDB easyDB = EasyDB.init(context, "ITEMS_DB")
+                .setTableName("ITEMS_TABLE")
+                .addColumn(new Column("Item_Id", new String[]{"text", "unique"}))
                 .addColumn(new Column("Item_PID", new String[]{"text", "not null"}))
                 .addColumn(new Column("Item_Name", new String[]{"text", "not null"}))
                 .addColumn(new Column("Item_Price_Each", new String[]{"text", "not null"}))
@@ -236,19 +228,17 @@ public class AdapterProductUser extends RecyclerView.Adapter<AdapterProductUser.
                 .addColumn(new Column("Item_Quantity", new String[]{"text", "not null"}))
                 .doneTableColumn();
 
-        Boolean b = easyDb.addData("Item_Id", itemId)
-                .addData("Item_PId", productId)
-                .addData("Item_Name", title)
-                .addData("Item_Price_Each", priceEach)
-                .addData("Item_Price", price)
-                .addData("Item_Quantity", quantity)
+        Boolean b = easyDB.addData("Item_Id", itemId)
+                .addData("item_PID", productId)
+                .addData("item_Name", productId)
+                .addData("item_Price_Each", productId)
+                .addData("item_Price", productId)
+                .addData("item_Quantity", quantity)
                 .doneDataAdding();
 
         Toast.makeText(context, "Added to cart...", Toast.LENGTH_SHORT).show();
 
-
     }
-
 
     @Override
     public int getItemCount() {
