@@ -1,12 +1,39 @@
 package com.example.gas4u;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Toast;
 
 import com.example.gas4u.databinding.ActivityCartBinding;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Objects;
 
 public class CartActivity extends DrawerBaseActivity {
+
+    private static final String userName = "userName";
+    private static final String userPhone = "userPhone";
+    private static final String userAddress = "userAddress";
+
+
+    FirebaseAuth fa = FirebaseAuth.getInstance();
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     ActivityCartBinding activityCartBinding;
     @Override
@@ -15,5 +42,125 @@ public class CartActivity extends DrawerBaseActivity {
         activityCartBinding = ActivityCartBinding.inflate(getLayoutInflater());
         setContentView(activityCartBinding.getRoot());
         allocateActivityTitle("Carts");
+
     }
+
+    public void placeorder(View v){
+
+
+
+        final String[] fonts = {
+                "Default Address", "New Address"
+        };
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(CartActivity.this);
+        builder.setTitle("Please choose the address");
+        builder.setItems(fonts, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+            if ("Default Address".equals(fonts[which])) {
+
+
+                FirebaseUser user = fa.getCurrentUser();
+                DocumentReference docRef = db.collection("Customers").document(user.getUid());
+                docRef.get()
+                        .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                            @Override
+                            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                if (documentSnapshot.exists()){
+                                    String name = documentSnapshot.getString(userName);
+                                    String phone = documentSnapshot.getString(userPhone);
+                                    String address = documentSnapshot.getString(userAddress);
+                                    String shipstatus = "Ordered";
+
+
+                                    String timestamp = ""+System.currentTimeMillis();
+                                    FirebaseUser user = fa.getCurrentUser();
+
+                                    //setup data to upload
+                                    HashMap<String, Object> hashMap = new HashMap<>();
+                                    hashMap.put("productId", ""+timestamp);
+                                    hashMap.put("Receiver Name: ", name);
+                                    hashMap.put("Phone Number", phone);
+                                    hashMap.put("Address", address);
+                                    hashMap.put("Order Status", shipstatus);
+                                    hashMap.put("timestamp", timestamp);
+                                    hashMap.put("uid", db.collection("Order").document(user.getUid()));
+
+                                    //add to db
+                                    db.collection("Order").document(user.getUid())
+                                            .set(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<Void> task) {
+                                                    if(task.isSuccessful()){
+                                                        //added to db
+                                                        Toast.makeText(CartActivity.this, "Order placed...", Toast.LENGTH_SHORT).show();
+                                                        //clearData();
+                                                    }
+                                                }
+                                            })
+                                            .addOnFailureListener(new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull Exception e) {
+                                                    Toast.makeText(CartActivity.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+                                                }
+                                            });
+
+
+
+
+                                } else {
+                                    Toast.makeText(CartActivity.this, "ORDER PLACEMENT FAILED!", Toast.LENGTH_SHORT).show();
+                                }
+
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(CartActivity.this, "error!", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
+               // Toast.makeText(CartActivity.this, "you nailed it", Toast.LENGTH_SHORT).show();
+            } else if ("New Address".equals(fonts[which])) {
+
+                Intent intent2 = new Intent(getBaseContext(), PlaceOrderActivity.class);
+                startActivity(intent2);
+            }
+
+        }
+        });
+        builder.show();
+
+
+
+
+    }
+
+
+
+//if (Objects.equals(role, user.getUid())){
+//
+//        if (Objects.equals(entr_stat, "in")){
+//
+//
+//            txtTesting.setText("GOOD NEWS!");
+//            txtTesting2.setText("We are happy to say that MR/MRS" + name + " is available at the faculty.");
+//
+//        } else {
+//
+//            txtTesting.setText("SAD NEWS!");
+//            txtTesting2.setText("We are sadly to say that MR/MRS " + name + " is not available at the faculty.");
+//        }
+//
+//    } else{
+//
+//        txtTesting.setText("SAD NEWS!");
+//        txtTesting2.setText("We are sadly to say that MR/MRS " + name + " is not a lecturer");
+//
+//    }
+
+
+
 }
