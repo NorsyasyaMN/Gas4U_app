@@ -55,7 +55,7 @@
                 android:id="@+id/discountedPriceTv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Promo Price: RM 28"
+                android:text="RM 28"
                 android:layout_marginEnd="10dp"
                 android:textColor="@color/textColor"/>
             <TextView
@@ -63,20 +63,34 @@
                 android:id="@+id/originalPriceTv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Original Price: RM 38"
+                android:text="RM 38"
                 android:textColor="@color/textColor"/>
+
+            <TextView
+                android:id="@+id/addProduct"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/discountedPriceTv"
+                android:layout_marginTop="5dp"
+                android:drawableStart="@drawable/cart_blue"
+                android:textColor="@color/splash_blue"
+                android:text="Add to cart"
+                android:layout_marginStart="5dp"
+                android:layout_marginBottom="5dp"/>
+
         </RelativeLayout>
         </LinearLayout>
+
         <ImageView
             android:id="@+id/nextIv"
+            android:layout_width="16dp"
+            android:layout_height="14dp"
             android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="5dp"
             android:adjustViewBounds="true"
             android:scaleType="fitCenter"
-            android:layout_centerVertical="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="5dp"
-            android:src="@drawable/ic_next"/>
+            android:src="@drawable/ic_next" />
     </RelativeLayout>
 
 </androidx.cardview.widget.CardView>
