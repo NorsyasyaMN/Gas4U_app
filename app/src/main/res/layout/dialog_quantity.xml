@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical">
     
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/shape_rect01">
+        android:background="@drawable/shape_rect03">
 
     <com.blogspot.atifsoftwares.circularimageview.CircularImageView
         android:id="@+id/productIv"
@@ -25,7 +25,7 @@
         android:layout_below="@id/productIv"
         android:layout_marginTop="5dp"
         android:text="Product Title"
-        android:textColor="@color/colorWhite"/>
+        android:textColor="@color/white"/>
 
     <TextView
         android:id="@+id/pQuantityTv"
@@ -35,7 +35,7 @@
         android:layout_below="@id/titleTv"
         android:text="Quantity"
         android:textSize="10sp"
-        android:textColor="@color/colorWhite"/>
+        android:textColor="@color/white"/>
 
     <TextView
         android:id="@+id/descriptionTv"
@@ -45,7 +45,7 @@
         android:layout_below="@id/pQuantityTv"
         android:layout_marginTop="5dp"
         android:text="Product Description"
-        android:textColor="@color/colorWhite"/>
+        android:textColor="@color/white"/>
 
     <TextView
         android:id="@+id/discountedNoteTv"
@@ -55,9 +55,9 @@
         android:layout_margin="5dp"
         android:text="10% OFF"
         android:padding="5dp"
-        android:textColor="@color/colorGreen"
+        android:textColor="@color/green1"
         android:textSize="10sp"
-        android:background="@drawable/shape_rect05"/>
+        android:background="@drawable/shape_rect_product"/>
 
     </RelativeLayout>
 
@@ -74,27 +74,27 @@
             android:padding="10dp"
             android:text="$12"
             android:textAlignment="textStart"
-            android:textColor="@color/colorBlack"/>
+            android:textColor="@color/black"/>
 
         <TextView
-            android:id="@id/priceDiscountedTv"
+            android:id="@+id/priceDiscountedTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="10dp"
             android:layout_toEndOf="@+id/originalPriceTv"
             android:text="$10"
             android:textAlignment="textStart"
-            android:textColor="@color/colorBlack"/>
+            android:textColor="@color/black"/>
 
         <TextView
-            android:id="@id/finalPriceTv"
+            android:id="@+id/finalPriceTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="10dp"
             android:layout_alignParentEnd="true"
             android:text="Final Price"
             android:textAlignment="textStart"
-            android:textColor="@color/colorBlack"/>
+            android:textColor="@color/black"/>
 
 
 
@@ -121,7 +121,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="1"
-            android:textColor="@color/colorBlack"
+            android:textColor="@color/black"
             android:textSize="18sp"/>
 
         <ImageButton
@@ -131,19 +131,19 @@
             android:layout_gravity="center_vertical"
             android:background="@null"
             android:src="@drawable/ic_add_black"/>
-    </LinearLayout>
 
+    </LinearLayout>
     <Button
-        android:id="@id/continueBtn"
+        android:id="@+id/continueBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:background="@color/colorPrimary"
         android:padding="5dp"
         android:text="Add To Cart"
-        android:testColor="@color/colorWhite"
-        android:textAllCaps="false"/>
-
+        android:textColor="@color/white"
+        android:textAllCaps="false">
+    </Button>
 
 </LinearLayout>
 

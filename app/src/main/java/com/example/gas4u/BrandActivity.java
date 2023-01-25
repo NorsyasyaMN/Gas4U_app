@@ -48,7 +48,7 @@ public class BrandActivity extends DrawerBaseActivity {
 
     TextView nameTv,emailTv,phoneTv, tabProductsTv, filterProductsTv;
     EditText searchProductEt;
-    ImageButton logoutBtn,addToCart,filterProductBtn,editProfileBtn;
+    ImageButton logoutBtn,addToCart,filterProductBtn;
     ImageView profileIv;
     RelativeLayout productsRl;
     RecyclerView productsRv;
@@ -119,7 +119,7 @@ public class BrandActivity extends DrawerBaseActivity {
         addToCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(BrandActivity.this, CartActivity.class));
+                startActivity(new Intent(BrandActivity.this, AdapterProductSeller.class));
             }
         });
 
