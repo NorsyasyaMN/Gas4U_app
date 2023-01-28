@@ -225,10 +225,10 @@ public class BrandActivity extends DrawerBaseActivity {
             finish();
         }
         else{
-            loadMyInfo();
+            //loadMyInfo();
         }
     }
-    private void loadMyInfo() {
+    /*   private void loadMyInfo() {
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         DocumentReference reference;
@@ -257,7 +257,7 @@ public class BrandActivity extends DrawerBaseActivity {
                 }
             }
         });
-    }
+    }*/
 
     private void makeMeOffline() {
         progressDialog.setMessage("Logging Out...");
