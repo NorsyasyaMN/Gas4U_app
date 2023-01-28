@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.gas4u.databinding.ActivityCartBinding;
@@ -96,7 +97,12 @@ public class CartActivity extends DrawerBaseActivity {
                                                         //added to db
                                                         Toast.makeText(CartActivity.this, "Order placed...", Toast.LENGTH_SHORT).show();
                                                         //clearData();
+
+                                                        Intent intent2 = new Intent(getBaseContext(), CheckoutActivity.class);
+                                                        startActivity(intent2);
+
                                                     }
+
                                                 }
                                             })
                                             .addOnFailureListener(new OnFailureListener() {
@@ -105,8 +111,6 @@ public class CartActivity extends DrawerBaseActivity {
                                                     Toast.makeText(CartActivity.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
                                                 }
                                             });
-
-
 
 
                                 } else {

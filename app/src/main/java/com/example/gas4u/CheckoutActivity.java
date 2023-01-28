@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -30,6 +31,9 @@ import com.example.gas4u.databinding.ActivityCheckoutBinding;
  */
 public class CheckoutActivity extends AppCompatActivity {
 
+    Button button;
+
+
     // Arbitrarily-picked constant integer you define to track a request for payment data activity.
     private static final int LOAD_PAYMENT_DATA_REQUEST_CODE = 991;
 
@@ -48,8 +52,18 @@ public class CheckoutActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         initializeUi();
 
+        button = findViewById(R.id.Paycash); // paycash
+
         model = new ViewModelProvider(this).get(CheckoutViewModel.class);
         model.canUseGooglePay.observe(this, this::setGooglePayAvailable);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(CheckoutActivity.this, "Order Placed..", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getBaseContext(), DashboardActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void initializeUi() {
