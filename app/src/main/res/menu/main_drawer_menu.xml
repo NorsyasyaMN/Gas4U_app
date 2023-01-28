@@ -20,8 +20,8 @@
 
         <item android:id= "@+id/nav_helpline"
             android:icon= "@drawable/ic_call"
-            android:title= "Profile"/>
-
+            android:title= "Helpline"/>
+        
         <item android:id= "@+id/nav_logout"
             android:icon= "@drawable/unlock"
             android:title= "Logout"/>
