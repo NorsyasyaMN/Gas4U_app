@@ -51,14 +51,14 @@ import com.google.firebase.storage.UploadTask;
 import java.util.HashMap;
 
 
-public class d1 extends DrawerAdminActivity{
+public class d1 extends AppCompatActivity{
 
     ActivityD1Binding activityAddProduct;
     ImageView productIconIv;
     EditText titleEt, descriptionEt;
     TextView categoryTv, quantityEt, priceEt, discountedPriceEt, discountedNoteEt;
     SwitchCompat discountSwitch;
-    Button addProductBtn;
+    Button addProductBtn, cancelBtn;
 
     Uri image_uri;
 
@@ -72,7 +72,6 @@ public class d1 extends DrawerAdminActivity{
         super.onCreate(savedInstanceState);
         activityAddProduct = ActivityD1Binding.inflate(getLayoutInflater());
         setContentView(activityAddProduct.getRoot());
-        allocateActivityTitle("Add Product");
 
         //init ui views
         productIconIv = findViewById(R.id.productIconIv);
@@ -85,6 +84,7 @@ public class d1 extends DrawerAdminActivity{
         discountedNoteEt = findViewById(R.id.discountedNoteEt);
         discountSwitch = findViewById(R.id.discountSwitch);
         addProductBtn = findViewById(R.id.addProductBtn);
+        cancelBtn = findViewById(R.id.cancelBtn);
 
         //checked, show discountPriceEt, discountNoteEt
         discountedPriceEt.setVisibility(View.GONE);
@@ -112,6 +112,13 @@ public class d1 extends DrawerAdminActivity{
                     discountedPriceEt.setVisibility(View.GONE);
                     discountedNoteEt.setVisibility(View.GONE);
                 }
+            }
+        });
+
+        cancelBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                startActivity(new Intent(getApplicationContext(), AdminViewProduct.class));
             }
         });
 

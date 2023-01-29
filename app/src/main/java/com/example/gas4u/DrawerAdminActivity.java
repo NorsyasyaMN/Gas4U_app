@@ -43,10 +43,6 @@ public class DrawerAdminActivity extends AppCompatActivity implements Navigation
         drawerLayout.closeDrawer(GravityCompat.START);
 
         switch (item.getItemId()){
-            case R.id.nav_add_product:
-                startActivity(new Intent(this, d1.class));
-                overridePendingTransition(0,0);
-                break;
             case R.id.nav_view_product:
                 startActivity(new Intent(this, AdminViewProduct.class));
                 overridePendingTransition(0,0);

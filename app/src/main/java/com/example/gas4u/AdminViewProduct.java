@@ -102,7 +102,7 @@ public class AdminViewProduct extends DrawerAdminActivity{
         addToCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(AdminViewProduct.this, d4.class));
+                startActivity(new Intent(AdminViewProduct.this, d1.class));
             }
         });
 
