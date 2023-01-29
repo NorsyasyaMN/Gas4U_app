@@ -152,7 +152,7 @@ public class PlaceOrderActivity extends AppCompatActivity {
 
     public void btnback(View v){
 
-        Intent intent2 = new Intent(getBaseContext(), CartActivity.class);
+        Intent intent2 = new Intent(getBaseContext(), UserCart.class);
         startActivity(intent2);
     }
 }

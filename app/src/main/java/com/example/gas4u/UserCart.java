@@ -3,18 +3,20 @@ package com.example.gas4u;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.gas4u.databinding.ActivityCartBinding;
+import com.example.gas4u.databinding.ActivityUserCartBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -33,9 +35,8 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class CartActivity extends DrawerBaseActivity {
+public class UserCart extends DrawerBaseActivity {
 
-    TextView itemTitleTv,itemPriceTv,itemPriceEachTv,itemQuantityTv;
     TextView sTotalLabelTv, sTotalTv, dFeeLabelTv, dFeeTv, totalLabelTv, totalTv;
     private static final String userName = "userName";
     private static final String userPhone = "userPhone";
@@ -44,7 +45,7 @@ public class CartActivity extends DrawerBaseActivity {
     RecyclerView cartItemsRv;
     FirebaseAuth fa = FirebaseAuth.getInstance();
     FirebaseFirestore db = FirebaseFirestore.getInstance();
-    ActivityCartBinding activityCartBinding;
+    ActivityUserCartBinding activityUserCartBinding;
     ArrayList<ModelCartItem> cartItems;
     AdapterCartItem adapterCartItem;
     FirebaseAuth firebaseAuth;
@@ -52,14 +53,10 @@ public class CartActivity extends DrawerBaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        activityCartBinding = ActivityCartBinding.inflate(getLayoutInflater());
-        setContentView(activityCartBinding.getRoot());
+        activityUserCartBinding = ActivityUserCartBinding.inflate(getLayoutInflater());
+        setContentView(activityUserCartBinding.getRoot());
         allocateActivityTitle("Carts");
 
-        itemTitleTv = findViewById(R.id.itemTitleTv);
-        itemPriceTv = findViewById(R.id.itemPriceTv);
-        itemPriceEachTv = findViewById(R.id.itemPriceEachTv);
-        itemQuantityTv = findViewById(R.id.itemQuantityTv);
         sTotalLabelTv = findViewById(R.id.sTotalLabelTv);
         sTotalTv = findViewById(R.id.sTotalTv);
         dFeeLabelTv = findViewById(R.id.dFeeLabelTv);
@@ -71,14 +68,17 @@ public class CartActivity extends DrawerBaseActivity {
         loadAllCart();
         showProductsUI();
     }
+
     private void showProductsUI() {
         pricesLayout.setVisibility(View.VISIBLE);
     }
 
     private void loadAllCart() {
+
+        View view = LayoutInflater.from(this).inflate(R.layout.activity_user_cart, null);
         cartItems = new ArrayList<>();
         //setup adapter
-        adapterCartItem = new AdapterCartItem(CartActivity.this, cartItems);
+        adapterCartItem = new AdapterCartItem(this, cartItems);
         //set adapter
         cartItemsRv.setAdapter(adapterCartItem);
         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
@@ -110,7 +110,7 @@ public class CartActivity extends DrawerBaseActivity {
                 "Default Address", "New Address"
         };
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(CartActivity.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(UserCart.this);
         builder.setTitle("Please choose the address");
         builder.setItems(fonts, new DialogInterface.OnClickListener() {
             @Override
@@ -171,13 +171,13 @@ public class CartActivity extends DrawerBaseActivity {
                                                 .addOnFailureListener(new OnFailureListener() {
                                                     @Override
                                                     public void onFailure(@NonNull Exception e) {
-                                                        Toast.makeText(CartActivity.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+                                                        Toast.makeText(UserCart.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
                                                     }
                                                 });
 
 
                                     } else {
-                                        Toast.makeText(CartActivity.this, "ORDER PLACEMENT FAILED!", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(UserCart.this, "ORDER PLACEMENT FAILED!", Toast.LENGTH_SHORT).show();
                                     }
 
                                 }
@@ -185,7 +185,7 @@ public class CartActivity extends DrawerBaseActivity {
                             .addOnFailureListener(new OnFailureListener() {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {
-                                    Toast.makeText(CartActivity.this, "error!", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(UserCart.this, "error!", Toast.LENGTH_SHORT).show();
                                 }
                             });
 
@@ -227,7 +227,4 @@ public class CartActivity extends DrawerBaseActivity {
 //        txtTesting2.setText("We are sadly to say that MR/MRS " + name + " is not a lecturer");
 //
 //    }
-
-
-
 }

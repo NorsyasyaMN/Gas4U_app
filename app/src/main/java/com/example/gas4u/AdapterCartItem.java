@@ -16,10 +16,10 @@ import java.util.ArrayList;
 public class AdapterCartItem extends RecyclerView.Adapter<AdapterCartItem.HolderCart> {
 
 
-    private Context context;
-    public ArrayList<ModelCartItem> cartItems;
+    Context context;
+    ArrayList<ModelCartItem> cartItems;
 
-    public AdapterCartItem(CartActivity context, ArrayList<ModelCartItem> cartItems) {
+    public AdapterCartItem(UserCart context, ArrayList<ModelCartItem> cartItems) {
         this.context = context;
         this.cartItems = cartItems;
     }
@@ -35,7 +35,7 @@ public class AdapterCartItem extends RecyclerView.Adapter<AdapterCartItem.Holder
     public void onBindViewHolder(@NonNull HolderCart holder, int position) {
         // get data
         ModelCartItem modelCartItem = cartItems.get(position);
-        String gpId = modelCartItem.getProductId();
+
         String title = modelCartItem.getTitle();
         String cost = modelCartItem.getPrice();
         String price = modelCartItem.getPriceEach();
