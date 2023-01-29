@@ -95,7 +95,6 @@ public class CartActivity extends DrawerBaseActivity {
                                                 public void onComplete(@NonNull Task<Void> task) {
                                                     if(task.isSuccessful()){
                                                         //added to db
-                                                        Toast.makeText(CartActivity.this, "Order placed...", Toast.LENGTH_SHORT).show();
                                                         //clearData();
 
                                                         Intent intent2 = new Intent(getBaseContext(), CheckoutActivity.class);
