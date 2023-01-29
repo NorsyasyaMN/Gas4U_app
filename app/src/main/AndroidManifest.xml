@@ -23,6 +23,13 @@
                 android:value="" />
         </activity>
         <activity
+            android:name=".UserTrackingOrder"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".PlaceOrderActivity"
             android:exported="false" />
         <activity
@@ -85,13 +92,6 @@
         </activity>
         <activity
             android:name=".LogoutActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".RiderActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

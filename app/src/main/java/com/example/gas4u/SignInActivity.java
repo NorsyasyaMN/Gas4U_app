@@ -105,6 +105,10 @@ public class SignInActivity extends AppCompatActivity {
                     startActivity(new Intent(getApplicationContext(),DashboardActivity.class));
                     finish();
                 }
+//                if(documentSnapshot.get("isRider") != null){
+//                    startActivity(new Intent(getApplicationContext(), RiderActivity.class));
+//                    finish();
+//                }
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override

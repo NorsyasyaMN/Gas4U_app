@@ -14,6 +14,10 @@
             android:icon= "@drawable/shopping_cart"
             android:title= "Carts"/>
 
+        <item android:id= "@+id/nav_track_order"
+            android:icon= "@drawable/ic_track_order"
+            android:title= "Track Order"/>
+
         <item android:id= "@+id/nav_user_profile"
             android:icon= "@drawable/profile_photo"
             android:title= "Profile"/>
@@ -23,7 +27,7 @@
             android:title= "Helpline"/>
         
         <item android:id= "@+id/nav_logout"
-            android:icon= "@drawable/unlock"
+            android:icon= "@drawable/logout"
             android:title= "Logout"/>
 
     </group>

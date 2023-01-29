@@ -87,7 +87,7 @@
 //        }
 //
 //        try {
-//            Picasso.get().load(productIcon.placeholder(R.drawable.shopping_cart).into(holder.productIconTv));
+//            Picasso.get().load(productIcon.placeholder(R.drawable.shopping_cart).into(holder.productIconTv);
 //        }
 //        catch (Exception e){
 //            holder.productIconTv.setImageResource(R.drawable.ic_add_shopping_primary);

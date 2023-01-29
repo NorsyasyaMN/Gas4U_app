@@ -7,9 +7,10 @@
     tools:context=".AdminActivity">
 
     <TextView
+        android:id="@+id/textView6"
         android:layout_width="375dp"
         android:layout_height="50dp"
-        android:text="Welcome Admin to Gas4U"
+        android:text="Welcome To Admin Menu!"
         android:textSize="32dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -22,7 +23,9 @@
         android:id="@+id/imageView5"
         android:layout_width="299dp"
         android:layout_height="424dp"
-        app:srcCompat="@drawable/gas"
-        tools:layout_editor_absoluteX="56dp"
-        tools:layout_editor_absoluteY="168dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/gas" />
 </androidx.constraintlayout.widget.ConstraintLayout>

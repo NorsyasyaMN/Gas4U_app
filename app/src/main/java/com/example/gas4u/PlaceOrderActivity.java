@@ -36,7 +36,6 @@ public class PlaceOrderActivity extends AppCompatActivity {
 
     //ActivityUpdateCustomerProfileBinding activityUpdateCustomerProfileBinding;
     //ImageView userPhoto;
-    Button button;
     EditText nameEt, phoneEt, addressEt;
 
     FirebaseAuth firebaseAuth;
@@ -51,8 +50,6 @@ public class PlaceOrderActivity extends AppCompatActivity {
        // setContentView(activityUpdateCustomerProfileBinding.getRoot());
        setContentView(R.layout.activity_place_order);
 
-        button = findViewById(R.id.button3);
-
         //init ui views
         nameEt = findViewById(R.id.NEWname);
         phoneEt = findViewById(R.id.NEWPhone);
@@ -66,14 +63,6 @@ public class PlaceOrderActivity extends AppCompatActivity {
         progressDialog = new ProgressDialog(this);
         progressDialog.setTitle("Please wait");
         progressDialog.setCanceledOnTouchOutside(false);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(PlaceOrderActivity.this, CheckoutActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
     }
 
     public void btnupdate(View view){
@@ -103,7 +92,9 @@ public class PlaceOrderActivity extends AppCompatActivity {
         }
         addUser();
 
+
     }
+
     private void addUser() {
 
         //3) Add data to db
@@ -146,7 +137,10 @@ public class PlaceOrderActivity extends AppCompatActivity {
 
         clearData();
 
+
         }
+
+
 
     private void clearData() {
         //clear data after upload
@@ -155,16 +149,10 @@ public class PlaceOrderActivity extends AppCompatActivity {
         addressEt.setText("");
     }
 
+
     public void btnback(View v){
 
         Intent intent2 = new Intent(getBaseContext(), CartActivity.class);
         startActivity(intent2);
     }
-
-    public void payment(View v){
-
-        Intent intent2 = new Intent(getBaseContext(), ConfirmPayment.class);
-        startActivity(intent2);
-    }
-
 }

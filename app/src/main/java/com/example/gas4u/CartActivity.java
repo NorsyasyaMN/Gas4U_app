@@ -78,14 +78,23 @@ public class CartActivity extends DrawerBaseActivity {
                                     String timestamp = ""+System.currentTimeMillis();
                                     FirebaseUser user = fa.getCurrentUser();
 
-                                    //setup data to upload
+                                    //setup data to upload for default address
                                     HashMap<String, Object> hashMap = new HashMap<>();
-                                    hashMap.put("productId", ""+timestamp);
+                                   // hashMap.put("productId", ""+timestamp);
                                     hashMap.put("Receiver Name: ", name);
                                     hashMap.put("Phone Number", phone);
                                     hashMap.put("Address", address);
                                     hashMap.put("Order Status", shipstatus);
-                                    hashMap.put("timestamp", timestamp);
+
+                                    //dummy
+                                    String products = "Petron 14kg";
+                                    String quantity = "1";
+                                    String totalprice = "25.00";
+
+                                    hashMap.put("Products", products);
+                                    hashMap.put("Quantity", quantity);
+                                    hashMap.put("Total Price", totalprice);
+                                    //hashMap.put("timestamp", timestamp);
                                     hashMap.put("uid", db.collection("Order").document(user.getUid()));
 
                                     //add to db

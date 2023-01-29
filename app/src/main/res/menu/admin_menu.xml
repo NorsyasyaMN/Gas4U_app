@@ -18,7 +18,7 @@
             android:title= "Customer"/>
 
         <item android:id= "@+id/nav_logout"
-            android:icon= "@drawable/unlock"
+            android:icon= "@drawable/logout"
             android:title= "Logout"/>
     </group>
 </menu>
