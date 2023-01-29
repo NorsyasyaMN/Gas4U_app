@@ -47,7 +47,7 @@ public class d3 extends DrawerAdminActivity{
 
     private void EventChangeListener() {
 
-        db.collection("Customer").orderBy("fullName", Query.Direction.ASCENDING)
+        db.collection("Customers").orderBy("userName", Query.Direction.ASCENDING)
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
 
                     @Override

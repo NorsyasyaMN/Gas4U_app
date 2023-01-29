@@ -3,26 +3,18 @@ package com.example.gas4u;
 public class User {
 
     public String userName;
-    public String userPassword;
-    public String phoneNo;
-    public String email;
-    public String fullName;
-    public String address;
-    public long age;
+    public String userPhone;
+    public String userEmail;
+    public String profilePhoto;
 
-    public User() {
-
+    public User(){
     }
 
-
-    public User(String userName, String userPassword, String phoneNo, String email, String fullName, String address, long age) {
+    public User(String userName, String userPhone, String userEmail, String profilePhoto) {
         this.userName = userName;
-        this.userPassword = userPassword;
-        this.phoneNo = phoneNo;
-        this.email = email;
-        this.fullName = fullName;
-        this.address = address;
-        this.age = age;
+        this.userPhone = userPhone;
+        this.userEmail = userEmail;
+        this.profilePhoto = profilePhoto;
     }
 
     public String getUserName() {
@@ -33,47 +25,27 @@ public class User {
         this.userName = userName;
     }
 
-    public String getUserPassword() {
-        return userPassword;
+    public String getUserPhone() {
+        return userPhone;
     }
 
-    public void setUserPassword(String userPassword) {
-        this.userPassword = userPassword;
+    public void setUserPhone(String userPhone) {
+        this.userPhone = userPhone;
     }
 
-    public String getPhoneNo() {
-        return phoneNo;
+    public String getUserEmail() {
+        return userEmail;
     }
 
-    public void setPhoneNo(String phoneNo) {
-        this.phoneNo = phoneNo;
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
     }
 
-    public String getEmail() {
-        return email;
+    public String getProfilePhoto() {
+        return profilePhoto;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setProfilePhoto(String profilePhoto) {
+        this.profilePhoto = profilePhoto;
     }
-
-    public String getFullName() {
-        return fullName;
-    }
-
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public long getAge() {return age;}
-
-    public void setAge(long age) {this.age = age;}
 }

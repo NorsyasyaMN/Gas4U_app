@@ -4,11 +4,14 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -35,9 +38,16 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyViewHolder>{
 
         User user = userArrayList.get(position);
 
-        holder.fullName.setText(user.fullName);
-        holder.age.setText(String.valueOf(user.age));
-        holder.email.setText(user.email);
+        String icon = user.getProfilePhoto();
+        holder.userName.setText(user.userName);
+        holder.userPhone.setText(user.userPhone);
+        holder.userEmail.setText(user.userEmail);
+        try{
+            Picasso.get().load(icon).placeholder(R.drawable.ic_baseline_person_24).into(holder.profilePhoto);
+
+        } catch (Exception e){
+            holder.profilePhoto.setImageResource(R.drawable.ic_baseline_person_24);
+        }
     }
 
     @Override
@@ -47,13 +57,15 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyViewHolder>{
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{
 
-        TextView fullName, age, email;
+        ImageView profilePhoto;
+        TextView userName, userPhone, userEmail;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            fullName = itemView.findViewById(R.id.tvfullName);
-            age = itemView.findViewById(R.id.tvage);
-            email = itemView.findViewById(R.id.tvemail);
+            profilePhoto = itemView.findViewById(R.id.profilePhoto);
+            userName = itemView.findViewById(R.id.userName);
+            userPhone = itemView.findViewById(R.id.userPhone);
+            userEmail = itemView.findViewById(R.id.userEmail);
         }
     }
 }
