@@ -18,6 +18,10 @@
             android:icon= "@drawable/profile_photo"
             android:title= "Profile"/>
 
+        <item android:id= "@+id/nav_helpline"
+            android:icon= "@drawable/ic_call"
+            android:title= "Helpline"/>
+        
         <item android:id= "@+id/nav_logout"
             android:icon= "@drawable/unlock"
             android:title= "Logout"/>

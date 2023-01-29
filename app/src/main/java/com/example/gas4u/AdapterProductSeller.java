@@ -214,43 +214,36 @@ public class AdapterProductSeller extends RecyclerView.Adapter<AdapterProductSel
                 String quantity = quantityTv.getText().toString();
 
                 //add to database
-                addToCart(productId, title, priceEach,price, quantity);
+                Map<String, Object> user = new HashMap<>();
+                user.put("productId", productId);
+                user.put("title", title);
+                user.put("priceEach", priceEach);
+                user.put("price", price);
+                user.put("quantity", quantity);
 
+                firebaseAuth = FirebaseAuth.getInstance();
+
+                //add to db
+                firebaseFirestore.collection("Users").document(firebaseAuth.getCurrentUser().getUid()).collection("Cart").document()
+                        .set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                //added to db
+                                Toast.makeText(context, "Added to cart...", Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(context, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        });
                 dialog.dismiss();
             }
 
         });
     }
 
-
-    private void addToCart(String productId, String title, String priceEach, String price, String quantity) {
-        Map<String, Object> user = new HashMap<>();
-        user.put("productId", productId);
-        user.put("title", title);
-        user.put("priceEach", priceEach);
-        user.put("price", price);
-        user.put("quantity", quantity);
-
-        firebaseAuth = FirebaseAuth.getInstance();
-
-        //add to db
-        firebaseFirestore.collection("Users").document(firebaseAuth.getCurrentUser().getUid()).collection("Cart").document()
-                .set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        //added to db
-                        Toast.makeText(context, "Added to cart...", Toast.LENGTH_SHORT).show();
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(context, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                });
-
-
-    }
 
     @Override
     public int getItemCount() {

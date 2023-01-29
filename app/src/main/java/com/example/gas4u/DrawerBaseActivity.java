@@ -58,6 +58,10 @@ public class DrawerBaseActivity extends AppCompatActivity implements NavigationV
                 startActivity(new Intent(this, CustomerProfileActivity.class));
                 overridePendingTransition(0,0);
                 break;
+            case R.id.nav_helpline:
+                startActivity(new Intent(this, ViewHelplineActivity.class));
+                overridePendingTransition(0,0);
+                break;
             case R.id.nav_logout:
                 startActivity(new Intent(this, LogoutActivity.class));
                 break;
