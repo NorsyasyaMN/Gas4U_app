@@ -59,6 +59,10 @@ public class DrawerAdminActivity extends AppCompatActivity implements Navigation
                 startActivity(new Intent(this, d3.class));
                 overridePendingTransition(0,0);
                 break;
+            case R.id.nav_user_profile:
+                startActivity(new Intent(this, CustomerProfileActivity.class));
+                overridePendingTransition(0,0);
+                break;
             case R.id.nav_logout:
                 startActivity(new Intent(this, d4.class));
                 break;

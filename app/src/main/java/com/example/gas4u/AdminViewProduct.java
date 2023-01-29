@@ -52,13 +52,14 @@ public class AdminViewProduct extends DrawerAdminActivity{
     FirebaseFirestore db;
     FirebaseAuth firebaseAuth;
     ProgressDialog progressDialog;
-    ArrayList<ModelProduct> productList;
-    private AdapterProduct adapterProduct;
+    ArrayList<ModelProduct> brandList;
+    AdapterProduct adapterProduct;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activityAdminViewProductBinding = ActivityAdminViewProductBinding.inflate(getLayoutInflater());
+        setContentView(activityAdminViewProductBinding.getRoot());
         allocateActivityTitle("Products");
 
         nameTv = findViewById(R.id.nameTv);
@@ -72,13 +73,14 @@ public class AdminViewProduct extends DrawerAdminActivity{
         filterProductBtn = findViewById(R.id.filterProductBtn);
         profileIv = findViewById(R.id.profileIv);
         productsRl = findViewById(R.id.productsRl);
-        productsRv = findViewById(R.id.Rvproducts);
+        productsRv = findViewById(R.id.adminProductsRV);
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setTitle("Please wait");
         progressDialog.setCanceledOnTouchOutside(false);
         firebaseAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
+
         checkUser();
         loadAllProducts();
 
@@ -97,12 +99,20 @@ public class AdminViewProduct extends DrawerAdminActivity{
                 showProductsUI();
             }
         });
+        addToCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(AdminViewProduct.this, d4.class));
+            }
+        });
+
+
     }
 
     private void loadAllProducts() {
-        productList = new ArrayList<>();
+        brandList = new ArrayList<>();
         //setup adapter
-        adapterProduct = new AdapterProduct(AdminViewProduct.this, productList);
+        adapterProduct = new AdapterProduct(AdminViewProduct.this, brandList);
         //set adapter
         productsRv.setAdapter(adapterProduct);
         db.collection("Product").orderBy("productTitle", Query.Direction.ASCENDING)
@@ -111,7 +121,7 @@ public class AdminViewProduct extends DrawerAdminActivity{
                     @Override
                     public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
 
-                        productList.clear();
+                        brandList.clear();
                         if (error != null) {
 
                             Log.e("Firestore error", error.getMessage());
@@ -120,7 +130,7 @@ public class AdminViewProduct extends DrawerAdminActivity{
                         for (DocumentChange dc : value.getDocumentChanges()) {
 
                             if (dc.getType() == DocumentChange.Type.ADDED) {
-                                productList.add(dc.getDocument().toObject(ModelProduct.class));
+                                brandList.add(dc.getDocument().toObject(ModelProduct.class));
                             }
                             adapterProduct.notifyDataSetChanged();
                         }
@@ -169,7 +179,6 @@ public class AdminViewProduct extends DrawerAdminActivity{
     }
 
     private void makeMeOffline() {
-        progressDialog.setMessage("Logging Out...");
-        HashMap<String, Object> hashMap = new HashMap<>();
+        startActivity(new Intent(AdminViewProduct.this, d4.class));
     }
 }

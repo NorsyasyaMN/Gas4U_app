@@ -274,8 +274,6 @@ public class AdapterProductSeller extends RecyclerView.Adapter<AdapterProductSel
             addToCartTv = itemView.findViewById(R.id.addProduct);
             discountedPriceTv=itemView.findViewById(R.id.discountedPriceTv);
             originalPriceTv=itemView.findViewById(R.id.originalPriceTv);
-
-
         }
     }
 }

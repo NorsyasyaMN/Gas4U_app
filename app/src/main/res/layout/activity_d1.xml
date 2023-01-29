@@ -100,10 +100,12 @@
             android:id="@+id/discountSwitch"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
             android:layout_below="@id/priceEt"
-            android:text="Discount">
-        </androidx.appcompat.widget.SwitchCompat>
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
+            android:text="Discount"></androidx.appcompat.widget.SwitchCompat>
 
         <EditText
             android:id="@+id/discountedPriceEt"

@@ -1,45 +1,44 @@
 package com.example.gas4u;
 
-import static java.util.Objects.*;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.collection.CircularArray;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
-import java.util.Objects;
 
 
 public class AdapterCartItem extends RecyclerView.Adapter<AdapterCartItem.HolderCart> {
 
+
     private Context context;
-    private ArrayList<ModelCartItem> cartItems;
+    public ArrayList<ModelCartItem> cartItems;
 
+    public AdapterCartItem(CartActivity context, ArrayList<ModelCartItem> cartItems) {
+        this.context = context;
+        this.cartItems = cartItems;
+    }
+
+    @NonNull
     @Override
-    public HolderCart onCreateViewHolder(ViewGroup parent, int viewType) {
-        // inflate layout row_cartitem.xml
+    public HolderCart onCreateViewHolder(@NonNull ViewGroup parent, int viewType){
         View view = LayoutInflater.from(context).inflate(R.layout.row_cartitem, parent, false);
-
         return new HolderCart(view);
     }
 
     @Override
-    public void onBindViewHolder(HolderCart holder, @SuppressLint("RecyclerView") int position) {
+    public void onBindViewHolder(@NonNull HolderCart holder, int position) {
         // get data
         ModelCartItem modelCartItem = cartItems.get(position);
-
-        String id = modelCartItem.getId();
-
-        String gpId = modelCartItem.getpID();
-        String title = modelCartItem.getName();
-        String cost = modelCartItem.getCost();
-        String price = modelCartItem.getPrice();
+        String gpId = modelCartItem.getProductId();
+        String title = modelCartItem.getTitle();
+        String cost = modelCartItem.getPrice();
+        String price = modelCartItem.getPriceEach();
         String quantity = modelCartItem.getQuantity();
 
         // set data

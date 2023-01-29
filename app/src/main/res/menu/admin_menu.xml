@@ -17,6 +17,10 @@
             android:icon= "@drawable/customer"
             android:title= "Customer"/>
 
+        <item android:id= "@+id/nav_user_profile"
+            android:icon= "@drawable/customer"
+            android:title= "Profile"/>
+
         <item android:id= "@+id/nav_logout"
             android:icon= "@drawable/logout"
             android:title= "Logout"/>

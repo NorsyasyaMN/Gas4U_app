@@ -58,6 +58,7 @@ public class BrandActivity extends DrawerBaseActivity {
     ProgressDialog progressDialog;
     ArrayList<ModelProduct> productList;
     AdapterProductSeller adapterProductSeller;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -183,6 +184,7 @@ public class BrandActivity extends DrawerBaseActivity {
 //            }
 //        });
     }
+
     private void loadAllProducts() {
         productList = new ArrayList<>();
         //setup adapter
@@ -225,10 +227,10 @@ public class BrandActivity extends DrawerBaseActivity {
             finish();
         }
         else{
-            //loadMyInfo();
+            loadMyInfo();
         }
     }
-    /*   private void loadMyInfo() {
+      private void loadMyInfo() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         DocumentReference reference;
         FirebaseFirestore firestore = FirebaseFirestore.getInstance();
@@ -254,11 +256,10 @@ public class BrandActivity extends DrawerBaseActivity {
                 }
             }
         });
-    }*/
+    }
 
     private void makeMeOffline() {
-        progressDialog.setMessage("Logging Out...");
-        HashMap<String, Object> hashMap = new HashMap<>();
+        startActivity(new Intent(BrandActivity.this, LogoutActivity.class));
     }
 
 

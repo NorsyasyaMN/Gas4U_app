@@ -54,7 +54,6 @@
         <meta-data
             android:name="com.google.android.gms.wallet.api.enabled"
             android:value="true" />
-
         <activity
             android:name=".d4"
             android:exported="false">
@@ -91,6 +90,20 @@
                 android:value="" />
         </activity>
         <activity
+            android:name=".CartActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".AdminViewProduct"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".AdminActivity"
             android:exported="false">
             <meta-data
@@ -99,13 +112,6 @@
         </activity>
         <activity
             android:name=".menu_card"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".CartActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
