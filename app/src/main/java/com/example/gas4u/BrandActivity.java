@@ -260,4 +260,6 @@ public class BrandActivity extends DrawerBaseActivity {
         progressDialog.setMessage("Logging Out...");
         HashMap<String, Object> hashMap = new HashMap<>();
     }
+
+
 }

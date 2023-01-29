@@ -6,17 +6,13 @@
             android:icon= "@drawable/brand"
             android:title= "Products"/>
 
-        <item android:id= "@+id/nav_shopping_bag"
-            android:icon= "@drawable/shopping_bag"
-            android:title= "Orders"/>
-
         <item android:id= "@+id/nav_shopping_cart"
             android:icon= "@drawable/shopping_cart"
             android:title= "Carts"/>
 
         <item android:id= "@+id/nav_track_order"
             android:icon= "@drawable/ic_track_order"
-            android:title= "Track Order"/>
+            android:title= "Track Orders"/>
 
         <item android:id= "@+id/nav_user_profile"
             android:icon= "@drawable/profile_photo"

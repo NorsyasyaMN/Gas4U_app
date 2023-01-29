@@ -46,16 +46,12 @@ public class DrawerBaseActivity extends AppCompatActivity implements NavigationV
                 startActivity(new Intent(this, BrandActivity.class));
                 overridePendingTransition(0,0);
                 break;
-            case R.id.nav_shopping_bag:
-                startActivity(new Intent(this, OrderActivity.class));
+            case R.id.nav_track_order:
+                startActivity(new Intent(this, UserTrackOrder.class));
                 overridePendingTransition(0,0);
                 break;
             case R.id.nav_shopping_cart:
                 startActivity(new Intent(this, CartActivity.class));
-                overridePendingTransition(0,0);
-                break;
-            case R.id.nav_track_order:
-                startActivity(new Intent(this, UserTrackingOrder.class));
                 overridePendingTransition(0,0);
                 break;
             case R.id.nav_user_profile:

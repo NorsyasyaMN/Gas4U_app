@@ -1,33 +1,26 @@
 package com.example.gas4u;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.content.Intent;
-import android.view.View;
 
-import com.example.gas4u.databinding.ActivityBrandBinding;
-import com.example.gas4u.databinding.ActivityBrandBinding;
-import com.example.gas4u.databinding.ActivityCartBinding;
-import com.google.android.gms.tasks.OnCompleteListener;
+import com.example.gas4u.databinding.ActivityUsertrackorderBinding;
+import com.example.gas4u.databinding.ActivityUsertrackorderBinding;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.util.HashMap;
 import java.util.Objects;
 
-public class UserTrackingOrder extends DrawerBaseActivity {
+public class UserTrackOrder extends DrawerBaseActivity {
 
-   // UserTrackingOrderBinding userTrackingOrderBinding;
+    ActivityUsertrackorderBinding activityUsertrackorderBinding;
 
     //initialize to extract from database (the green one must be exactly same with db)
     private static final String productt = "Products";
@@ -52,16 +45,12 @@ public class UserTrackingOrder extends DrawerBaseActivity {
     TextView ORDconfirm = findViewById(R.id.ordconfirm);
     TextView ORDdelivery = findViewById(R.id.orddelivery);
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        userTrackingOrderBinding = UserTrackingOrderBinding.inflate(getLayoutInflater());
-//        setContentView(userTrackingOrderBinding.getRoot());
-//        allocateActivityTitle("Track Order");
-//        setContentView(R.layout.activity_user_tracking_order);
-
-
+        activityUsertrackorderBinding = ActivityUsertrackorderBinding.inflate(getLayoutInflater());
+        setContentView(activityUsertrackorderBinding.getRoot());
+        allocateActivityTitle("Track Orders");
 
         DocumentReference docRef = db.collection("Order").document(user.getUid());
         docRef.get()
@@ -97,12 +86,12 @@ public class UserTrackingOrder extends DrawerBaseActivity {
                                 ORDdelivery.setText("Your order is out for delivery!");
 
                             } else {
-                                Toast.makeText(UserTrackingOrder.this, "ORDER NOT AVAILABLE!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(UserTrackOrder.this, "ORDER NOT AVAILABLE!", Toast.LENGTH_SHORT).show();
                             }
 
 
                         } else {
-                            Toast.makeText(UserTrackingOrder.this, "NO ACTIVE ORDER", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(UserTrackOrder.this, "NO ACTIVE ORDER", Toast.LENGTH_SHORT).show();
                         }
                     }
 
@@ -110,14 +99,10 @@ public class UserTrackingOrder extends DrawerBaseActivity {
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(UserTrackingOrder.this, "error!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(UserTrackOrder.this, "error!", Toast.LENGTH_SHORT).show();
                     }
                 });
 
 
-
     }
-
 }
-
-

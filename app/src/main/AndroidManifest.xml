@@ -23,13 +23,6 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".UserTrackingOrder"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
             android:name=".PlaceOrderActivity"
             android:exported="false" />
         <activity
@@ -119,7 +112,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".OrderActivity"
+            android:name=".UserTrackOrder"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
