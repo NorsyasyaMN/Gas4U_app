@@ -2,6 +2,7 @@ package com.example.gas4u;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.AlertDialog;
@@ -19,16 +20,11 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.example.gas4u.databinding.ActivityBrandBinding;
+import com.example.gas4u.databinding.ActivityAdminViewProductBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -42,9 +38,9 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class BrandActivity extends DrawerBaseActivity {
+public class AdminViewProduct extends DrawerAdminActivity{
 
-    ActivityBrandBinding activityBrandBinding;
+    ActivityAdminViewProductBinding activityAdminViewProductBinding;
 
     TextView nameTv,emailTv,phoneTv, tabProductsTv, filterProductsTv;
     EditText searchProductEt;
@@ -57,12 +53,12 @@ public class BrandActivity extends DrawerBaseActivity {
     FirebaseAuth firebaseAuth;
     ProgressDialog progressDialog;
     ArrayList<ModelProduct> productList;
-    AdapterProductSeller adapterProductSeller;
+    private AdapterProduct adapterProduct;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        activityBrandBinding = ActivityBrandBinding.inflate(getLayoutInflater());
-        setContentView(activityBrandBinding.getRoot());
+        activityAdminViewProductBinding = ActivityAdminViewProductBinding.inflate(getLayoutInflater());
         allocateActivityTitle("Products");
 
         nameTv = findViewById(R.id.nameTv);
@@ -76,7 +72,7 @@ public class BrandActivity extends DrawerBaseActivity {
         filterProductBtn = findViewById(R.id.filterProductBtn);
         profileIv = findViewById(R.id.profileIv);
         productsRl = findViewById(R.id.productsRl);
-        productsRv = findViewById(R.id.productsRv);
+        productsRv = findViewById(R.id.Rvproducts);
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setTitle("Please wait");
@@ -88,38 +84,10 @@ public class BrandActivity extends DrawerBaseActivity {
 
         showProductsUI();
 
-        //search
-        searchProductEt.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                try{
-                    adapterProductSeller.getFilter().filter(s);
-                }catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-
         logoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 makeMeOffline();
-            }
-        });
-
-        addToCart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(BrandActivity.this, AdapterProductSeller.class));
             }
         });
 
@@ -129,66 +97,14 @@ public class BrandActivity extends DrawerBaseActivity {
                 showProductsUI();
             }
         });
-        filterProductBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(BrandActivity.this);
-                builder.setTitle("Choose Category:").setItems(Constants.productCategories1, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        //get selected item
-                        String selected = Constants.productCategories1[which];
-                        filterProductsTv.setText(selected);
-                        if(selected.equals("All")){
-                            //load all
-                            loadAllProducts();
-                        }
-                        else{
-                            //load filter
-                            loadFilteredProducts(selected);
-                        }
-                    }
-                }).show();
-            }
-        });
-        }
-    private void loadFilteredProducts(String selected) {
-//        productList = new ArrayList<>();
-//        //get all products
-//        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users");
-//        reference.child(firebaseAuth.getUid()).child("Products").addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                //before getting reset list
-//                productList.clear();
-//                for (DataSnapshot ds: snapshot.getChildren()){
-//                    String productCategory =""+ds.child("productCategory").getValue();
-//
-//                    //if selected category matches product category then add in list
-//                    if(selected.equals(productCategory)){
-//                        ModelProduct modelProduct = ds.getValue(ModelProduct.class);
-//                        productList.add(modelProduct);
-//                    }
-//                    ModelProduct modelProduct = ds.getValue(ModelProduct.class);
-//                    productList.add(modelProduct);
-//                }
-//                //setup adapter
-//                adapterProductSeller = new AdapterProductSeller(BrandActivity.this, productList);
-//                //set adapter
-//                productsRv.setAdapter(adapterProductSeller);
-//            }
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
     }
+
     private void loadAllProducts() {
         productList = new ArrayList<>();
         //setup adapter
-        adapterProductSeller = new AdapterProductSeller(BrandActivity.this, productList);
+        adapterProduct = new AdapterProduct(AdminViewProduct.this, productList);
         //set adapter
-        productsRv.setAdapter(adapterProductSeller);
+        productsRv.setAdapter(adapterProduct);
         db.collection("Product").orderBy("productTitle", Query.Direction.ASCENDING)
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
 
@@ -206,7 +122,7 @@ public class BrandActivity extends DrawerBaseActivity {
                             if (dc.getType() == DocumentChange.Type.ADDED) {
                                 productList.add(dc.getDocument().toObject(ModelProduct.class));
                             }
-                            adapterProductSeller.notifyDataSetChanged();
+                            adapterProduct.notifyDataSetChanged();
                         }
 
                     }
@@ -219,14 +135,7 @@ public class BrandActivity extends DrawerBaseActivity {
         tabProductsTv.setBackgroundResource((R.drawable.shape_rect01));
     }
     private void checkUser() {
-        FirebaseUser user = firebaseAuth.getCurrentUser();
-        if(user==null){
-            startActivity(new Intent(BrandActivity.this,SignInActivity.class));
-            finish();
-        }
-        else{
-            //loadMyInfo();
-        }
+        loadMyInfo();
     }
     private void loadMyInfo() {
 

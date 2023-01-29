@@ -145,9 +145,6 @@ public class SignUpActivity extends AppCompatActivity{
                         if(isAdminBox.isChecked()){
                             userInfo.put("isAdmin","1");
                         }
-                        if(isRiderBox.isChecked()){
-                            userInfo.put("isRider","1");
-                        }
                         df.set(userInfo);
                         startActivity(new Intent(getApplicationContext(),SignInActivity.class));
                         finish();

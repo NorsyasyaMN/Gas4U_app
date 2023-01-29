@@ -47,6 +47,10 @@ public class DrawerAdminActivity extends AppCompatActivity implements Navigation
                 startActivity(new Intent(this, d1.class));
                 overridePendingTransition(0,0);
                 break;
+            case R.id.nav_view_product:
+                startActivity(new Intent(this, AdminViewProduct.class));
+                overridePendingTransition(0,0);
+                break;
             case R.id.nav_order:
                 startActivity(new Intent(this, d2.class));
                 overridePendingTransition(0,0);

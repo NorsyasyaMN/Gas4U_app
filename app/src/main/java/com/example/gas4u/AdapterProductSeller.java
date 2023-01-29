@@ -25,6 +25,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.Picasso;
@@ -53,6 +54,7 @@ public class AdapterProductSeller extends RecyclerView.Adapter<AdapterProductSel
     public HolderProductSeller onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         //inflate layout
         View view = LayoutInflater.from(context).inflate(R.layout.row_product_seller, parent, false);
+        firebaseAuth = FirebaseAuth.getInstance();
         return new HolderProductSeller(view);
     }
 
@@ -208,6 +210,7 @@ public class AdapterProductSeller extends RecyclerView.Adapter<AdapterProductSel
         continueBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
+                firebaseFirestore = FirebaseFirestore.getInstance();
                 String title = titleTv.getText().toString();
                 String priceEach = originalPriceTv.getText().toString().replace("$", "");
                 String price = finalPriceTv.getText().toString().replace("$","");
@@ -221,10 +224,10 @@ public class AdapterProductSeller extends RecyclerView.Adapter<AdapterProductSel
                 user.put("price", price);
                 user.put("quantity", quantity);
 
-                firebaseAuth = FirebaseAuth.getInstance();
+                FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
 
                 //add to db
-                firebaseFirestore.collection("Users").document(firebaseAuth.getCurrentUser().getUid()).collection("Cart").document()
+                firebaseFirestore.collection("Cart").document(firebaseUser.getUid()).collection("CartList").document()
                         .set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
