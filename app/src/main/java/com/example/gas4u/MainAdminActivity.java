@@ -20,6 +20,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.gas4u.databinding.ActivityBrandBinding;
+import com.example.gas4u.viewmodel.ModelOrderShop;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -42,22 +43,25 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class BrandActivity extends DrawerBaseActivity {
+public class MainAdminActivity extends DrawerBaseActivity {
 
     ActivityBrandBinding activityBrandBinding;
 
-    TextView nameTv,emailTv,phoneTv, tabProductsTv, filterProductsTv;
+    TextView nameTv,emailTv,phoneTv, tabProductsTv, tabOrdersTv, filterProductsTv, filteredOrdersTv;
     EditText searchProductEt;
-    ImageButton logoutBtn,addToCart,filterProductBtn;
+    ImageButton logoutBtn,addToCart,filterProductBtn, filterOrderBtn;
     ImageView profileIv;
-    RelativeLayout productsRl;
-    RecyclerView productsRv;
+    RelativeLayout productsRl, ordersRL;
+    RecyclerView productsRv, ordersRv;
 
     FirebaseFirestore db;
     FirebaseAuth firebaseAuth;
     ProgressDialog progressDialog;
     ArrayList<ModelProduct> productList;
     AdapterProductSeller adapterProductSeller;
+    ArrayList<ModelOrderShop> orderShopArrayList;
+    AdapterOrderShop adapterOrderShop;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,6 +73,7 @@ public class BrandActivity extends DrawerBaseActivity {
         emailTv = findViewById(R.id.emailTv);
         phoneTv = findViewById(R.id.phoneTv);
         tabProductsTv = findViewById(R.id.tabProductsTv);
+        tabOrdersTv = findViewById(R.id.tabOrdersTv);
         filterProductsTv = findViewById(R.id.filterProductsTv);
         searchProductEt = findViewById(R.id.searchProductEt);
         logoutBtn = findViewById(R.id.logoutBtn);
@@ -77,6 +82,11 @@ public class BrandActivity extends DrawerBaseActivity {
         profileIv = findViewById(R.id.profileIv);
         productsRl = findViewById(R.id.productsRl);
         productsRv = findViewById(R.id.productsRv);
+        ordersRL = findViewById(R.id.ordersRl);
+        filteredOrdersTv = findViewById(R.id.filteredOrdersTv);
+        filterOrderBtn = findViewById(R.id.filterOrderBtn);
+        ordersRv = findViewById(R.id.ordersRv); // creates the layout for recyclerview
+
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setTitle("Please wait");
@@ -85,6 +95,7 @@ public class BrandActivity extends DrawerBaseActivity {
         db = FirebaseFirestore.getInstance();
         checkUser();
         loadAllProducts();
+        loadAllOrders();
 
         showProductsUI();
 
@@ -119,7 +130,7 @@ public class BrandActivity extends DrawerBaseActivity {
         addToCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(BrandActivity.this, AdapterProductSeller.class));
+                startActivity(new Intent(MainAdminActivity.this, AdapterProductSeller.class));
             }
         });
 
@@ -128,11 +139,19 @@ public class BrandActivity extends DrawerBaseActivity {
             public void onClick(View view) {
                 showProductsUI();
             }
+
+        });
+
+        tabOrdersTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
         });
         filterProductBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(BrandActivity.this);
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainAdminActivity.this);
                 builder.setTitle("Choose Category:").setItems(Constants.productCategories1, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -151,7 +170,79 @@ public class BrandActivity extends DrawerBaseActivity {
                 }).show();
             }
         });
+        filterOrderBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // options of dialog that will be displayed
+                String[] options = {"All", "In Progress", "Completed", "Cancelled"};
+                // dialog
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainAdminActivity.this);
+                builder.setTitle("Filter Orders:")
+                        .setItems(options, new DialogInterface.OnClickListener(){
+                            @Override
+                            public void onClick(DialogInterface dialog, int which){
+
+                                //handle clicking of item
+                                if(which==0){
+                                    // All is clicked
+                                    filteredOrdersTv.setText("Showing All Orders");
+                                    adapterOrderShop.getFilter().filter(""); //all orders are shown
+                                }
+                                else {
+                                    String optionClicked = options[which];
+                                    filteredOrdersTv.setText("Showing " + optionClicked + " Orders"); // like Showing The Completed Orders
+                                    adapterOrderShop.getFilter().filter(optionClicked);
+
+                                }
+
+                            }
+                        })
+                        .show();
+            }
+        });
+    /*
+        reviewsBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // open the same reviews activity as user
+                Intent intent = new Intent(MainAdminActivity.this, ShopRe)
+            }
+        });*/
     }
+
+    private void loadAllOrders() {
+        // initializa array list
+        orderShopArrayList = new ArrayList<>();
+
+        // loading orders
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users");
+        ref.child(firebaseAuth.getUid()).child("Orders")
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                        //list is cleared before new data is added
+                        orderShopArrayList.clear();
+                        for (DataSnapshot ds: dataSnapshot.getChildren()){
+                            ModelOrderShop modelOrderShop = ds.getValue(ModelOrderShop.class);
+
+                            // adding to list
+                            orderShopArrayList.add(modelOrderShop);
+                        }
+
+                        //setting the adapter
+                        adapterOrderShop = new AdapterOrderShop(MainAdminActivity.this, orderShopArrayList);
+                        //setting the adapter to recyclerview
+                        ordersRv.setAdapter(adapterOrderShop);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+    }
+
     private void loadFilteredProducts(String selected) {
 //        productList = new ArrayList<>();
 //        //get all products
@@ -186,7 +277,7 @@ public class BrandActivity extends DrawerBaseActivity {
     private void loadAllProducts() {
         productList = new ArrayList<>();
         //setup adapter
-        adapterProductSeller = new AdapterProductSeller(BrandActivity.this, productList);
+        adapterProductSeller = new AdapterProductSeller(MainAdminActivity.this, productList);
         //set adapter
         productsRv.setAdapter(adapterProductSeller);
         db.collection("Product").orderBy("productTitle", Query.Direction.ASCENDING)
@@ -221,7 +312,7 @@ public class BrandActivity extends DrawerBaseActivity {
     private void checkUser() {
         FirebaseUser user = firebaseAuth.getCurrentUser();
         if(user==null){
-            startActivity(new Intent(BrandActivity.this,SignInActivity.class));
+            startActivity(new Intent(MainAdminActivity.this,SignInActivity.class));
             finish();
         }
         else{
@@ -229,6 +320,7 @@ public class BrandActivity extends DrawerBaseActivity {
         }
     }
     /*   private void loadMyInfo() {
+
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         DocumentReference reference;
         FirebaseFirestore firestore = FirebaseFirestore.getInstance();
@@ -237,10 +329,12 @@ public class BrandActivity extends DrawerBaseActivity {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.getResult().exists()) {
+
                     String nameResult = task.getResult().getString("userName");
                     String url = task.getResult().getString("profilePhoto");
                     String emailResult = task.getResult().getString("userEmail");
                     String phoneResult = task.getResult().getString("userPhone");
+
 //                    Picasso.get().load(url).into(profileIv);
                     nameTv.setText(nameResult);
                     emailTv.setText(emailResult);
