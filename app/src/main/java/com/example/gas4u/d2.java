@@ -22,6 +22,8 @@ import android.widget.TextView;
 
 import com.example.gas4u.databinding.ActivityD2Binding;
 import com.example.gas4u.viewmodel.ModelOrderShop;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -30,11 +32,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -304,16 +309,9 @@ public class d2 extends DrawerAdminActivity{
         tabProductsTv.setBackgroundResource((R.drawable.shape_rect01));
     }
     private void checkUser() {
-        FirebaseUser user = firebaseAuth.getCurrentUser();
-        if(user==null){
-            startActivity(new Intent(d2.this,SignInActivity.class));
-            finish();
-        }
-        else{
-            //loadMyInfo();
-        }
+            loadMyInfo();
     }
-    /*   private void loadMyInfo() {
+    private void loadMyInfo() {
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         DocumentReference reference;
@@ -329,7 +327,7 @@ public class d2 extends DrawerAdminActivity{
                     String emailResult = task.getResult().getString("userEmail");
                     String phoneResult = task.getResult().getString("userPhone");
 
-//                    Picasso.get().load(url).into(profileIv);
+                    Picasso.get().load(url).into(profileIv);
                     nameTv.setText(nameResult);
                     emailTv.setText(emailResult);
                     phoneTv.setText(phoneResult);
@@ -342,7 +340,7 @@ public class d2 extends DrawerAdminActivity{
                 }
             }
         });
-    }*/
+    }
 
     private void makeMeOffline() {
         progressDialog.setMessage("Logging Out...");
