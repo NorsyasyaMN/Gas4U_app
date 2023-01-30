@@ -31,21 +31,14 @@
             android:textSize="20sp"
             android:textStyle="bold"/>
 
-        <ImageButton
-            android:id="@+id/editBtn"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:background="@null"
-            android:layout_alignParentEnd="true"
-            android:src="@drawable/ic_white_edit"/>
 
         <ImageButton
             android:id="@+id/mapBtn"
             android:layout_width="30dp"
             android:layout_height="30dp"
+            android:layout_marginLeft="350dp"
             android:background="@null"
-            android:layout_toStartOf="@id/editBtn"
-            android:src="@drawable/ic_white_map"/>
+            android:src="@drawable/ic_white_map" />
     </RelativeLayout>
 
     <!--Info of Order-->
