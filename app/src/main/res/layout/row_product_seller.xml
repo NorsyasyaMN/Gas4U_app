@@ -9,7 +9,8 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@color/pastel_light_purple">
         <ImageView
             android:id="@+id/productIconIv"
             android:layout_width="100dp"

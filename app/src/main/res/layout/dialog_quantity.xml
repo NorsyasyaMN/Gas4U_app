@@ -7,7 +7,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/pastel_blue">
+        android:background="@color/pastel_light_purple">
 
         <com.blogspot.atifsoftwares.circularimageview.CircularImageView
             android:id="@+id/productIv"

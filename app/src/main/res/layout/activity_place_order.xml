@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".PlaceOrderActivity"
-    tools:layout_editor_absoluteY="25dp">
+    tools:layout_editor_absoluteY="25dp"
+    android:background="@drawable/cust_bg">
 
     <EditText
         android:id="@+id/NEWname"
@@ -20,7 +21,10 @@
         app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.223" />
+        app:layout_constraintVertical_bias="0.223"
+        android:padding="10dp"
+        android:background="@drawable/shapre_rect02"
+        android:drawableStart="@drawable/ic_title_gray"/>
 
     <EditText
         android:id="@+id/NEWPhone"
@@ -28,13 +32,16 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="Phone Number"
-        android:inputType="phone"
+        android:inputType="text|number"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/NEWname"
-        app:layout_constraintVertical_bias="0.062" />
+        app:layout_constraintVertical_bias="0.062"
+        android:padding="10dp"
+        android:background="@drawable/shapre_rect02"
+        android:drawableStart="@drawable/ic_title_gray"/>
 
     <EditText
         android:id="@+id/NEWAddress"
@@ -48,7 +55,10 @@
         app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/NEWPhone"
-        app:layout_constraintVertical_bias="0.104" />
+        app:layout_constraintVertical_bias="0.104"
+        android:padding="10dp"
+        android:background="@drawable/shapre_rect02"
+        android:drawableStart="@drawable/ic_title_gray"/>
 
     <Button
         android:id="@+id/button3"
@@ -61,7 +71,8 @@
         app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/NEWAddress"
-        app:layout_constraintVertical_bias="0.278" />
+        app:layout_constraintVertical_bias="0.278"
+        android:background="@drawable/button_sign_in"/>
 
     <Button
         android:id="@+id/button4"
@@ -74,5 +85,6 @@
         app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button3"
-        app:layout_constraintVertical_bias="0.152" />
+        app:layout_constraintVertical_bias="0.152"
+        android:background="@drawable/button_sign_in"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -15,7 +15,8 @@
         android:duplicateParentState="true"
         android:gravity="center_vertical"
         android:orientation="vertical"
-        android:weightSum="2">
+        android:weightSum="2"
+        android:radius="10dp">
 
         <ImageView
             android:layout_width="match_parent"
