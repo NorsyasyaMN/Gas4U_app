@@ -53,7 +53,7 @@ public class d2 extends DrawerAdminActivity{
     ImageView profileIv;
     RelativeLayout productsRl, ordersRl;
     RecyclerView productsRv, ordersRv;
-
+    //firebase
     FirebaseFirestore db;
     FirebaseAuth firebaseAuth;
     ProgressDialog progressDialog;
