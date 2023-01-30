@@ -53,7 +53,7 @@ public class d2 extends DrawerAdminActivity{
     ImageView profileIv;
     RelativeLayout productsRl, ordersRl;
     RecyclerView productsRv, ordersRv;
-    //firebase
+
     FirebaseFirestore db;
     FirebaseAuth firebaseAuth;
     ProgressDialog progressDialog;
@@ -171,7 +171,7 @@ public class d2 extends DrawerAdminActivity{
         //setting the adapter to recyclerview
         ordersRv.setAdapter(adapterOrderShop);
 
-        db.collection("Users").orderBy("Orders", Query.Direction.ASCENDING)
+        db.collection("Orders").orderBy("orderID", Query.Direction.ASCENDING)
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
 
                     @Override
