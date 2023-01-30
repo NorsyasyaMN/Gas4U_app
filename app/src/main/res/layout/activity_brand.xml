@@ -25,15 +25,6 @@
             android:layout_alignParentEnd = "true"
             android:background="@null"/>
 
-        <ImageButton
-            android:id="@+id/addToCart"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="38dp"
-            android:background="@null"
-            android:src="@drawable/add_product" />
-
 
         <com.blogspot.atifsoftwares.circularimageview.CircularImageView
             android:id="@+id/profileIv"

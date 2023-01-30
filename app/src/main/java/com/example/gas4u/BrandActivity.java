@@ -74,7 +74,7 @@ public class BrandActivity extends DrawerBaseActivity {
         filterProductsTv = findViewById(R.id.filterProductsTv);
         searchProductEt = findViewById(R.id.searchProductEt);
         logoutBtn = findViewById(R.id.logoutBtn);
-        addToCart = findViewById(R.id.addToCart);
+        //addToCart = findViewById(R.id.addToCart);
         profileIv = findViewById(R.id.profileIv);
         productsRl = findViewById(R.id.productsRl);
         productsRv = findViewById(R.id.productsRv);
@@ -117,11 +117,11 @@ public class BrandActivity extends DrawerBaseActivity {
             }
         });
 
-        addToCart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-            }
-        });
+//        addToCart.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//            }
+//        });
 
         tabProductsTv.setOnClickListener(new View.OnClickListener() {
             @Override
