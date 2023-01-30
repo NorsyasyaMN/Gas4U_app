@@ -7,15 +7,13 @@ public class ModelOrderShop {
     public ModelOrderShop() {
     }
 
-    public ModelOrderShop(String orderId, String orderTime, String orderStatus, String orderCost, String orderBy, String orderTo, String latitude, String longitude) {
+    public ModelOrderShop(String orderId, String orderTime, String orderStatus, String orderCost, String orderBy, String orderTo) {
         this.orderId = orderId;
         this.orderTime = orderTime;
         this.orderStatus = orderStatus;
         this.orderCost = orderCost;
         this.orderBy = orderBy;
         this.orderTo = orderTo;
-        this.latitude = latitude;
-        this.longitude = longitude;
     }
 
     public String getOrderId() {
@@ -66,19 +64,4 @@ public class ModelOrderShop {
         this.orderTo = orderTo;
     }
 
-    public String getLatitude() {
-        return latitude;
-    }
-
-    public void setLatitude(String latitude) {
-        this.latitude = latitude;
-    }
-
-    public String getLongitude() {
-        return longitude;
-    }
-
-    public void setLongitude(String longitude) {
-        this.longitude = longitude;
-    }
 }
