@@ -1,0 +1,117 @@
+Index: app/src/main/res/layout/activity_cart.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<ScrollView xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\">\r\n\r\n\r\n    <LinearLayout\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"match_parent\"\r\n        android:orientation=\"vertical\">\r\n\r\n        <TextView\r\n            style=\"@style/TextAppearance.AppCompat.Headline\"\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:text=\"Order To\"\r\n            android:textAlignment=\"center\"\r\n            android:textAllCaps=\"true\"\r\n            android:textStyle=\"bold\" />\r\n\r\n        <!--shop name-->\r\n        <TextView\r\n            android:id=\"@+id/shopNameTv\"\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:text=\"Order To\"\r\n            android:textAlignment=\"center\"\r\n            android:textAllCaps=\"true\"\r\n            android:textColor=\"@color/black\"\r\n            android:textStyle=\"bold\" />\r\n\r\n        <View\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"2dp\"\r\n            android:background=\"@color/white\" />\r\n\r\n        <!--show cart items-->\r\n        <androidx.recyclerview.widget.RecyclerView\r\n            android:id=\"@+id/cartItemsRv\"\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:padding=\"5dp\"\r\n            app:layoutManager=\"androidx.recyclerview.widget.LinearLayoutManager\"\r\n            tools:listitem=\"@layout/row_cartitem\" />\r\n\r\n        <RelativeLayout\r\n            android:id=\"@+id/pricesLayout\"\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"176dp\"\r\n            android:padding=\"10dp\">\r\n\r\n            <TextView\r\n                android:id=\"@+id/sTotalLabelTv\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:padding=\"5dp\"\r\n                android:text=\"Sub Total:\"\r\n                android:textColor=\"@color/black\"\r\n                android:textStyle=\"bold\" />\r\n\r\n            <TextView\r\n                android:id=\"@+id/sTotalTv\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_alignParentEnd=\"true\"\r\n                android:padding=\"5dp\"\r\n                android:text=\"$10\"\r\n                android:textColor=\"@color/black\"\r\n                android:textStyle=\"bold\" />\r\n\r\n            <TextView\r\n                android:id=\"@+id/dFeeLabelTv\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_below=\"@+id/sTotalLabelTv\"\r\n                android:padding=\"5dp\"\r\n                android:text=\"Delivery Fee:\"\r\n                android:textColor=\"@color/black\"\r\n                android:textStyle=\"bold\" />\r\n\r\n            <TextView\r\n                android:id=\"@+id/dFeeTv\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_below=\"@+id/sTotalLabelTv\"\r\n                android:layout_alignParentEnd=\"true\"\r\n                android:padding=\"5dp\"\r\n                android:text=\"$12\"\r\n                android:textColor=\"@color/black\"\r\n                android:textStyle=\"bold\" />\r\n\r\n            <TextView\r\n                android:id=\"@+id/totalLabelTv\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_below=\"@+id/dFeeLabelTv\"\r\n                android:padding=\"5dp\"\r\n                android:text=\"Total price:\"\r\n                android:textColor=\"@color/black\"\r\n                android:textStyle=\"bold\" />\r\n\r\n            <TextView\r\n                android:id=\"@+id/totalTv\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_below=\"@+id/dFeeLabelTv\"\r\n                android:layout_alignParentEnd=\"true\"\r\n                android:padding=\"5dp\"\r\n                android:text=\"$22\"\r\n                android:textColor=\"@color/black\"\r\n                android:textStyle=\"bold\" />\r\n\r\n\r\n        </RelativeLayout>\r\n\r\n        <Button\r\n            android:id=\"@+id/checkoutBtn\"\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:background=\"@color/colorPrimary\"\r\n            android:gravity=\"center|center_horizontal\"\r\n            android:padding=\"10dp\"\r\n            android:onClick=\"placeorder\"\r\n            android:text=\"Place Order\"\r\n            android:textColor=\"@color/white\"\r\n            app:iconPadding=\"10dp\" />\r\n    </LinearLayout>\r\n\r\n</ScrollView>\r\n\r\n
+===================================================================
+diff --git a/app/src/main/res/layout/activity_cart.xml b/app/src/main/res/layout/activity_cart.xml
+--- a/app/src/main/res/layout/activity_cart.xml	
++++ b/app/src/main/res/layout/activity_cart.xml	
+@@ -26,7 +26,7 @@
+             android:id="@+id/shopNameTv"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+-            android:text="Order To"
++            android:text="Gas4u"
+             android:textAlignment="center"
+             android:textAllCaps="true"
+             android:textColor="@color/black"
+@@ -38,6 +38,7 @@
+             android:background="@color/white" />
+ 
+         <!--show cart items-->
++
+         <androidx.recyclerview.widget.RecyclerView
+             android:id="@+id/cartItemsRv"
+             android:layout_width="match_parent"
+@@ -116,6 +117,7 @@
+ 
+         </RelativeLayout>
+ 
++
+         <Button
+             android:id="@+id/checkoutBtn"
+             android:layout_width="match_parent"
+Index: app/src/main/java/com/example/gas4u/CartActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.gas4u;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.appcompat.app.AlertDialog;\r\nimport androidx.appcompat.app.AppCompatActivity;\r\n\r\nimport android.content.DialogInterface;\r\nimport android.content.Intent;\r\nimport android.os.Bundle;\r\nimport android.util.Log;\r\nimport android.view.View;\r\nimport android.widget.Button;\r\nimport android.widget.Toast;\r\n\r\nimport com.example.gas4u.databinding.ActivityCartBinding;\r\nimport com.google.android.gms.tasks.OnCompleteListener;\r\nimport com.google.android.gms.tasks.OnFailureListener;\r\nimport com.google.android.gms.tasks.OnSuccessListener;\r\nimport com.google.android.gms.tasks.Task;\r\nimport com.google.firebase.auth.FirebaseAuth;\r\nimport com.google.firebase.auth.FirebaseUser;\r\nimport com.google.firebase.firestore.DocumentReference;\r\nimport com.google.firebase.firestore.DocumentSnapshot;\r\nimport com.google.firebase.firestore.FirebaseFirestore;\r\n\r\nimport java.util.HashMap;\r\nimport java.util.Objects;\r\n\r\npublic class CartActivity extends DrawerBaseActivity {\r\n\r\n    private static final String userName = \"userName\";\r\n    private static final String userPhone = \"userPhone\";\r\n    private static final String userAddress = \"userAddress\";\r\n\r\n\r\n    FirebaseAuth fa = FirebaseAuth.getInstance();\r\n    FirebaseFirestore db = FirebaseFirestore.getInstance();\r\n\r\n    ActivityCartBinding activityCartBinding;\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        activityCartBinding = ActivityCartBinding.inflate(getLayoutInflater());\r\n        setContentView(activityCartBinding.getRoot());\r\n        allocateActivityTitle(\"Carts\");\r\n\r\n    }\r\n\r\n    public void placeorder(View v){\r\n\r\n\r\n\r\n        final String[] fonts = {\r\n                \"Default Address\", \"New Address\"\r\n        };\r\n\r\n        AlertDialog.Builder builder = new AlertDialog.Builder(CartActivity.this);\r\n        builder.setTitle(\"Please choose the address\");\r\n        builder.setItems(fonts, new DialogInterface.OnClickListener() {\r\n            @Override\r\n            public void onClick(DialogInterface dialog, int which) {\r\n            if (\"Default Address\".equals(fonts[which])) {\r\n\r\n\r\n                FirebaseUser user = fa.getCurrentUser();\r\n                DocumentReference docRef = db.collection(\"Customers\").document(user.getUid());\r\n                docRef.get()\r\n                        .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {\r\n                            @Override\r\n                            public void onSuccess(DocumentSnapshot documentSnapshot) {\r\n                                if (documentSnapshot.exists()){\r\n                                    String name = documentSnapshot.getString(userName);\r\n                                    String phone = documentSnapshot.getString(userPhone);\r\n                                    String address = documentSnapshot.getString(userAddress);\r\n                                    String shipstatus = \"Ordered\";\r\n\r\n\r\n                                    String timestamp = \"\"+System.currentTimeMillis();\r\n                                    FirebaseUser user = fa.getCurrentUser();\r\n\r\n                                    //setup data to upload for default address\r\n                                    HashMap<String, Object> hashMap = new HashMap<>();\r\n                                   // hashMap.put(\"productId\", \"\"+timestamp);\r\n                                    hashMap.put(\"Receiver Name: \", name);\r\n                                    hashMap.put(\"Phone Number\", phone);\r\n                                    hashMap.put(\"Address\", address);\r\n                                    hashMap.put(\"Order Status\", shipstatus);\r\n\r\n                                    //dummy\r\n                                    String products = \"Petron 14kg\";\r\n                                    String quantity = \"1\";\r\n                                    String totalprice = \"25.00\";\r\n\r\n                                    hashMap.put(\"Products\", products);\r\n                                    hashMap.put(\"Quantity\", quantity);\r\n                                    hashMap.put(\"Total Price\", totalprice);\r\n                                    //hashMap.put(\"timestamp\", timestamp);\r\n                                    hashMap.put(\"uid\", db.collection(\"Order\").document(user.getUid()));\r\n\r\n                                    //add to db\r\n                                    db.collection(\"Order\").document(user.getUid())\r\n                                            .set(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {\r\n                                                @Override\r\n                                                public void onComplete(@NonNull Task<Void> task) {\r\n                                                    if(task.isSuccessful()){\r\n                                                        //added to db\r\n                                                        //clearData();\r\n\r\n                                                        Intent intent2 = new Intent(getBaseContext(), CheckoutActivity.class);\r\n                                                        startActivity(intent2);\r\n\r\n                                                    }\r\n\r\n                                                }\r\n                                            })\r\n                                            .addOnFailureListener(new OnFailureListener() {\r\n                                                @Override\r\n                                                public void onFailure(@NonNull Exception e) {\r\n                                                    Toast.makeText(CartActivity.this, \"\"+e.getMessage(), Toast.LENGTH_SHORT).show();\r\n                                                }\r\n                                            });\r\n\r\n\r\n                                } else {\r\n                                    Toast.makeText(CartActivity.this, \"ORDER PLACEMENT FAILED!\", Toast.LENGTH_SHORT).show();\r\n                                }\r\n\r\n                            }\r\n                        })\r\n                        .addOnFailureListener(new OnFailureListener() {\r\n                            @Override\r\n                            public void onFailure(@NonNull Exception e) {\r\n                                Toast.makeText(CartActivity.this, \"error!\", Toast.LENGTH_SHORT).show();\r\n                            }\r\n                        });\r\n\r\n               // Toast.makeText(CartActivity.this, \"you nailed it\", Toast.LENGTH_SHORT).show();\r\n            } else if (\"New Address\".equals(fonts[which])) {\r\n\r\n                Intent intent2 = new Intent(getBaseContext(), PlaceOrderActivity.class);\r\n                startActivity(intent2);\r\n            }\r\n\r\n        }\r\n        });\r\n        builder.show();\r\n\r\n\r\n\r\n\r\n    }\r\n\r\n\r\n\r\n//if (Objects.equals(role, user.getUid())){\r\n//\r\n//        if (Objects.equals(entr_stat, \"in\")){\r\n//\r\n//\r\n//            txtTesting.setText(\"GOOD NEWS!\");\r\n//            txtTesting2.setText(\"We are happy to say that MR/MRS\" + name + \" is available at the faculty.\");\r\n//\r\n//        } else {\r\n//\r\n//            txtTesting.setText(\"SAD NEWS!\");\r\n//            txtTesting2.setText(\"We are sadly to say that MR/MRS \" + name + \" is not available at the faculty.\");\r\n//        }\r\n//\r\n//    } else{\r\n//\r\n//        txtTesting.setText(\"SAD NEWS!\");\r\n//        txtTesting2.setText(\"We are sadly to say that MR/MRS \" + name + \" is not a lecturer\");\r\n//\r\n//    }\r\n\r\n\r\n\r\n}
+===================================================================
+diff --git a/app/src/main/java/com/example/gas4u/CartActivity.java b/app/src/main/java/com/example/gas4u/CartActivity.java
+--- a/app/src/main/java/com/example/gas4u/CartActivity.java	
++++ b/app/src/main/java/com/example/gas4u/CartActivity.java	
+@@ -1,5 +1,7 @@
+ package com.example.gas4u;
+ 
++import static java.lang.Double.parseDouble;
++
+ import androidx.annotation.NonNull;
+ import androidx.appcompat.app.AlertDialog;
+ import androidx.appcompat.app.AppCompatActivity;
+@@ -10,6 +12,7 @@
+ import android.util.Log;
+ import android.view.View;
+ import android.widget.Button;
++import android.widget.TextView;
+ import android.widget.Toast;
+ 
+ import com.example.gas4u.databinding.ActivityCartBinding;
+@@ -22,12 +25,18 @@
+ import com.google.firebase.firestore.DocumentReference;
+ import com.google.firebase.firestore.DocumentSnapshot;
+ import com.google.firebase.firestore.FirebaseFirestore;
++import com.google.firebase.firestore.QueryDocumentSnapshot;
++import com.google.firebase.firestore.QuerySnapshot;
+ 
+ import java.util.HashMap;
+ import java.util.Objects;
+ 
+ public class CartActivity extends DrawerBaseActivity {
+ 
++    String uidUser, totalprice;
++    Double totalPrice = 0.0, price;
++    TextView total;
++
+     private static final String userName = "userName";
+     private static final String userPhone = "userPhone";
+     private static final String userAddress = "userAddress";
+@@ -44,6 +53,32 @@
+         setContentView(activityCartBinding.getRoot());
+         allocateActivityTitle("Carts");
+ 
++        total = findViewById(R.id.totalTv);
++
++
++        uidUser = fa.getCurrentUser().getUid();
++        Task<QuerySnapshot> querySnapshotTask = db.collection("Cart").document(uidUser)
++                .collection("CartList").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
++                    @Override
++                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
++                        if (task.isSuccessful()) {
++//                    Toast.makeText(CartActivity.this, , Toast.LENGTH_SHORT).show();
++
++                            for (QueryDocumentSnapshot document : task.getResult()) {
++                                price = parseDouble(document.getString("price"));
++                                totalPrice = totalPrice + price;
++                                Log.d("price", price.toString());
++                            }
++                            Log.d("totalPrice", totalPrice.toString());
++
++//                            DocumentSnapshot documentSnapshot = task.getResult();
++
++                            totalprice = totalPrice.toString();
++                            total.setText(totalprice);
++                        }
++                    }
++                });
++
+     }
+ 
+     public void placeorder(View v){
+@@ -147,7 +182,6 @@
+ 
+ 
+ 
+-
+     }
+ 
+ 
