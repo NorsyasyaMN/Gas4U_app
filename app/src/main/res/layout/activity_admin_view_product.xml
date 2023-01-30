@@ -5,24 +5,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AdminViewProduct">
+    tools:context=".AdminViewProduct"
+    android:background="@drawable/admin_bg">
 
     <!--Toolbar-->
     <RelativeLayout
         android:id="@+id/toolBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/splash_blue"
-        android:padding="10dp">
+        android:padding="10dp"
+        android:background="@color/pastel_green">
 
 
         <ImageButton
             android:id="@+id/logoutBtn"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_alignParentEnd="true"
-            android:background="@null"
-            android:src="@drawable/ic_baseline_logout_24" />
+            android:src="@drawable/ic_baseline_logout_24"
+            android:layout_alignParentEnd = "true"
+            android:background="@null"/>
 
         <ImageButton
             android:id="@+id/addToCart"
@@ -39,45 +40,48 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginEnd="10dp"
-            android:src="@drawable/ic_baseline_person_24"
             app:c_border="true"
-            app:c_border_color="@color/colorPrimaryDark" />
+            app:c_border_color="@color/colorPrimaryDark"
+            android:src="@drawable/ic_baseline_person_24"/>
 
         <TextView
             android:id="@+id/nameTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toEndOf="@id/profileIv"
             android:text=""
+            android:layout_toEndOf="@id/profileIv"
+            android:textStyle="bold"
             android:textColor="@color/black"
-            android:textStyle="bold" />
+            />
 
         <TextView
             android:id="@+id/emailTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/nameTv"
-            android:layout_toEndOf="@id/profileIv"
             android:text=""
-            android:textColor="@color/black" />
+            android:layout_toEndOf="@id/profileIv"
+            android:textColor="@color/black"
+            android:layout_below="@id/nameTv"
+            />
 
         <TextView
             android:id="@+id/phoneTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/emailTv"
-            android:layout_toEndOf="@id/profileIv"
             android:text=""
-            android:textColor="@color/black" />
+            android:layout_toEndOf="@id/profileIv"
+            android:textColor="@color/black"
+            android:layout_below="@id/emailTv"
+            />
 
         <!--Tabs: Products-->
         <LinearLayout
+            android:layout_below="@+id/profileIv"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:layout_below="@+id/profileIv"
-            android:layout_marginTop="10dp"
             android:background="@drawable/shape_rect01"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp">
 
             <!--Products-->
             <TextView
@@ -85,11 +89,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:layout_margin="5dp"
                 android:background="@drawable/shape_rect02"
                 android:gravity="center"
                 android:text="Products"
-                android:textColor="@color/colorPrimaryDark" />
+                android:textColor="@color/colorPrimaryDark"/>
 
         </LinearLayout>
     </RelativeLayout>
@@ -102,10 +105,43 @@
         android:layout_height="match_parent">
 
         <!--Search view-->
+        <EditText
+            android:id="@+id/searchProductEt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_toStartOf="@+id/filterProductBtn"
+            android:background="@drawable/shapre_rect02"
+            android:drawableStart="@drawable/ic_search"
+            android:drawablePadding="10dp"
+            android:hint="Search"
+            android:padding="10dp" />
 
         <!--Filter-->
+        <ImageButton
+            android:id="@+id/filterProductBtn"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:background="@null"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_dashboard"/>
 
         <!--Show filter products title-->
+        <TextView
+            android:id="@+id/filterProductsTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/searchProductEt"
+            android:textColor="@color/colorPrimaryDark"
+            android:text="Showing All"
+            android:layout_marginStart="5dp"
+            android:layout_marginBottom="5dp"/>
 
         <!--RecyclerView:show products-->
         <androidx.recyclerview.widget.RecyclerView
@@ -113,7 +149,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:listitem="@layout/row_product"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:layout_below="@+id/filterProductsTv"/>
 
     </RelativeLayout>
 
