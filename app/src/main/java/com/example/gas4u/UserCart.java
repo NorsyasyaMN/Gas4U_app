@@ -85,7 +85,7 @@ public class UserCart extends DrawerBaseActivity {
         cartItemsRv.setAdapter(adapterCartItem);
 
         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
-
+//.orderBy("title", Query.Direction.ASCENDING).addSnapshotListener(new EventListener<QuerySnapshot>()
         db.collection("Cart").document(firebaseUser.getUid()).collection("CartList").orderBy("title", Query.Direction.ASCENDING).addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
