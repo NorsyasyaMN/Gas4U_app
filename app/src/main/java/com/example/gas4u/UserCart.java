@@ -61,8 +61,6 @@ public class UserCart extends DrawerBaseActivity {
 
         sTotalLabelTv = findViewById(R.id.sTotalLabelTv);
         sTotalTv = findViewById(R.id.sTotalTv);
-        dFeeLabelTv = findViewById(R.id.dFeeLabelTv);
-        dFeeTv = findViewById(R.id.dFeeTv);
         totalLabelTv = findViewById(R.id.totalLabelTv);
         totalTv = findViewById(R.id.totalTv);
         firebaseAuth = FirebaseAuth.getInstance();
@@ -208,26 +206,4 @@ public class UserCart extends DrawerBaseActivity {
 
     }
 
-
-
-//if (Objects.equals(role, user.getUid())){
-//
-//        if (Objects.equals(entr_stat, "in")){
-//
-//
-//            txtTesting.setText("GOOD NEWS!");
-//            txtTesting2.setText("We are happy to say that MR/MRS" + name + " is available at the faculty.");
-//
-//        } else {
-//
-//            txtTesting.setText("SAD NEWS!");
-//            txtTesting2.setText("We are sadly to say that MR/MRS " + name + " is not available at the faculty.");
-//        }
-//
-//    } else{
-//
-//        txtTesting.setText("SAD NEWS!");
-//        txtTesting2.setText("We are sadly to say that MR/MRS " + name + " is not a lecturer");
-//
-//    }
 }

@@ -70,36 +70,16 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:padding="5dp"
-                android:text="$10"
+                android:text="RM 35.OO"
                 android:textColor="@color/black"
                 android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/dFeeLabelTv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/sTotalLabelTv"
-                android:padding="5dp"
-                android:text="Delivery Fee:"
-                android:textColor="@color/black"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/dFeeTv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/sTotalLabelTv"
-                android:layout_alignParentEnd="true"
-                android:padding="5dp"
-                android:text="$12"
-                android:textColor="@color/black"
-                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/totalLabelTv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/dFeeLabelTv"
+                android:layout_below="@+id/sTotalLabelTv"
                 android:padding="5dp"
                 android:text="Total price:"
                 android:textColor="@color/black"
@@ -109,10 +89,10 @@
                 android:id="@+id/totalTv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/dFeeLabelTv"
+                android:layout_below="@+id/sTotalTv"
                 android:layout_alignParentEnd="true"
                 android:padding="5dp"
-                android:text="$22"
+                android:text="RM 35.OO"
                 android:textColor="@color/black"
                 android:textStyle="bold" />
 
