@@ -1,0 +1,684 @@
+Index: app/src/main/res/layout/activity_d2.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    tools:context=\".d2\">\r\n\r\n    <TextView\r\n        android:id=\"@+id/textView5\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:text=\"d2\"\r\n        tools:layout_editor_absoluteX=\"197dp\"\r\n        tools:layout_editor_absoluteY=\"356dp\"\r\n        tools:ignore=\"MissingConstraints\" />\r\n</androidx.constraintlayout.widget.ConstraintLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/activity_d2.xml b/app/src/main/res/layout/activity_d2.xml
+--- a/app/src/main/res/layout/activity_d2.xml	(revision 7f4437e0a2a9531cca9ff6a94267ba31d286b1ec)
++++ b/app/src/main/res/layout/activity_d2.xml	(date 1675007439992)
+@@ -1,17 +1,131 @@
+ <?xml version="1.0" encoding="utf-8"?>
+-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
++<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:app="http://schemas.android.com/apk/res-auto"
+     xmlns:tools="http://schemas.android.com/tools"
+     android:layout_width="match_parent"
+     android:layout_height="match_parent"
+     tools:context=".d2">
+ 
+-    <TextView
+-        android:id="@+id/textView5"
+-        android:layout_width="wrap_content"
+-        android:layout_height="wrap_content"
+-        android:text="d2"
+-        tools:layout_editor_absoluteX="197dp"
+-        tools:layout_editor_absoluteY="356dp"
+-        tools:ignore="MissingConstraints" />
+-</androidx.constraintlayout.widget.ConstraintLayout>
+\ No newline at end of file
++    <!--Toolbar-->
++    <RelativeLayout
++        android:id="@+id/toolBar"
++        android:layout_width="match_parent"
++        android:layout_height="wrap_content"
++        android:padding="10dp"
++        android:background="@color/splash_blue">
++
++
++        <ImageButton
++            android:id="@+id/logoutBtn"
++            android:layout_width="30dp"
++            android:layout_height="30dp"
++            android:src="@drawable/ic_baseline_logout_24"
++            android:layout_alignParentEnd = "true"
++            android:background="@null"/>
++
++        <com.blogspot.atifsoftwares.circularimageview.CircularImageView
++            android:id="@+id/profileIv"
++            android:layout_width="50dp"
++            android:layout_height="50dp"
++            android:layout_marginEnd="10dp"
++            app:c_border="true"
++            app:c_border_color="@color/colorPrimaryDark"
++            android:src="@drawable/ic_baseline_person_24"/>
++
++        <TextView
++            android:id="@+id/nameTv"
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:text=""
++            android:layout_toEndOf="@id/profileIv"
++            android:textStyle="bold"
++            android:textColor="@color/black"
++            />
++
++        <TextView
++            android:id="@+id/emailTv"
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:text=""
++            android:layout_toEndOf="@id/profileIv"
++            android:textColor="@color/black"
++            android:layout_below="@id/nameTv"
++            />
++
++        <TextView
++            android:id="@+id/phoneTv"
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:text=""
++            android:layout_toEndOf="@id/profileIv"
++            android:textColor="@color/black"
++            android:layout_below="@id/emailTv"
++            />
++
++        <!--Tabs: Products-->
++        <LinearLayout
++            android:layout_below="@+id/profileIv"
++            android:layout_width="match_parent"
++            android:layout_height="40dp"
++            android:background="@drawable/shape_rect01"
++            android:orientation="horizontal"
++            android:layout_marginTop="10dp">
++
++            <!--Products-->
++            <TextView
++                android:id="@+id/tabOrdersTv"
++                android:layout_width="wrap_content"
++                android:layout_height="match_parent"
++                android:layout_weight="1"
++                android:background="@drawable/shape_rect02"
++                android:gravity="center"
++                android:text="Order"
++                android:textColor="@color/colorPrimaryDark"/>
++
++        </LinearLayout>
++    </RelativeLayout>
++
++    <!--Orders-->
++    <RelativeLayout
++        android:id="@+id/ordersRl"
++        android:layout_below="@+id/toolBar"
++        android:layout_width="match_parent"
++        android:layout_height="match_parent">
++        <!--Filter/Search-->
++        <TextView
++            android:id="@+id/filteredOrdersTv"
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"
++            android:layout_marginStart="5dp"
++            android:layout_marginTop="5dp"
++            android:layout_marginEnd="5dp"
++            android:layout_marginBottom="5dp"
++            android:layout_toStartOf="@id/filterOrderBtn"
++            android:background="@drawable/shapre_rect02"
++            android:padding="10dp"
++            android:text="Showing All Orders"/>
++        <!--Filtering Order-->
++        <ImageButton
++            android:id="@+id/filterOrderBtn"
++            android:layout_width="45dp"
++            android:layout_height="45dp"
++            android:layout_alignParentEnd="true"
++            android:layout_marginTop="5dp"
++            android:layout_marginEnd="5dp"
++            android:background="@null"
++            android:scaleType="fitXY"
++            android:src="@drawable/ic_filter_grayish"/>
++
++        <!--show order-->
++        <androidx.recyclerview.widget.RecyclerView
++            android:id="@+id/ordersRv"
++            android:layout_width="match_parent"
++            android:layout_height="match_parent"
++            android:layout_below="@id/filteredOrdersTv"
++            tools:listitem="@layout/row_order_seller"
++            app:reverseLayout="true"
++            app:stackFromEnd="true"
++            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
++    </RelativeLayout>
++
++</RelativeLayout>
+\ No newline at end of file
+Index: app/src/main/java/com/example/gas4u/d2.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.gas4u;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.annotation.Nullable;\r\nimport androidx.appcompat.app.AppCompatActivity;\r\nimport androidx.recyclerview.widget.RecyclerView;\r\n\r\nimport android.app.AlertDialog;\r\nimport android.app.ProgressDialog;\r\nimport android.content.DialogInterface;\r\nimport android.content.Intent;\r\nimport android.os.Bundle;\r\nimport android.text.Editable;\r\nimport android.text.TextWatcher;\r\nimport android.util.Log;\r\nimport android.view.View;\r\nimport android.widget.EditText;\r\nimport android.widget.ImageButton;\r\nimport android.widget.ImageView;\r\nimport android.widget.RelativeLayout;\r\nimport android.widget.TextView;\r\n\r\nimport com.example.gas4u.databinding.ActivityD2Binding;\r\nimport com.example.gas4u.viewmodel.ModelOrderShop;\r\nimport com.google.firebase.auth.FirebaseAuth;\r\nimport com.google.firebase.auth.FirebaseUser;\r\nimport com.google.firebase.database.DataSnapshot;\r\nimport com.google.firebase.database.DatabaseError;\r\nimport com.google.firebase.database.DatabaseReference;\r\nimport com.google.firebase.database.FirebaseDatabase;\r\nimport com.google.firebase.database.ValueEventListener;\r\nimport com.google.firebase.firestore.DocumentChange;\r\nimport com.google.firebase.firestore.EventListener;\r\nimport com.google.firebase.firestore.FirebaseFirestore;\r\nimport com.google.firebase.firestore.FirebaseFirestoreException;\r\nimport com.google.firebase.firestore.Query;\r\nimport com.google.firebase.firestore.QuerySnapshot;\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.HashMap;\r\n\r\npublic class d2 extends DrawerAdminActivity{\r\n\r\n    ActivityD2Binding activityD2Binding;\r\n    TextView nameTv,emailTv,phoneTv, tabProductsTv, tabOrdersTv, filterProductsTv, filteredOrdersTv;\r\n    EditText searchProductEt;\r\n    ImageButton logoutBtn,addToCart,filterProductBtn, filterOrderBtn;\r\n    ImageView profileIv;\r\n    RelativeLayout productsRl, ordersRL;\r\n    RecyclerView productsRv, ordersRv;\r\n\r\n    FirebaseFirestore db;\r\n    FirebaseAuth firebaseAuth;\r\n    ProgressDialog progressDialog;\r\n    ArrayList<ModelProduct> productList;\r\n    AdapterProductSeller adapterProductSeller;\r\n    ArrayList<ModelOrderShop> orderShopArrayList;\r\n    AdapterOrderShop adapterOrderShop;\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        activityD2Binding = ActivityD2Binding.inflate(getLayoutInflater());\r\n        setContentView(activityD2Binding.getRoot());\r\n        allocateActivityTitle(\"Orders\");\r\n\r\n        nameTv = findViewById(R.id.nameTv);\r\n        emailTv = findViewById(R.id.emailTv);\r\n        phoneTv = findViewById(R.id.phoneTv);\r\n        tabProductsTv = findViewById(R.id.tabProductsTv);\r\n        tabOrdersTv = findViewById(R.id.tabOrdersTv);\r\n        filterProductsTv = findViewById(R.id.filterProductsTv);\r\n        searchProductEt = findViewById(R.id.searchProductEt);\r\n        logoutBtn = findViewById(R.id.logoutBtn);\r\n        addToCart = findViewById(R.id.addToCart);\r\n        filterProductBtn = findViewById(R.id.filterProductBtn);\r\n        profileIv = findViewById(R.id.profileIv);\r\n        productsRl = findViewById(R.id.productsRl);\r\n        productsRv = findViewById(R.id.productsRv);\r\n        ordersRL = findViewById(R.id.ordersRl);\r\n        filteredOrdersTv = findViewById(R.id.filteredOrdersTv);\r\n        filterOrderBtn = findViewById(R.id.filterOrderBtn);\r\n        ordersRv = findViewById(R.id.ordersRv); // creates the layout for recyclerview\r\n\r\n\r\n        progressDialog = new ProgressDialog(this);\r\n        progressDialog.setTitle(\"Please wait\");\r\n        progressDialog.setCanceledOnTouchOutside(false);\r\n        firebaseAuth = FirebaseAuth.getInstance();\r\n        db = FirebaseFirestore.getInstance();\r\n        checkUser();\r\n        loadAllProducts();\r\n        loadAllOrders();\r\n\r\n        showProductsUI();\r\n\r\n        //search\r\n        searchProductEt.addTextChangedListener(new TextWatcher() {\r\n            @Override\r\n            public void beforeTextChanged(CharSequence s, int start, int count, int after) {\r\n\r\n            }\r\n            @Override\r\n            public void onTextChanged(CharSequence s, int start, int before, int count) {\r\n                try{\r\n                    adapterProductSeller.getFilter().filter(s);\r\n                }catch (Exception e) {\r\n                    e.printStackTrace();\r\n                }\r\n            }\r\n\r\n            @Override\r\n            public void afterTextChanged(Editable s) {\r\n\r\n            }\r\n        });\r\n\r\n        logoutBtn.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View view) {\r\n                makeMeOffline();\r\n            }\r\n        });\r\n\r\n        addToCart.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View view) {\r\n                startActivity(new Intent(d2.this, AdapterProductSeller.class));\r\n            }\r\n        });\r\n\r\n        tabProductsTv.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View view) {\r\n                showProductsUI();\r\n            }\r\n\r\n        });\r\n\r\n        tabOrdersTv.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n\r\n            }\r\n        });\r\n        filterProductBtn.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                AlertDialog.Builder builder = new AlertDialog.Builder(d2.this);\r\n                builder.setTitle(\"Choose Category:\").setItems(Constants.productCategories1, new DialogInterface.OnClickListener() {\r\n                    @Override\r\n                    public void onClick(DialogInterface dialog, int which) {\r\n                        //get selected item\r\n                        String selected = Constants.productCategories1[which];\r\n                        filterProductsTv.setText(selected);\r\n                        if(selected.equals(\"All\")){\r\n                            //load all\r\n                            loadAllProducts();\r\n                        }\r\n                        else{\r\n                            //load filter\r\n                            loadFilteredProducts(selected);\r\n                        }\r\n                    }\r\n                }).show();\r\n            }\r\n        });\r\n        filterOrderBtn.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                // options of dialog that will be displayed\r\n                String[] options = {\"All\", \"In Progress\", \"Completed\", \"Cancelled\"};\r\n                // dialog\r\n                AlertDialog.Builder builder = new AlertDialog.Builder(d2.this);\r\n                builder.setTitle(\"Filter Orders:\")\r\n                        .setItems(options, new DialogInterface.OnClickListener(){\r\n                            @Override\r\n                            public void onClick(DialogInterface dialog, int which){\r\n\r\n                                //handle clicking of item\r\n                                if(which==0){\r\n                                    // All is clicked\r\n                                    filteredOrdersTv.setText(\"Showing All Orders\");\r\n                                    adapterOrderShop.getFilter().filter(\"\"); //all orders are shown\r\n                                }\r\n                                else {\r\n                                    String optionClicked = options[which];\r\n                                    filteredOrdersTv.setText(\"Showing \" + optionClicked + \" Orders\"); // like Showing The Completed Orders\r\n                                    adapterOrderShop.getFilter().filter(optionClicked);\r\n\r\n                                }\r\n\r\n                            }\r\n                        })\r\n                        .show();\r\n            }\r\n        });\r\n    /*\r\n        reviewsBtn.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                // open the same reviews activity as user\r\n                Intent intent = new Intent(MainAdminActivity.this, ShopRe)\r\n            }\r\n        });*/\r\n    }\r\n\r\n    private void loadAllOrders() {\r\n        // initializa array list\r\n        orderShopArrayList = new ArrayList<>();\r\n\r\n        // loading orders\r\n        DatabaseReference ref = FirebaseDatabase.getInstance().getReference(\"Users\");\r\n        ref.child(firebaseAuth.getUid()).child(\"Orders\")\r\n                .addValueEventListener(new ValueEventListener() {\r\n                    @Override\r\n                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {\r\n\r\n                        //list is cleared before new data is added\r\n                        orderShopArrayList.clear();\r\n                        for (DataSnapshot ds: dataSnapshot.getChildren()){\r\n                            ModelOrderShop modelOrderShop = ds.getValue(ModelOrderShop.class);\r\n\r\n                            // adding to list\r\n                            orderShopArrayList.add(modelOrderShop);\r\n                        }\r\n\r\n                        //setting the adapter\r\n                        adapterOrderShop = new AdapterOrderShop(d2.this, orderShopArrayList);\r\n                        //setting the adapter to recyclerview\r\n                        ordersRv.setAdapter(adapterOrderShop);\r\n                    }\r\n\r\n                    @Override\r\n                    public void onCancelled(@NonNull DatabaseError error) {\r\n\r\n                    }\r\n                });\r\n    }\r\n\r\n    private void loadFilteredProducts(String selected) {\r\n//        productList = new ArrayList<>();\r\n//        //get all products\r\n//        DatabaseReference reference = FirebaseDatabase.getInstance().getReference(\"Users\");\r\n//        reference.child(firebaseAuth.getUid()).child(\"Products\").addValueEventListener(new ValueEventListener() {\r\n//            @Override\r\n//            public void onDataChange(@NonNull DataSnapshot snapshot) {\r\n//                //before getting reset list\r\n//                productList.clear();\r\n//                for (DataSnapshot ds: snapshot.getChildren()){\r\n//                    String productCategory =\"\"+ds.child(\"productCategory\").getValue();\r\n//\r\n//                    //if selected category matches product category then add in list\r\n//                    if(selected.equals(productCategory)){\r\n//                        ModelProduct modelProduct = ds.getValue(ModelProduct.class);\r\n//                        productList.add(modelProduct);\r\n//                    }\r\n//                    ModelProduct modelProduct = ds.getValue(ModelProduct.class);\r\n//                    productList.add(modelProduct);\r\n//                }\r\n//                //setup adapter\r\n//                adapterProductSeller = new AdapterProductSeller(BrandActivity.this, productList);\r\n//                //set adapter\r\n//                productsRv.setAdapter(adapterProductSeller);\r\n//            }\r\n//            @Override\r\n//            public void onCancelled(@NonNull DatabaseError error) {\r\n//\r\n//            }\r\n//        });\r\n    }\r\n    private void loadAllProducts() {\r\n        productList = new ArrayList<>();\r\n        //setup adapter\r\n        adapterProductSeller = new AdapterProductSeller(d2.this, productList);\r\n        //set adapter\r\n        productsRv.setAdapter(adapterProductSeller);\r\n        db.collection(\"Product\").orderBy(\"productTitle\", Query.Direction.ASCENDING)\r\n                .addSnapshotListener(new EventListener<QuerySnapshot>() {\r\n\r\n                    @Override\r\n                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {\r\n\r\n                        productList.clear();\r\n                        if (error != null) {\r\n\r\n                            Log.e(\"Firestore error\", error.getMessage());\r\n                            return;\r\n                        }\r\n                        for (DocumentChange dc : value.getDocumentChanges()) {\r\n\r\n                            if (dc.getType() == DocumentChange.Type.ADDED) {\r\n                                productList.add(dc.getDocument().toObject(ModelProduct.class));\r\n                            }\r\n                            adapterProductSeller.notifyDataSetChanged();\r\n                        }\r\n\r\n                    }\r\n                });\r\n    }\r\n    private void showProductsUI() {\r\n        productsRl.setVisibility(View.VISIBLE);\r\n\r\n        tabProductsTv.setTextColor(getResources().getColor(R.color.colorPrimary));\r\n        tabProductsTv.setBackgroundResource((R.drawable.shape_rect01));\r\n    }\r\n    private void checkUser() {\r\n        FirebaseUser user = firebaseAuth.getCurrentUser();\r\n        if(user==null){\r\n            startActivity(new Intent(d2.this,SignInActivity.class));\r\n            finish();\r\n        }\r\n        else{\r\n            //loadMyInfo();\r\n        }\r\n    }\r\n    /*   private void loadMyInfo() {\r\n\r\n        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();\r\n        DocumentReference reference;\r\n        FirebaseFirestore firestore = FirebaseFirestore.getInstance();\r\n        reference = firestore.collection(\"Customers\").document(user.getUid());\r\n        reference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {\r\n            @Override\r\n            public void onComplete(@NonNull Task<DocumentSnapshot> task) {\r\n                if (task.getResult().exists()) {\r\n\r\n                    String nameResult = task.getResult().getString(\"userName\");\r\n                    String url = task.getResult().getString(\"profilePhoto\");\r\n                    String emailResult = task.getResult().getString(\"userEmail\");\r\n                    String phoneResult = task.getResult().getString(\"userPhone\");\r\n\r\n//                    Picasso.get().load(url).into(profileIv);\r\n                    nameTv.setText(nameResult);\r\n                    emailTv.setText(emailResult);\r\n                    phoneTv.setText(phoneResult);\r\n                    try{\r\n                        Picasso.get().load(url).placeholder(R.drawable.ic_baseline_person_24).into(profileIv);\r\n                    }\r\n                    catch(Exception e){\r\n                        profileIv.setImageResource(R.drawable.ic_baseline_person_24);\r\n                    }\r\n                }\r\n            }\r\n        });\r\n    }*/\r\n\r\n    private void makeMeOffline() {\r\n        progressDialog.setMessage(\"Logging Out...\");\r\n        HashMap<String, Object> hashMap = new HashMap<>();\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/gas4u/d2.java b/app/src/main/java/com/example/gas4u/d2.java
+--- a/app/src/main/java/com/example/gas4u/d2.java	(revision 7f4437e0a2a9531cca9ff6a94267ba31d286b1ec)
++++ b/app/src/main/java/com/example/gas4u/d2.java	(date 1675019840694)
+@@ -22,6 +22,8 @@
+ 
+ import com.example.gas4u.databinding.ActivityD2Binding;
+ import com.example.gas4u.viewmodel.ModelOrderShop;
++import com.google.android.gms.tasks.OnCompleteListener;
++import com.google.android.gms.tasks.Task;
+ import com.google.firebase.auth.FirebaseAuth;
+ import com.google.firebase.auth.FirebaseUser;
+ import com.google.firebase.database.DataSnapshot;
+@@ -30,11 +32,14 @@
+ import com.google.firebase.database.FirebaseDatabase;
+ import com.google.firebase.database.ValueEventListener;
+ import com.google.firebase.firestore.DocumentChange;
++import com.google.firebase.firestore.DocumentReference;
++import com.google.firebase.firestore.DocumentSnapshot;
+ import com.google.firebase.firestore.EventListener;
+ import com.google.firebase.firestore.FirebaseFirestore;
+ import com.google.firebase.firestore.FirebaseFirestoreException;
+ import com.google.firebase.firestore.Query;
+ import com.google.firebase.firestore.QuerySnapshot;
++import com.squareup.picasso.Picasso;
+ 
+ import java.util.ArrayList;
+ import java.util.HashMap;
+@@ -42,18 +47,18 @@
+ public class d2 extends DrawerAdminActivity{
+ 
+     ActivityD2Binding activityD2Binding;
+-    TextView nameTv,emailTv,phoneTv, tabProductsTv, tabOrdersTv, filterProductsTv, filteredOrdersTv;
++    TextView nameTv,emailTv, phoneTv, tabProductsTv, tabOrdersTv, filterProductsTv, filteredOrdersTv;
+     EditText searchProductEt;
+     ImageButton logoutBtn,addToCart,filterProductBtn, filterOrderBtn;
+     ImageView profileIv;
+-    RelativeLayout productsRl, ordersRL;
++    RelativeLayout productsRl, ordersRl;
+     RecyclerView productsRv, ordersRv;
+ 
+     FirebaseFirestore db;
+     FirebaseAuth firebaseAuth;
+     ProgressDialog progressDialog;
+-    ArrayList<ModelProduct> productList;
+-    AdapterProductSeller adapterProductSeller;
++    //ArrayList<ModelOrderedItem> productList;
++    //AdapterOrderedItem adapterOrderedItem;
+     ArrayList<ModelOrderShop> orderShopArrayList;
+     AdapterOrderShop adapterOrderShop;
+     @Override
+@@ -61,22 +66,23 @@
+         super.onCreate(savedInstanceState);
+         activityD2Binding = ActivityD2Binding.inflate(getLayoutInflater());
+         setContentView(activityD2Binding.getRoot());
++        //setContentView(R.layout.activity_d2);
+         allocateActivityTitle("Orders");
+ 
+         nameTv = findViewById(R.id.nameTv);
+         emailTv = findViewById(R.id.emailTv);
+         phoneTv = findViewById(R.id.phoneTv);
+-        tabProductsTv = findViewById(R.id.tabProductsTv);
++        //tabProductsTv = findViewById(R.id.tabProductsTv);
+         tabOrdersTv = findViewById(R.id.tabOrdersTv);
+-        filterProductsTv = findViewById(R.id.filterProductsTv);
+-        searchProductEt = findViewById(R.id.searchProductEt);
++        //filterProductsTv = findViewById(R.id.filterProductsTv);
++        //searchProductEt = findViewById(R.id.searchProductEt);
+         logoutBtn = findViewById(R.id.logoutBtn);
+-        addToCart = findViewById(R.id.addToCart);
+-        filterProductBtn = findViewById(R.id.filterProductBtn);
++        //addToCart = findViewById(R.id.addToCart);
++        //filterProductBtn = findViewById(R.id.filterProductBtn);
+         profileIv = findViewById(R.id.profileIv);
+-        productsRl = findViewById(R.id.productsRl);
+-        productsRv = findViewById(R.id.productsRv);
+-        ordersRL = findViewById(R.id.ordersRl);
++        //productsRl = findViewById(R.id.productsRl);
++        //productsRv = findViewById(R.id.productsRv);
++        ordersRl = findViewById(R.id.ordersRl);
+         filteredOrdersTv = findViewById(R.id.filteredOrdersTv);
+         filterOrderBtn = findViewById(R.id.filterOrderBtn);
+         ordersRv = findViewById(R.id.ordersRv); // creates the layout for recyclerview
+@@ -88,31 +94,11 @@
+         firebaseAuth = FirebaseAuth.getInstance();
+         db = FirebaseFirestore.getInstance();
+         checkUser();
+-        loadAllProducts();
++        //loadAllProducts();
+         loadAllOrders();
+-
+-        showProductsUI();
+-
+-        //search
+-        searchProductEt.addTextChangedListener(new TextWatcher() {
+-            @Override
+-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+-
+-            }
+-            @Override
+-            public void onTextChanged(CharSequence s, int start, int before, int count) {
+-                try{
+-                    adapterProductSeller.getFilter().filter(s);
+-                }catch (Exception e) {
+-                    e.printStackTrace();
+-                }
+-            }
++        loadMyInfo();
+ 
+-            @Override
+-            public void afterTextChanged(Editable s) {
+-
+-            }
+-        });
++        //showProductsUI();
+ 
+         logoutBtn.setOnClickListener(new View.OnClickListener() {
+             @Override
+@@ -121,49 +107,15 @@
+             }
+         });
+ 
+-        addToCart.setOnClickListener(new View.OnClickListener() {
++
++        tabOrdersTv.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View view) {
+-                startActivity(new Intent(d2.this, AdapterProductSeller.class));
+-            }
+-        });
+-
+-        tabProductsTv.setOnClickListener(new View.OnClickListener() {
+-            @Override
+-            public void onClick(View view) {
+-                showProductsUI();
++                showOrdersUI();
+             }
+ 
+         });
+ 
+-        tabOrdersTv.setOnClickListener(new View.OnClickListener() {
+-            @Override
+-            public void onClick(View v) {
+-
+-            }
+-        });
+-        filterProductBtn.setOnClickListener(new View.OnClickListener() {
+-            @Override
+-            public void onClick(View v) {
+-                AlertDialog.Builder builder = new AlertDialog.Builder(d2.this);
+-                builder.setTitle("Choose Category:").setItems(Constants.productCategories1, new DialogInterface.OnClickListener() {
+-                    @Override
+-                    public void onClick(DialogInterface dialog, int which) {
+-                        //get selected item
+-                        String selected = Constants.productCategories1[which];
+-                        filterProductsTv.setText(selected);
+-                        if(selected.equals("All")){
+-                            //load all
+-                            loadAllProducts();
+-                        }
+-                        else{
+-                            //load filter
+-                            loadFilteredProducts(selected);
+-                        }
+-                    }
+-                }).show();
+-            }
+-        });
+         filterOrderBtn.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View v) {
+@@ -204,12 +156,45 @@
+         });*/
+     }
+ 
++    private void showOrdersUI() {
++        ordersRl.setVisibility(View.VISIBLE);
++
++        tabOrdersTv.setTextColor(getResources().getColor(R.color.textColor));
++        tabOrdersTv.setBackgroundResource(R.drawable.shape_rect02);
++    }
++
+     private void loadAllOrders() {
+-        // initializa array list
++        // initialize array list
+         orderShopArrayList = new ArrayList<>();
++        //setting the adapter
++        adapterOrderShop = new AdapterOrderShop(d2.this, orderShopArrayList);
++        //setting the adapter to recyclerview
++        ordersRv.setAdapter(adapterOrderShop);
++
++        db.collection("Users").orderBy("Orders", Query.Direction.ASCENDING)
++                .addSnapshotListener(new EventListener<QuerySnapshot>() {
+ 
++                    @Override
++                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
++
++                        orderShopArrayList.clear();
++                        if (error != null) {
++
++                            Log.e("Firestore error", error.getMessage());
++                            return;
++                        }
++                        for (DocumentChange dc : value.getDocumentChanges()) {
++
++                            if (dc.getType() == DocumentChange.Type.ADDED) {
++                                orderShopArrayList.add(dc.getDocument().toObject(ModelOrderShop.class));
++                            }
++                            adapterOrderShop.notifyDataSetChanged();
++                        }
++
++                    }
++                });
+         // loading orders
+-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users");
++        /*DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users");
+         ref.child(firebaseAuth.getUid()).child("Orders")
+                 .addValueEventListener(new ValueEventListener() {
+                     @Override
+@@ -224,17 +209,13 @@
+                             orderShopArrayList.add(modelOrderShop);
+                         }
+ 
+-                        //setting the adapter
+-                        adapterOrderShop = new AdapterOrderShop(d2.this, orderShopArrayList);
+-                        //setting the adapter to recyclerview
+-                        ordersRv.setAdapter(adapterOrderShop);
+                     }
+ 
+                     @Override
+                     public void onCancelled(@NonNull DatabaseError error) {
+ 
+                     }
+-                });
++                });*/
+     }
+ 
+     private void loadFilteredProducts(String selected) {
+@@ -268,41 +249,7 @@
+ //            }
+ //        });
+     }
+-    private void loadAllProducts() {
+-        productList = new ArrayList<>();
+-        //setup adapter
+-        adapterProductSeller = new AdapterProductSeller(d2.this, productList);
+-        //set adapter
+-        productsRv.setAdapter(adapterProductSeller);
+-        db.collection("Product").orderBy("productTitle", Query.Direction.ASCENDING)
+-                .addSnapshotListener(new EventListener<QuerySnapshot>() {
+-
+-                    @Override
+-                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+ 
+-                        productList.clear();
+-                        if (error != null) {
+-
+-                            Log.e("Firestore error", error.getMessage());
+-                            return;
+-                        }
+-                        for (DocumentChange dc : value.getDocumentChanges()) {
+-
+-                            if (dc.getType() == DocumentChange.Type.ADDED) {
+-                                productList.add(dc.getDocument().toObject(ModelProduct.class));
+-                            }
+-                            adapterProductSeller.notifyDataSetChanged();
+-                        }
+-
+-                    }
+-                });
+-    }
+-    private void showProductsUI() {
+-        productsRl.setVisibility(View.VISIBLE);
+-
+-        tabProductsTv.setTextColor(getResources().getColor(R.color.colorPrimary));
+-        tabProductsTv.setBackgroundResource((R.drawable.shape_rect01));
+-    }
+     private void checkUser() {
+         FirebaseUser user = firebaseAuth.getCurrentUser();
+         if(user==null){
+@@ -310,10 +257,10 @@
+             finish();
+         }
+         else{
+-            //loadMyInfo();
++            loadMyInfo();
+         }
+     }
+-    /*   private void loadMyInfo() {
++    private void loadMyInfo() {
+ 
+         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+         DocumentReference reference;
+@@ -342,7 +289,7 @@
+                 }
+             }
+         });
+-    }*/
++    }
+ 
+     private void makeMeOffline() {
+         progressDialog.setMessage("Logging Out...");
+Index: app/src/main/java/com/example/gas4u/viewmodel/ModelOrderShop.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.gas4u.viewmodel;\r\n\r\npublic class ModelOrderShop {\r\n\r\n    String orderId, orderTime, orderStatus, orderCost, orderBy, orderTo, latitude, longitude;\r\n\r\n    public ModelOrderShop() {\r\n    }\r\n\r\n    public ModelOrderShop(String orderId, String orderTime, String orderStatus, String orderCost, String orderBy, String orderTo, String latitude, String longitude) {\r\n        this.orderId = orderId;\r\n        this.orderTime = orderTime;\r\n        this.orderStatus = orderStatus;\r\n        this.orderCost = orderCost;\r\n        this.orderBy = orderBy;\r\n        this.orderTo = orderTo;\r\n        this.latitude = latitude;\r\n        this.longitude = longitude;\r\n    }\r\n\r\n    public String getOrderId() {\r\n        return orderId;\r\n    }\r\n\r\n    public void setOrderId(String orderId) {\r\n        this.orderId = orderId;\r\n    }\r\n\r\n    public String getOrderTime() {\r\n        return orderTime;\r\n    }\r\n\r\n    public void setOrderTime(String orderTime) {\r\n        this.orderTime = orderTime;\r\n    }\r\n\r\n    public String getOrderStatus() {\r\n        return orderStatus;\r\n    }\r\n\r\n    public void setOrderStatus(String orderStatus) {\r\n        this.orderStatus = orderStatus;\r\n    }\r\n\r\n    public String getOrderCost() {\r\n        return orderCost;\r\n    }\r\n\r\n    public void setOrderCost(String orderCost) {\r\n        this.orderCost = orderCost;\r\n    }\r\n\r\n    public String getOrderBy() {\r\n        return orderBy;\r\n    }\r\n\r\n    public void setOrderBy(String orderBy) {\r\n        this.orderBy = orderBy;\r\n    }\r\n\r\n    public String getOrderTo() {\r\n        return orderTo;\r\n    }\r\n\r\n    public void setOrderTo(String orderTo) {\r\n        this.orderTo = orderTo;\r\n    }\r\n\r\n    public String getLatitude() {\r\n        return latitude;\r\n    }\r\n\r\n    public void setLatitude(String latitude) {\r\n        this.latitude = latitude;\r\n    }\r\n\r\n    public String getLongitude() {\r\n        return longitude;\r\n    }\r\n\r\n    public void setLongitude(String longitude) {\r\n        this.longitude = longitude;\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/gas4u/viewmodel/ModelOrderShop.java b/app/src/main/java/com/example/gas4u/viewmodel/ModelOrderShop.java
+--- a/app/src/main/java/com/example/gas4u/viewmodel/ModelOrderShop.java	(revision 7f4437e0a2a9531cca9ff6a94267ba31d286b1ec)
++++ b/app/src/main/java/com/example/gas4u/viewmodel/ModelOrderShop.java	(date 1675020125597)
+@@ -7,15 +7,13 @@
+     public ModelOrderShop() {
+     }
+ 
+-    public ModelOrderShop(String orderId, String orderTime, String orderStatus, String orderCost, String orderBy, String orderTo, String latitude, String longitude) {
++    public ModelOrderShop(String orderId, String orderTime, String orderStatus, String orderCost, String orderBy, String orderTo) {
+         this.orderId = orderId;
+         this.orderTime = orderTime;
+         this.orderStatus = orderStatus;
+         this.orderCost = orderCost;
+         this.orderBy = orderBy;
+         this.orderTo = orderTo;
+-        this.latitude = latitude;
+-        this.longitude = longitude;
+     }
+ 
+     public String getOrderId() {
+@@ -66,19 +64,4 @@
+         this.orderTo = orderTo;
+     }
+ 
+-    public String getLatitude() {
+-        return latitude;
+-    }
+-
+-    public void setLatitude(String latitude) {
+-        this.latitude = latitude;
+-    }
+-
+-    public String getLongitude() {
+-        return longitude;
+-    }
+-
+-    public void setLongitude(String longitude) {
+-        this.longitude = longitude;
+-    }
+ }
+Index: app/src/main/res/layout/activity_view_order.xml
+===================================================================
+diff --git a/app/src/main/res/layout/activity_view_order.xml b/app/src/main/res/layout/activity_view_order.xml
+deleted file mode 100644
+--- a/app/src/main/res/layout/activity_view_order.xml	(revision 7f4437e0a2a9531cca9ff6a94267ba31d286b1ec)
++++ /dev/null	(revision 7f4437e0a2a9531cca9ff6a94267ba31d286b1ec)
+@@ -1,131 +0,0 @@
+-<?xml version="1.0" encoding="utf-8"?>
+-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+-    xmlns:app="http://schemas.android.com/apk/res-auto"
+-    xmlns:tools="http://schemas.android.com/tools"
+-    android:layout_width="match_parent"
+-    android:layout_height="match_parent"
+-    tools:context=".MainAdminActivity">
+-
+-    <!--Toolbar-->
+-    <RelativeLayout
+-        android:id="@+id/toolBar"
+-        android:layout_width="match_parent"
+-        android:layout_height="wrap_content"
+-        android:padding="10dp"
+-        android:background="@color/splash_blue">
+-
+-
+-        <ImageButton
+-            android:id="@+id/logoutBtn"
+-            android:layout_width="30dp"
+-            android:layout_height="30dp"
+-            android:src="@drawable/ic_baseline_logout_24"
+-            android:layout_alignParentEnd = "true"
+-            android:background="@null"/>
+-
+-        <com.blogspot.atifsoftwares.circularimageview.CircularImageView
+-            android:id="@+id/profileIv"
+-            android:layout_width="50dp"
+-            android:layout_height="50dp"
+-            android:layout_marginEnd="10dp"
+-            app:c_border="true"
+-            app:c_border_color="@color/colorPrimaryDark"
+-            android:src="@drawable/ic_baseline_person_24"/>
+-
+-        <TextView
+-            android:id="@+id/nameTv"
+-            android:layout_width="wrap_content"
+-            android:layout_height="wrap_content"
+-            android:text=""
+-            android:layout_toEndOf="@id/profileIv"
+-            android:textStyle="bold"
+-            android:textColor="@color/black"
+-            />
+-
+-        <TextView
+-            android:id="@+id/emailTv"
+-            android:layout_width="wrap_content"
+-            android:layout_height="wrap_content"
+-            android:text=""
+-            android:layout_toEndOf="@id/profileIv"
+-            android:textColor="@color/black"
+-            android:layout_below="@id/nameTv"
+-            />
+-
+-        <TextView
+-            android:id="@+id/phoneTv"
+-            android:layout_width="wrap_content"
+-            android:layout_height="wrap_content"
+-            android:text=""
+-            android:layout_toEndOf="@id/profileIv"
+-            android:textColor="@color/black"
+-            android:layout_below="@id/emailTv"
+-            />
+-
+-        <!--Tabs: Products-->
+-        <LinearLayout
+-            android:layout_below="@+id/profileIv"
+-            android:layout_width="match_parent"
+-            android:layout_height="40dp"
+-            android:background="@drawable/shape_rect01"
+-            android:orientation="horizontal"
+-            android:layout_marginTop="10dp">
+-
+-            <!--Products-->
+-            <TextView
+-                android:id="@+id/tabOrdersTv"
+-                android:layout_width="wrap_content"
+-                android:layout_height="match_parent"
+-                android:layout_weight="1"
+-                android:background="@drawable/shape_rect02"
+-                android:gravity="center"
+-                android:text="Order"
+-                android:textColor="@color/colorPrimaryDark"/>
+-
+-        </LinearLayout>
+-    </RelativeLayout>
+-
+-        <!--Orders-->
+-        <RelativeLayout
+-        android:id="@+id/ordersRl"
+-        android:layout_below="@+id/toolBar"
+-        android:layout_width="match_parent"
+-        android:layout_height="match_parent">
+-        <!--Filter/Search-->
+-        <TextView
+-            android:id="@+id/filteredOrdersTv"
+-            android:layout_width="match_parent"
+-            android:layout_height="wrap_content"
+-            android:layout_marginStart="5dp"
+-            android:layout_marginTop="5dp"
+-            android:layout_marginEnd="5dp"
+-            android:layout_marginBottom="5dp"
+-            android:layout_toStartOf="@id/filterOrderBtn"
+-            android:background="@drawable/shapre_rect02"
+-            android:padding="10dp"
+-            android:text="Showing All Orders"/>
+-        <!--Filtering Order-->
+-        <ImageButton
+-            android:id="@+id/filterOrderBtn"
+-            android:layout_width="45dp"
+-            android:layout_height="45dp"
+-            android:layout_alignParentEnd="true"
+-            android:layout_marginTop="5dp"
+-            android:layout_marginEnd="5dp"
+-            android:background="@null"
+-            android:scaleType="fitXY"
+-            android:src="@drawable/ic_filter_grayish"/>
+-
+-        <!--show order-->
+-        <androidx.recyclerview.widget.RecyclerView
+-            android:id="@+id/ordersRv"
+-            android:layout_width="match_parent"
+-            android:layout_height="match_parent"
+-            android:layout_below="@id/filteredOrdersTv"
+-            tools:listitem="@layout/row_order_seller"
+-            app:reverseLayout="true"
+-            app:stackFromEnd="true"
+-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+-    </RelativeLayout>
+-
+-</RelativeLayout>
+\ No newline at end of file
+Index: .idea/gradle.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"GradleSettings\">\r\n    <option name=\"linkedExternalProjectsSettings\">\r\n      <GradleProjectSettings>\r\n        <option name=\"testRunner\" value=\"GRADLE\" />\r\n        <option name=\"distributionType\" value=\"DEFAULT_WRAPPED\" />\r\n        <option name=\"externalProjectPath\" value=\"$PROJECT_DIR$\" />\r\n        <option name=\"modules\">\r\n          <set>\r\n            <option value=\"$PROJECT_DIR$\" />\r\n            <option value=\"$PROJECT_DIR$/app\" />\r\n          </set>\r\n        </option>\r\n      </GradleProjectSettings>\r\n    </option>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/gradle.xml b/.idea/gradle.xml
+--- a/.idea/gradle.xml	(revision 7f4437e0a2a9531cca9ff6a94267ba31d286b1ec)
++++ b/.idea/gradle.xml	(date 1675005180005)
+@@ -1,5 +1,6 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
++  <component name="GradleMigrationSettings" migrationVersion="1" />
+   <component name="GradleSettings">
+     <option name="linkedExternalProjectsSettings">
+       <GradleProjectSettings>
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ExternalStorageConfigurationManager\" enabled=\"true\" />\r\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_11\" project-jdk-name=\"11\" project-jdk-type=\"JavaSDK\">\r\n    <output url=\"file://$PROJECT_DIR$/build/classes\" />\r\n  </component>\r\n  <component name=\"ProjectType\">\r\n    <option name=\"id\" value=\"Android\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+--- a/.idea/misc.xml	(revision 7f4437e0a2a9531cca9ff6a94267ba31d286b1ec)
++++ b/.idea/misc.xml	(date 1675005373510)
+@@ -1,7 +1,7 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="ExternalStorageConfigurationManager" enabled="true" />
+-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="11" project-jdk-type="JavaSDK">
++  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
+     <output url="file://$PROJECT_DIR$/build/classes" />
+   </component>
+   <component name="ProjectType">
