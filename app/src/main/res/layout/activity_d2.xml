@@ -31,7 +31,7 @@
             android:layout_marginEnd="10dp"
             app:c_border="true"
             app:c_border_color="@color/colorPrimaryDark"
-            android:src="@drawable/ic_baseline_person_24"/>
+            android:src="@drawable/profilepi"/>
 
         <TextView
             android:id="@+id/nameTv"
@@ -115,7 +115,7 @@
             android:layout_marginEnd="5dp"
             android:background="@null"
             android:scaleType="fitXY"
-            android:src="@drawable/ic_filter_grayish"/>
+            android:src="@drawable/menup"/>
 
         <!--show order-->
         <androidx.recyclerview.widget.RecyclerView
