@@ -3,6 +3,10 @@ package com.example.gas4u;
 public class ModelOrderedItem {
     String price, priceEach, productId, quantity, title;
 
+    public ModelOrderedItem(){
+
+    }
+
     public ModelOrderedItem(String price, String priceEach, String productId, String quantity, String title) {
         this.price = price;
         this.priceEach = priceEach;

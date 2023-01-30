@@ -72,16 +72,9 @@ public class d2 extends DrawerAdminActivity{
         nameTv = findViewById(R.id.nameTv);
         emailTv = findViewById(R.id.emailTv);
         phoneTv = findViewById(R.id.phoneTv);
-        //tabProductsTv = findViewById(R.id.tabProductsTv);
         tabOrdersTv = findViewById(R.id.tabOrdersTv);
-        //filterProductsTv = findViewById(R.id.filterProductsTv);
-        //searchProductEt = findViewById(R.id.searchProductEt);
         logoutBtn = findViewById(R.id.logoutBtn);
-        //addToCart = findViewById(R.id.addToCart);
-        //filterProductBtn = findViewById(R.id.filterProductBtn);
         profileIv = findViewById(R.id.profileIv);
-        //productsRl = findViewById(R.id.productsRl);
-        //productsRv = findViewById(R.id.productsRv);
         ordersRl = findViewById(R.id.ordersRl);
         ordersRv = findViewById(R.id.ordersRv); // creates the layout for recyclerview
 

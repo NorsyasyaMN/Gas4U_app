@@ -70,7 +70,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:layout_weight="1"
-                    android:text="121212121212"
+                    android:text="289088"
                     android:textColor="@color/textColor"/>
 
             </TableRow>
@@ -92,7 +92,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:layout_weight="1"
-                    android:text="dd/MM/yyyy"
+                    android:text="31/1/2023"
                     android:textColor="@color/textColor"/>
 
             </TableRow>
@@ -136,7 +136,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:layout_weight="1"
-                    android:text="Email"
+                    android:text="qwerty@gmail.com"
                     android:textColor="@color/textColor"/>
 
             </TableRow>
@@ -158,7 +158,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:layout_weight="1"
-                    android:text="+032546980"
+                    android:text="0132345434"
                     android:autoLink="all"
                     android:textColor="@color/textColor"/>
 
@@ -181,7 +181,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:layout_weight="1"
-                    android:text="12"
+                    android:text="1"
                     android:textColor="@color/textColor"/>
 
             </TableRow>
@@ -203,7 +203,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:layout_weight="1"
-                    android:text="RM12"
+                    android:text="RM 25.00"
                     android:textColor="@color/textColor"/>
 
             </TableRow>
@@ -225,7 +225,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:layout_weight="1"
-                    android:text="Customer Address "
+                    android:text="Batu 17 1/4 Kg Melekek, 78000, Alor Gajah, Melaka"
                     android:textColor="@color/textColor"/>
 
             </TableRow>
