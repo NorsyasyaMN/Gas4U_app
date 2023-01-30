@@ -57,7 +57,7 @@ public class AdapterCartItem extends RecyclerView.Adapter<AdapterCartItem.Holder
             public void onClick(View v) {
                 // table will be created if not exists, however will exist
                 EasyDB easyDB =  EasyDB.init(context, "ITEMS_DB")
-                       .setTableName("ITEMS_TABLE")
+                        .setTableName("ITEMS_TABLE")
                         .addColumn(new Column("Item_Id", new String[]{"text", "unique"}))
                         .addColumn(new Column("Item_PID", new String[]{"text", "not null"}))
                         .addColumn(new Column("Item_Name", new String[]{"text", "not null"}))

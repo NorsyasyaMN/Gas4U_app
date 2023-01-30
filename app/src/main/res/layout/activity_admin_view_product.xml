@@ -5,8 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AdminViewProduct"
-    android:background="@drawable/admin_bg">
+    tools:context=".AdminViewProduct">
 
     <!--Toolbar-->
     <RelativeLayout
@@ -14,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="10dp"
-        android:background="@color/pastel_green">
+        android:background="@color/splash_blue">
 
 
         <ImageButton

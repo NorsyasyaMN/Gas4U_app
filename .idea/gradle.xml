@@ -7,6 +7,7 @@
         <option name="testRunner" value="GRADLE" />
         <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="gradleHome" value="$USER_HOME$/AndroidStudioProjects/Workshop/.gradle/android studio gradle/gradle-8.0-rc-1-all/gradle-8.0-rc-1" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />

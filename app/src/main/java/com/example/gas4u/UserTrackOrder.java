@@ -2,6 +2,8 @@ package com.example.gas4u;
 
 import androidx.annotation.NonNull;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -56,7 +58,7 @@ public class UserTrackOrder extends DrawerBaseActivity {
 
         View view = LayoutInflater.from(this).inflate(R.layout.activity_usertrackorder, null);
 
-        orderid = findViewById(R.id.orderid);
+        //orderid = findViewById(R.id.orderid);
         Products = findViewById(R.id.products);
         Address = findViewById(R.id.address);
         Quantity = findViewById(R.id.quantity);
@@ -117,6 +119,12 @@ public class UserTrackOrder extends DrawerBaseActivity {
                     }
                 });
 
+    }
 
+    public void btnwasap(View v)
+    {
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://wa.link/4qgpmo"));
+        //Intent intent = new Intent(getBaseContext(), DashboardActivity.class);
+        startActivity(intent);
     }
 }
