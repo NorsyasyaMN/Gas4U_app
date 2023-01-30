@@ -44,7 +44,7 @@ public class AdminViewProduct extends DrawerAdminActivity{
 
     TextView nameTv,emailTv,phoneTv, tabProductsTv, filterProductsTv;
     EditText searchProductEt;
-    ImageButton logoutBtn;
+    ImageButton logoutBtn, addToCart;
     ImageView profileIv;
     RelativeLayout productsRl;
     RecyclerView productsRv;
@@ -62,6 +62,7 @@ public class AdminViewProduct extends DrawerAdminActivity{
         setContentView(activityAdminViewProductBinding.getRoot());
         allocateActivityTitle("Products");
 
+        addToCart = findViewById(R.id.addToCart);
         nameTv = findViewById(R.id.nameTv);
         emailTv = findViewById(R.id.emailTv);
         phoneTv = findViewById(R.id.phoneTv);
@@ -87,6 +88,13 @@ public class AdminViewProduct extends DrawerAdminActivity{
             @Override
             public void onClick(View view) {
                 makeMeOffline();
+            }
+        });
+
+        addToCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(AdminViewProduct.this, d1.class));
             }
         });
 
