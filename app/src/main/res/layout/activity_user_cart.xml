@@ -27,7 +27,7 @@
             android:id="@+id/shopNameTv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Order To"
+            android:text="Gas 4U Sdn Bhd."
             android:textAlignment="center"
             android:textAllCaps="true"
             android:textColor="@color/black"
