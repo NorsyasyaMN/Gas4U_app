@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SignInActivity">
+    tools:context=".SignInActivity"
+    android:background="@drawable/background">
 
     <ImageView
         android:id="@+id/imageView3"
@@ -25,22 +26,28 @@
         android:layout_marginTop="50dp"
         android:layout_marginEnd="10dp"
         android:ems="10"
-        android:hint="Username"
+        android:hint="  Email"
+        android:padding="10dp"
+        android:background="@drawable/shapre_rect02"
         android:inputType="textPersonName"
+        android:drawableStart="@drawable/ic_title_gray"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView3" />
 
     <EditText
         android:id="@+id/editTextSignInPassword"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="10dp"
         android:ems="10"
-        android:hint="Password"
-        android:inputType="textPersonName"
+        android:padding="10dp"
+        android:hint="  Password"
+        android:inputType="textPassword"
+        android:background="@drawable/shapre_rect02"
+        android:drawableStart="@drawable/ic_title_gray"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextSignInUserName" />
