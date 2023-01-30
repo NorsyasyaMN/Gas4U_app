@@ -36,7 +36,7 @@ import java.util.Locale;
 public class OrderDetailsAdminActivity extends AppCompatActivity {
 
     // view of ui
-    private ImageButton backBtn, mapBtn;
+    private ImageButton backBtn, editBtn, mapBtn;
     private TextView orderIdTv, dateTv, orderStatusTv, emailTv, phoneTv,totalItemsTv, amountTv, addressTv;
     private RecyclerView itemsRv;
 
@@ -54,6 +54,7 @@ public class OrderDetailsAdminActivity extends AppCompatActivity {
 
         // initialize view of ui
         backBtn = findViewById(R.id.backBtn);
+        editBtn = findViewById(R.id.editBtn);
         mapBtn = findViewById(R.id.mapBtn);
         orderIdTv = findViewById(R.id.orderIdTv);
         dateTv = findViewById(R.id.dateTv);
@@ -89,7 +90,60 @@ public class OrderDetailsAdminActivity extends AppCompatActivity {
                 openMap();
             }
         });
+        editBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //edit order status
+                editOrderStatusDialog();
+            }
+        });
 
+    }
+
+    private void editOrderStatusDialog() {
+        //options to display in dialog
+        final String[] options = {"In Progress", "Completed", "Cancelled"};
+
+        //dialog
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Edit Order Status")
+                .setItems(options, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // handle the click of item
+                        String selectedOption = options[which];
+                        editOrderStatus(selectedOption);
+                    }
+                });
+    }
+
+    private void editOrderStatus(String selectedOption) {
+
+        //setting data to place in firebase db
+        HashMap<String, Object> hashMap = new HashMap<>();
+        hashMap.put("OrderStatus", "" + selectedOption);
+
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users");
+        ref.child(firebaseAuth.getUid()).child("Orders").child(orderId)
+                .updateChildren(hashMap)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+
+                        //status is update
+                        Toast.makeText(OrderDetailsAdminActivity.this, "Order is now " + selectedOption, Toast.LENGTH_SHORT).show();
+
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+
+                        //status fail to update, display reason
+                        Toast.makeText(OrderDetailsAdminActivity.this, "" + e.getMessage(), Toast.LENGTH_SHORT).show();
+
+                    }
+                });
     }
 
     private void openMap() {
