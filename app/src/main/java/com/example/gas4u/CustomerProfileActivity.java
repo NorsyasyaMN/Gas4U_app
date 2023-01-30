@@ -69,12 +69,17 @@ public class CustomerProfileActivity extends DrawerBaseActivity {
                     String emailResult = task.getResult().getString("userEmail");
                     String phoneResult = task.getResult().getString("userPhone");
 
-                    Picasso.get().load(url).into(userDp);
                     name.setText(nameResult);
                     name2.setText(nameResult);
                     address.setText(addressResult);
                     email.setText(emailResult);
                     phone.setText(phoneResult);
+                    try{
+                        Picasso.get().load(url).placeholder(R.drawable.ic_baseline_person_24).into(userDp);
+                    }
+                    catch(Exception e){
+                        userDp.setImageResource(R.drawable.ic_baseline_person_24);
+                    }
                 }
                 else{
                     startActivity(new Intent(getApplicationContext(),UpdateCustomerProfile.class));
