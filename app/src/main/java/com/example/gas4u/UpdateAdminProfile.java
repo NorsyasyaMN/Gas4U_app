@@ -51,7 +51,7 @@ public class UpdateAdminProfile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         activityUpdateAdminProfileBinding = ActivityUpdateAdminProfileBinding.inflate(getLayoutInflater());
         setContentView(activityUpdateAdminProfileBinding.getRoot());
-        setContentView(R.layout.activity_update_admin_profile);
+        //setContentView(R.layout.activity_update_admin_profile);
 
         //init ui views
         userPhoto = findViewById(R.id.userPhoto);
