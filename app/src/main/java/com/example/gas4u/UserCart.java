@@ -146,9 +146,9 @@ public class UserCart extends DrawerBaseActivity {
                                         hashMap.put("Order Status", shipstatus);
 
                                         //dummy
-                                        String products = "Petron 14kg";
+                                        String products = "PETRON LPG GASUL 14kg";
                                         String quantity = "1";
-                                        String totalprice = "25.00";
+                                        String totalprice = "35.00";
 
                                         hashMap.put("Products", products);
                                         hashMap.put("Quantity", quantity);

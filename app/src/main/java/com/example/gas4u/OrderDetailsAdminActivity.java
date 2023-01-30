@@ -70,7 +70,6 @@ public class OrderDetailsAdminActivity extends AppCompatActivity {
 
         // initialize view of ui
         backBtn = findViewById(R.id.backBtn);
-        editBtn = findViewById(R.id.editBtn);
         mapBtn = findViewById(R.id.mapBtn);
         orderIdTv = findViewById(R.id.orderIdTv);
         dateTv = findViewById(R.id.dateTv);
