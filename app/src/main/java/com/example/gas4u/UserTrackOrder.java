@@ -3,6 +3,8 @@ package com.example.gas4u;
 import androidx.annotation.NonNull;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,15 +37,15 @@ public class UserTrackOrder extends DrawerBaseActivity {
     FirebaseUser user = fa.getCurrentUser();
 
     //Take from database (read from Order collection)
-    TextView orderid = findViewById(R.id.orderid);
-    TextView Products = findViewById(R.id.products);
-    TextView Address = findViewById(R.id.address);
-    TextView Quantity = findViewById(R.id.quantity);
-    TextView Tprice = findViewById(R.id.totalprice);
-    TextView ORDplace = findViewById(R.id.ordplace);
+    TextView orderid;
+    TextView Products;
+    TextView Address;
+    TextView Quantity;
+    TextView Tprice;
+    TextView ORDplace;
 
-    TextView ORDconfirm = findViewById(R.id.ordconfirm);
-    TextView ORDdelivery = findViewById(R.id.orddelivery);
+    TextView ORDconfirm;
+    TextView ORDdelivery;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +53,18 @@ public class UserTrackOrder extends DrawerBaseActivity {
         activityUsertrackorderBinding = ActivityUsertrackorderBinding.inflate(getLayoutInflater());
         setContentView(activityUsertrackorderBinding.getRoot());
         allocateActivityTitle("Track Orders");
+
+        View view = LayoutInflater.from(this).inflate(R.layout.activity_usertrackorder, null);
+
+        orderid = findViewById(R.id.orderid);
+        Products = findViewById(R.id.products);
+        Address = findViewById(R.id.address);
+        Quantity = findViewById(R.id.quantity);
+        Tprice = findViewById(R.id.totalprice);
+        ORDplace = findViewById(R.id.ordplace);
+
+        ORDconfirm = findViewById(R.id.ordconfirm);
+        ORDdelivery = findViewById(R.id.orddelivery);
 
         DocumentReference docRef = db.collection("Order").document(user.getUid());
         docRef.get()
