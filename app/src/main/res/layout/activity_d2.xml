@@ -92,37 +92,12 @@
         android:layout_below="@+id/toolBar"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <!--Filter/Search-->
-        <TextView
-            android:id="@+id/filteredOrdersTv"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="5dp"
-            android:layout_marginBottom="5dp"
-            android:layout_toStartOf="@id/filterOrderBtn"
-            android:background="@drawable/shapre_rect02"
-            android:padding="10dp"
-            android:text="Showing All Orders"/>
-        <!--Filtering Order-->
-        <ImageButton
-            android:id="@+id/filterOrderBtn"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="5dp"
-            android:background="@null"
-            android:scaleType="fitXY"
-            android:src="@drawable/menup"/>
 
         <!--show order-->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/ordersRv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/filteredOrdersTv"
             tools:listitem="@layout/row_order_seller"
             app:reverseLayout="true"
             app:stackFromEnd="true"
