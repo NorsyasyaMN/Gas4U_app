@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="20dp"
-    tools:context=".Feedback">
+    tools:context=".Feedback"
+    android:background="@drawable/cust_bg">
 
     <TextView
         android:layout_width="match_parent"
@@ -28,7 +29,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:text="Very Dissatisfied" />
+        android:layout_marginTop="10dp"
+        android:text="Very Dissatisfied"
+        android:textColor="@color/black"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -58,6 +61,7 @@
         android:backgroundTint="#FFFCFC"
         android:ems="10"
         android:hint="Enter your feedback"
+        android:textColor="@color/black"
         android:inputType="textPersonName"
         android:lines="4"
         android:minHeight="100dp"
@@ -67,6 +71,7 @@
         android:id="@+id/btnSend"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/button_sign_in"
         android:layout_marginLeft="50dp"
         android:layout_marginTop="50dp"
         android:layout_marginRight="50dp"

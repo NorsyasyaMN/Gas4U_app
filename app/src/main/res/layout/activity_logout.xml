@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LogoutActivity">
+    tools:context=".LogoutActivity"
+    android:background="@drawable/admin_bg">
 
     <Button
         android:id="@+id/logoutBtn"

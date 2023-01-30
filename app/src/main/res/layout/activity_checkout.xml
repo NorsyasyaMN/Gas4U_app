@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    tools:context=".CheckoutActivity">
+    tools:context=".CheckoutActivity"
+    android:background="@color/pastel_light_purple">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -45,6 +46,7 @@
             android:id="@+id/Paycash"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/button_sign_in"
             android:onClick="payCash"
             android:paddingRight="30dp"
             android:text="Cash" />

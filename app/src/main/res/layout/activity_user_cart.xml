@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UserCart">
+    tools:context=".UserCart"
+    android:background="@drawable/cust_bg">
 
 
     <LinearLayout
@@ -51,7 +52,8 @@
             android:id="@+id/pricesLayout"
             android:layout_width="match_parent"
             android:layout_height="176dp"
-            android:padding="10dp">
+            android:padding="10dp"
+            android:background="@color/pastel_purple">
 
             <TextView
                 android:id="@+id/sTotalLabelTv"

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".WelcomeActivity"
-    android:background="@color/splash_blue">
+    android:background="@color/pastel_blue">
 
     <ImageView
         android:id="@+id/imageView2"
@@ -23,7 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="LPG GAS TANK"
-        android:textColor="#fff"
+        android:textColor="@color/black"
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -40,7 +40,7 @@
         android:layout_marginEnd="10dp"
         android:text="DELIVER A HIGH QUALITY LPG GAS TANK TO YOU"
         android:textAlignment="center"
-        android:textColor="#FFFF"
+        android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="italic"
         app:layout_constraintBottom_toBottomOf="parent"

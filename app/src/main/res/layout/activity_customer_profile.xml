@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CustomerProfileActivity">
+    tools:context=".CustomerProfileActivity"
+    android:background="@drawable/cust_bg">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
@@ -12,7 +13,7 @@
         android:layout_height="170dp"
         android:layout_marginTop="0dp"
         android:layout_marginBottom="8dp"
-        android:background="@drawable/background_gradient"
+        android:background="@color/pastel_purple"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -30,7 +31,7 @@
             android:fontFamily="sans-serif-condensed-medium"
             android:text="Your Name"
             android:textAlignment="center"
-            android:textColor="@color/headerTextColor"
+            android:textColor="@color/black"
             android:textSize="25sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.497"
@@ -134,6 +135,7 @@
                 android:layout_marginTop="40dp"
                 android:layout_marginEnd="8dp"
                 android:text="Your Mail"
+                android:textColor="@color/black"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.031"
@@ -176,8 +178,9 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="184dp"
-                android:text="+88 017123456789"
+                android:text="+6001019876"
                 android:textSize="18sp"
+                android:textColor="@color/black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.031"
                 app:layout_constraintStart_toEndOf="@+id/phone_imageview"
