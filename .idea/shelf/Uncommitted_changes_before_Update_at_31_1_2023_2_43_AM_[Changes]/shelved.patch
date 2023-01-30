@@ -1,0 +1,506 @@
+Index: app/src/main/res/layout/activity_brand.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<RelativeLayout\r\n    xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    tools:context=\".BrandActivity\"\r\n    android:background=\"@drawable/cust_bg\">\r\n\r\n    <!--Toolbar-->\r\n    <RelativeLayout\r\n        android:id=\"@+id/toolBar\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:padding=\"10dp\"\r\n        android:background=\"@color/pastel_purple\">\r\n\r\n\r\n        <ImageButton\r\n            android:id=\"@+id/logoutBtn\"\r\n            android:layout_width=\"30dp\"\r\n            android:layout_height=\"30dp\"\r\n            android:src=\"@drawable/ic_baseline_logout_24\"\r\n            android:layout_alignParentEnd = \"true\"\r\n            android:background=\"@null\"/>\r\n\r\n        <ImageButton\r\n            android:id=\"@+id/addToCart\"\r\n            android:layout_width=\"30dp\"\r\n            android:layout_height=\"30dp\"\r\n            android:layout_alignParentEnd=\"true\"\r\n            android:layout_marginEnd=\"38dp\"\r\n            android:background=\"@null\"\r\n            android:src=\"@drawable/add_product\" />\r\n\r\n\r\n        <com.blogspot.atifsoftwares.circularimageview.CircularImageView\r\n            android:id=\"@+id/profileIv\"\r\n            android:layout_width=\"50dp\"\r\n            android:layout_height=\"50dp\"\r\n            android:layout_marginEnd=\"10dp\"\r\n            app:c_border=\"true\"\r\n            app:c_border_color=\"@color/colorPrimaryDark\"\r\n            android:src=\"@drawable/ic_baseline_person_24\"/>\r\n\r\n        <TextView\r\n            android:id=\"@+id/nameTv\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:text=\"\"\r\n            android:layout_toEndOf=\"@id/profileIv\"\r\n            android:textStyle=\"bold\"\r\n            android:textColor=\"@color/black\"\r\n            />\r\n\r\n        <TextView\r\n            android:id=\"@+id/emailTv\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:text=\"\"\r\n            android:layout_toEndOf=\"@id/profileIv\"\r\n            android:textColor=\"@color/black\"\r\n            android:layout_below=\"@id/nameTv\"\r\n            />\r\n\r\n        <TextView\r\n            android:id=\"@+id/phoneTv\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:text=\"\"\r\n            android:layout_toEndOf=\"@id/profileIv\"\r\n            android:textColor=\"@color/black\"\r\n            android:layout_below=\"@id/emailTv\"\r\n            />\r\n\r\n        <!--Tabs: Products-->\r\n        <LinearLayout\r\n            android:layout_below=\"@+id/profileIv\"\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"40dp\"\r\n            android:background=\"@drawable/shape_rect01\"\r\n            android:orientation=\"horizontal\"\r\n            android:layout_marginTop=\"10dp\">\r\n\r\n            <!--Products-->\r\n            <TextView\r\n                android:id=\"@+id/tabProductsTv\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"match_parent\"\r\n                android:layout_weight=\"1\"\r\n                android:background=\"@drawable/shape_rect02\"\r\n                android:gravity=\"center\"\r\n                android:text=\"Products\"\r\n                android:textColor=\"@color/colorPrimaryDark\"/>\r\n\r\n        </LinearLayout>\r\n    </RelativeLayout>\r\n\r\n    <!--Products UI-->\r\n    <RelativeLayout\r\n        android:id=\"@+id/productsRl\"\r\n        android:layout_below=\"@+id/toolBar\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"match_parent\">\r\n\r\n        <!--Search view-->\r\n        <EditText\r\n            android:id=\"@+id/searchProductEt\"\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_marginStart=\"5dp\"\r\n            android:layout_marginTop=\"5dp\"\r\n            android:layout_marginEnd=\"5dp\"\r\n            android:layout_marginBottom=\"5dp\"\r\n            android:background=\"@drawable/shapre_rect02\"\r\n            android:drawableStart=\"@drawable/ic_search\"\r\n            android:drawablePadding=\"10dp\"\r\n            android:hint=\"Search\"\r\n            android:padding=\"10dp\" />\r\n\r\n\r\n        <!--Show filter products title-->\r\n        <TextView\r\n            android:id=\"@+id/filterProductsTv\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_below=\"@+id/searchProductEt\"\r\n            android:textColor=\"@color/colorPrimaryDark\"\r\n            android:text=\"Showing All\"\r\n            android:layout_marginStart=\"5dp\"\r\n            android:layout_marginBottom=\"5dp\"/>\r\n\r\n        <!--RecyclerView:show products-->\r\n        <androidx.recyclerview.widget.RecyclerView\r\n            android:id=\"@+id/productsRv\"\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"match_parent\"\r\n            tools:listitem=\"@layout/row_product_seller\"\r\n            app:layoutManager=\"androidx.recyclerview.widget.LinearLayoutManager\"\r\n            android:layout_below=\"@+id/filterProductsTv\"/>\r\n\r\n    </RelativeLayout>\r\n\r\n</RelativeLayout>\r\n\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/activity_brand.xml b/app/src/main/res/layout/activity_brand.xml
+--- a/app/src/main/res/layout/activity_brand.xml	(revision 10d1e63025bdf47245027ec4ffbd1d6bdd2cf246)
++++ b/app/src/main/res/layout/activity_brand.xml	(date 1675104221517)
+@@ -25,15 +25,6 @@
+             android:layout_alignParentEnd = "true"
+             android:background="@null"/>
+ 
+-        <ImageButton
+-            android:id="@+id/addToCart"
+-            android:layout_width="30dp"
+-            android:layout_height="30dp"
+-            android:layout_alignParentEnd="true"
+-            android:layout_marginEnd="38dp"
+-            android:background="@null"
+-            android:src="@drawable/add_product" />
+-
+ 
+         <com.blogspot.atifsoftwares.circularimageview.CircularImageView
+             android:id="@+id/profileIv"
+Index: app/src/main/java/com/example/gas4u/BrandActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.gas4u;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.annotation.Nullable;\r\nimport androidx.recyclerview.widget.RecyclerView;\r\n\r\nimport android.app.AlertDialog;\r\nimport android.app.ProgressDialog;\r\nimport android.content.DialogInterface;\r\nimport android.content.Intent;\r\nimport android.os.Bundle;\r\nimport android.text.Editable;\r\nimport android.text.TextWatcher;\r\nimport android.util.Log;\r\nimport android.view.LayoutInflater;\r\nimport android.view.View;\r\nimport android.widget.EditText;\r\nimport android.widget.ImageButton;\r\nimport android.widget.ImageView;\r\nimport android.widget.RelativeLayout;\r\nimport android.widget.TextView;\r\n\r\nimport com.example.gas4u.databinding.ActivityBrandBinding;\r\nimport com.google.android.gms.tasks.OnCompleteListener;\r\nimport com.google.android.gms.tasks.Task;\r\nimport com.google.firebase.auth.FirebaseAuth;\r\nimport com.google.firebase.auth.FirebaseUser;\r\nimport com.google.firebase.database.DataSnapshot;\r\nimport com.google.firebase.database.DatabaseError;\r\nimport com.google.firebase.database.DatabaseReference;\r\nimport com.google.firebase.database.FirebaseDatabase;\r\nimport com.google.firebase.database.ValueEventListener;\r\nimport com.google.firebase.firestore.DocumentChange;\r\nimport com.google.firebase.firestore.DocumentReference;\r\nimport com.google.firebase.firestore.DocumentSnapshot;\r\nimport com.google.firebase.firestore.EventListener;\r\nimport com.google.firebase.firestore.FirebaseFirestore;\r\nimport com.google.firebase.firestore.FirebaseFirestoreException;\r\nimport com.google.firebase.firestore.Query;\r\nimport com.google.firebase.firestore.QuerySnapshot;\r\nimport com.squareup.picasso.Picasso;\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.HashMap;\r\n\r\npublic class BrandActivity extends DrawerBaseActivity {\r\n\r\n    ActivityBrandBinding activityBrandBinding;\r\n\r\n    TextView nameTv,emailTv,phoneTv, tabProductsTv, filterProductsTv;\r\n    EditText searchProductEt;\r\n    ImageButton logoutBtn,addToCart;\r\n    ImageView profileIv;\r\n    RelativeLayout productsRl;\r\n    RecyclerView productsRv;\r\n\r\n    FirebaseFirestore db;\r\n    FirebaseAuth firebaseAuth;\r\n    ProgressDialog progressDialog;\r\n    ArrayList<ModelProduct> productList;\r\n    AdapterProductSeller adapterProductSeller;\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        activityBrandBinding = ActivityBrandBinding.inflate(getLayoutInflater());\r\n        setContentView(activityBrandBinding.getRoot());\r\n        allocateActivityTitle(\"Products\");\r\n\r\n        nameTv = findViewById(R.id.nameTv);\r\n        emailTv = findViewById(R.id.emailTv);\r\n        phoneTv = findViewById(R.id.phoneTv);\r\n        tabProductsTv = findViewById(R.id.tabProductsTv);\r\n        filterProductsTv = findViewById(R.id.filterProductsTv);\r\n        searchProductEt = findViewById(R.id.searchProductEt);\r\n        logoutBtn = findViewById(R.id.logoutBtn);\r\n        addToCart = findViewById(R.id.addToCart);\r\n        profileIv = findViewById(R.id.profileIv);\r\n        productsRl = findViewById(R.id.productsRl);\r\n        productsRv = findViewById(R.id.productsRv);\r\n\r\n        progressDialog = new ProgressDialog(this);\r\n        progressDialog.setTitle(\"Please wait\");\r\n        progressDialog.setCanceledOnTouchOutside(false);\r\n        firebaseAuth = FirebaseAuth.getInstance();\r\n        db = FirebaseFirestore.getInstance();\r\n        checkUser();\r\n        loadAllProducts();\r\n\r\n        showProductsUI();\r\n\r\n        //search\r\n        searchProductEt.addTextChangedListener(new TextWatcher() {\r\n            @Override\r\n            public void beforeTextChanged(CharSequence s, int start, int count, int after) {\r\n\r\n            }\r\n            @Override\r\n            public void onTextChanged(CharSequence s, int start, int before, int count) {\r\n                try{\r\n                    adapterProductSeller.getFilter().filter(s);\r\n                }catch (Exception e) {\r\n                    e.printStackTrace();\r\n                }\r\n            }\r\n\r\n            @Override\r\n            public void afterTextChanged(Editable s) {\r\n\r\n            }\r\n        });\r\n\r\n        logoutBtn.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View view) {\r\n                makeMeOffline();\r\n            }\r\n        });\r\n\r\n        addToCart.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View view) {\r\n            }\r\n        });\r\n\r\n        tabProductsTv.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View view) {\r\n                showProductsUI();\r\n            }\r\n        });\r\n\r\n    }\r\n\r\n    private void loadFilteredProducts(String selected) {\r\n//        productList = new ArrayList<>();\r\n//        //get all products\r\n//        DatabaseReference reference = FirebaseDatabase.getInstance().getReference(\"Users\");\r\n//        reference.child(firebaseAuth.getUid()).child(\"Products\").addValueEventListener(new ValueEventListener() {\r\n//            @Override\r\n//            public void onDataChange(@NonNull DataSnapshot snapshot) {\r\n//                //before getting reset list\r\n//                productList.clear();\r\n//                for (DataSnapshot ds: snapshot.getChildren()){\r\n//                    String productCategory =\"\"+ds.child(\"productCategory\").getValue();\r\n//\r\n//                    //if selected category matches product category then add in list\r\n//                    if(selected.equals(productCategory)){\r\n//                        ModelProduct modelProduct = ds.getValue(ModelProduct.class);\r\n//                        productList.add(modelProduct);\r\n//                    }\r\n//                    ModelProduct modelProduct = ds.getValue(ModelProduct.class);\r\n//                    productList.add(modelProduct);\r\n//                }\r\n//                //setup adapter\r\n//                adapterProductSeller = new AdapterProductSeller(BrandActivity.this, productList);\r\n//                //set adapter\r\n//                productsRv.setAdapter(adapterProductSeller);\r\n//            }\r\n//            @Override\r\n//            public void onCancelled(@NonNull DatabaseError error) {\r\n//\r\n//            }\r\n//        });\r\n    }\r\n\r\n    private void loadAllProducts() {\r\n        productList = new ArrayList<>();\r\n        //setup adapter\r\n        adapterProductSeller = new AdapterProductSeller(BrandActivity.this, productList);\r\n        //set adapter\r\n        productsRv.setAdapter(adapterProductSeller);\r\n        db.collection(\"Product\").orderBy(\"productTitle\", Query.Direction.ASCENDING)\r\n                .addSnapshotListener(new EventListener<QuerySnapshot>() {\r\n\r\n                    @Override\r\n                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {\r\n\r\n                        productList.clear();\r\n                        if (error != null) {\r\n\r\n                            Log.e(\"Firestore error\", error.getMessage());\r\n                            return;\r\n                        }\r\n                        for (DocumentChange dc : value.getDocumentChanges()) {\r\n\r\n                            if (dc.getType() == DocumentChange.Type.ADDED) {\r\n                                productList.add(dc.getDocument().toObject(ModelProduct.class));\r\n                            }\r\n                            adapterProductSeller.notifyDataSetChanged();\r\n                        }\r\n\r\n                    }\r\n                });\r\n    }\r\n    private void showProductsUI() {\r\n        productsRl.setVisibility(View.VISIBLE);\r\n\r\n        tabProductsTv.setTextColor(getResources().getColor(R.color.colorPrimary));\r\n        tabProductsTv.setBackgroundResource((R.drawable.shape_rect01));\r\n    }\r\n    private void checkUser() {\r\n        FirebaseUser user = firebaseAuth.getCurrentUser();\r\n        if(user==null){\r\n            startActivity(new Intent(BrandActivity.this,SignInActivity.class));\r\n            finish();\r\n        }\r\n        else{\r\n            loadMyInfo();\r\n        }\r\n    }\r\n      private void loadMyInfo() {\r\n        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();\r\n        DocumentReference reference;\r\n        FirebaseFirestore firestore = FirebaseFirestore.getInstance();\r\n        reference = firestore.collection(\"Customers\").document(user.getUid());\r\n        reference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {\r\n            @Override\r\n            public void onComplete(@NonNull Task<DocumentSnapshot> task) {\r\n                if (task.getResult().exists()) {\r\n                    String nameResult = task.getResult().getString(\"userName\");\r\n                    String url = task.getResult().getString(\"profilePhoto\");\r\n                    String emailResult = task.getResult().getString(\"userEmail\");\r\n                    String phoneResult = task.getResult().getString(\"userPhone\");\r\n//                    Picasso.get().load(url).into(profileIv);\r\n                    nameTv.setText(nameResult);\r\n                    emailTv.setText(emailResult);\r\n                    phoneTv.setText(phoneResult);\r\n                    try{\r\n                        Picasso.get().load(url).placeholder(R.drawable.ic_baseline_person_24).into(profileIv);\r\n                    }\r\n                    catch(Exception e){\r\n                        profileIv.setImageResource(R.drawable.ic_baseline_person_24);\r\n                    }\r\n                }\r\n            }\r\n        });\r\n    }\r\n\r\n    private void makeMeOffline() {\r\n        startActivity(new Intent(BrandActivity.this, LogoutActivity.class));\r\n    }\r\n\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/gas4u/BrandActivity.java b/app/src/main/java/com/example/gas4u/BrandActivity.java
+--- a/app/src/main/java/com/example/gas4u/BrandActivity.java	(revision 10d1e63025bdf47245027ec4ffbd1d6bdd2cf246)
++++ b/app/src/main/java/com/example/gas4u/BrandActivity.java	(date 1675104221530)
+@@ -74,7 +74,7 @@
+         filterProductsTv = findViewById(R.id.filterProductsTv);
+         searchProductEt = findViewById(R.id.searchProductEt);
+         logoutBtn = findViewById(R.id.logoutBtn);
+-        addToCart = findViewById(R.id.addToCart);
++        //addToCart = findViewById(R.id.addToCart);
+         profileIv = findViewById(R.id.profileIv);
+         productsRl = findViewById(R.id.productsRl);
+         productsRv = findViewById(R.id.productsRv);
+@@ -117,11 +117,11 @@
+             }
+         });
+ 
+-        addToCart.setOnClickListener(new View.OnClickListener() {
+-            @Override
+-            public void onClick(View view) {
+-            }
+-        });
++//        addToCart.setOnClickListener(new View.OnClickListener() {
++//            @Override
++//            public void onClick(View view) {
++//            }
++//        });
+ 
+         tabProductsTv.setOnClickListener(new View.OnClickListener() {
+             @Override
+Index: app/src/main/java/com/example/gas4u/OrderDetailsAdminActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.gas4u;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.annotation.Nullable;\r\nimport androidx.appcompat.app.AlertDialog;\r\nimport androidx.appcompat.app.AppCompatActivity;\r\nimport androidx.recyclerview.widget.RecyclerView;\r\n\r\nimport android.content.DialogInterface;\r\nimport android.content.Intent;\r\nimport android.graphics.ColorSpace;\r\nimport android.location.Address;\r\nimport android.location.Geocoder;\r\nimport android.net.Uri;\r\nimport android.os.Bundle;\r\nimport android.text.format.DateFormat;\r\nimport android.util.Log;\r\nimport android.view.View;\r\nimport android.widget.ImageButton;\r\nimport android.widget.TextView;\r\nimport android.widget.Toast;\r\n\r\nimport com.google.android.gms.tasks.OnCompleteListener;\r\nimport com.google.android.gms.tasks.OnFailureListener;\r\nimport com.google.android.gms.tasks.OnSuccessListener;\r\nimport com.google.android.gms.tasks.Task;\r\nimport com.google.firebase.auth.FirebaseAuth;\r\nimport com.google.firebase.auth.FirebaseUser;\r\nimport com.google.firebase.database.DataSnapshot;\r\nimport com.google.firebase.database.DatabaseError;\r\nimport com.google.firebase.database.DatabaseReference;\r\nimport com.google.firebase.database.FirebaseDatabase;\r\nimport com.google.firebase.database.ValueEventListener;\r\nimport com.google.firebase.firestore.DocumentChange;\r\nimport com.google.firebase.firestore.DocumentReference;\r\nimport com.google.firebase.firestore.DocumentSnapshot;\r\nimport com.google.firebase.firestore.EventListener;\r\nimport com.google.firebase.firestore.FirebaseFirestore;\r\nimport com.google.firebase.firestore.FirebaseFirestoreException;\r\nimport com.google.firebase.firestore.Query;\r\nimport com.google.firebase.firestore.QuerySnapshot;\r\nimport com.squareup.picasso.Picasso;\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.Calendar;\r\nimport java.util.HashMap;\r\nimport java.util.List;\r\nimport java.util.Locale;\r\n\r\npublic class OrderDetailsAdminActivity extends AppCompatActivity {\r\n\r\n    // view of ui\r\n    private ImageButton backBtn, editBtn, mapBtn;\r\n    private TextView orderIdTv, dateTv, orderStatusTv, emailTv, phoneTv,totalItemsTv, amountTv, addressTv;\r\n    private RecyclerView itemsRv;\r\n\r\n    String orderId, orderBy;\r\n    // open in map the destination\r\n    String sourceLatitude,sourceLongitude, destinationLatitude, destinationLongitude;\r\n    FirebaseAuth firebaseAuth;\r\n    FirebaseFirestore firestore;\r\n\r\n    ArrayList<ModelCartItem> cartItems;\r\n    private ArrayList<ModelOrderedItem> orderedItemArrayList;\r\n    private AdapterOrderedItem adapterOrderedItem;\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_order_details_admin);\r\n\r\n        // initialize view of ui\r\n        backBtn = findViewById(R.id.backBtn);\r\n        editBtn = findViewById(R.id.editBtn);\r\n        mapBtn = findViewById(R.id.mapBtn);\r\n        orderIdTv = findViewById(R.id.orderIdTv);\r\n        dateTv = findViewById(R.id.dateTv);\r\n        orderStatusTv = findViewById(R.id.orderStatusTv);\r\n        emailTv = findViewById(R.id.emailTv);\r\n        phoneTv = findViewById(R.id.phoneTv);\r\n        totalItemsTv = findViewById(R.id.totalItemsTv);\r\n        amountTv = findViewById(R.id.amountTv);\r\n        addressTv = findViewById(R.id.addressTv);\r\n        itemsRv = findViewById(R.id.itemsRv);\r\n\r\n        // from intent get data\r\n        orderId = getIntent().getStringExtra(\"orderId\");\r\n        orderBy = getIntent().getStringExtra(\"orderBy\");\r\n\r\n        firebaseAuth = FirebaseAuth.getInstance();\r\n        firestore = FirebaseFirestore.getInstance();\r\n        loadMyInfo();\r\n        loadBuyerInfo();\r\n        loadOrderDetails();\r\n        loadOrderedItems();\r\n\r\n        backBtn.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                // back\r\n                onBackPressed();\r\n            }\r\n        });\r\n\r\n        mapBtn.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                openMap();\r\n            }\r\n        });\r\n        editBtn.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                //edit order status\r\n                editOrderStatusDialog();\r\n            }\r\n        });\r\n\r\n    }\r\n\r\n    private void editOrderStatusDialog() {\r\n        //options to display in dialog\r\n        final String[] options = {\"In Progress\", \"Completed\", \"Cancelled\"};\r\n\r\n        //dialog\r\n        AlertDialog.Builder builder = new AlertDialog.Builder(this);\r\n        builder.setTitle(\"Edit Order Status\")\r\n                .setItems(options, new DialogInterface.OnClickListener() {\r\n                    @Override\r\n                    public void onClick(DialogInterface dialog, int which) {\r\n                        // handle the click of item\r\n                        String selectedOption = options[which];\r\n                        editOrderStatus(selectedOption);\r\n                    }\r\n                });\r\n    }\r\n\r\n    private void editOrderStatus(String selectedOption) {\r\n\r\n        //setting data to place in firebase db\r\n        HashMap<String, Object> hashMap = new HashMap<>();\r\n        hashMap.put(\"OrderStatus\", \"\" + selectedOption);\r\n\r\n        DatabaseReference ref = FirebaseDatabase.getInstance().getReference(\"Users\");\r\n        ref.child(firebaseAuth.getUid()).child(\"Orders\").child(orderId)\r\n                .updateChildren(hashMap)\r\n                .addOnSuccessListener(new OnSuccessListener<Void>() {\r\n                    @Override\r\n                    public void onSuccess(Void unused) {\r\n\r\n                        //status is update\r\n                        Toast.makeText(OrderDetailsAdminActivity.this, \"Order is now \" + selectedOption, Toast.LENGTH_SHORT).show();\r\n\r\n                    }\r\n                })\r\n                .addOnFailureListener(new OnFailureListener() {\r\n                    @Override\r\n                    public void onFailure(@NonNull Exception e) {\r\n\r\n                        //status fail to update, display reason\r\n                        Toast.makeText(OrderDetailsAdminActivity.this, \"\" + e.getMessage(), Toast.LENGTH_SHORT).show();\r\n\r\n                    }\r\n                });\r\n    }\r\n\r\n    private void openMap() {\r\n        //saddr is source address\r\n        //daddr is the destination address\r\n        String address = \"https://maps.google.com/maps?saddr=\" + sourceLatitude + \",\" + sourceLongitude + \"&daddr=\" + destinationLatitude + \",\" + destinationLongitude;\r\n        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(address));\r\n        startActivity(intent);\r\n    }\r\n\r\n    private void loadMyInfo() {\r\n//        DatabaseReference ref = FirebaseDatabase.getInstance().getReference(\"Users\");\r\n//        ref.child(firebaseAuth.getUid())\r\n//                .addValueEventListener(new ValueEventListener() {\r\n//                    @Override\r\n//                    public void onDataChange(@NonNull DataSnapshot snapshot) {\r\n//                        sourceLatitude = \"\"+snapshot.child(\"latitude\").getValue();\r\n//                        sourceLongitude = \"\"+snapshot.child(\"longitude\").getValue();\r\n//                    }\r\n//\r\n//                    @Override\r\n//                    public void onCancelled(@NonNull DatabaseError error) {\r\n//\r\n//                    }\r\n//                });\r\n        DocumentReference reference;\r\n        FirebaseFirestore firestore = FirebaseFirestore.getInstance();\r\n        reference = firestore.collection(\"Orders\").document(\"0KxYWa4CbfNVBe4odiMscRbe5a63\");\r\n        reference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {\r\n            @Override\r\n            public void onComplete(@NonNull Task<DocumentSnapshot> task) {\r\n                if (task.getResult().exists()) {\r\n\r\n                    String orderCost = task.getResult().getString(\"orderCost\");\r\n                    String orderId = task.getResult().getString(\"orderId\");\r\n                    String orderStatus = task.getResult().getString(\"orderStatus\");\r\n                    String orderTime = task.getResult().getString(\"orderTime\");\r\n                    String orderAddress = task.getResult().getString(\"address\");\r\n                    String orderEmail = task.getResult().getString(\"email\");\r\n                    String orderPhone = task.getResult().getString(\"phone\");\r\n                    String orderItem = task.getResult().getString(\"items\");\r\n\r\n\r\n                    //status of order\r\n                    if (orderStatus.equals(\"In Progress\")){\r\n                        orderStatusTv.setTextColor(getResources().getColor(R.color.colorPrimary));\r\n                    }\r\n                    else if(orderStatus.equals(\"Completed\")){\r\n                        orderStatusTv.setTextColor(getResources().getColor(R.color.colorGreen));\r\n                    }\r\n                    else if(orderStatus.equals(\"Cancelled\")){\r\n                        orderStatusTv.setTextColor(getResources().getColor(R.color.colorRed));\r\n                    }\r\n//\r\n                    orderIdTv.setText(orderId);\r\n                    dateTv.setText(orderTime);\r\n                    emailTv.setText(orderEmail);\r\n                    phoneTv.setText(orderPhone);\r\n                    totalItemsTv.setText(orderItem);\r\n                    amountTv.setText(orderCost);\r\n                    addressTv.setText(orderAddress);\r\n\r\n                }\r\n            }\r\n        });\r\n    }\r\n\r\n    private void loadBuyerInfo() {\r\n//        DatabaseReference ref = FirebaseDatabase.getInstance().getReference(\"Users\");\r\n//        ref.child(orderBy)\r\n//                .addValueEventListener(new ValueEventListener() {\r\n//                    @Override\r\n//                    public void onDataChange(@NonNull DataSnapshot snapshot) {\r\n//                        //get info of buyer\r\n//                        destinationLatitude = \"\"+snapshot.child(\"latitude\").getValue();\r\n//                        destinationLongitude = \"\"+snapshot.child(\"longitude\").getValue();\r\n//                        String email = \"\"+snapshot.child(\"email\").getValue();\r\n//                        String phone = \"\"+snapshot.child(\"phone\").getValue();\r\n//\r\n//                        // set buyer info\r\n//                        emailTv.setText(email);\r\n//                        phoneTv.setText(phone);\r\n//                    }\r\n//\r\n//                    @Override\r\n//                    public void onCancelled(@NonNull DatabaseError error) {\r\n//\r\n//                    }\r\n//                });\r\n        DocumentReference reference;\r\n        FirebaseFirestore firestore = FirebaseFirestore.getInstance();\r\n        reference = firestore.collection(\"Orders\").document(\"0KxYWa4CbfNVBe4odiMscRbe5a63\");\r\n        reference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {\r\n            @Override\r\n            public void onComplete(@NonNull Task<DocumentSnapshot> task) {\r\n                if (task.getResult().exists()) {\r\n\r\n                    String orderCost = task.getResult().getString(\"orderCost\");\r\n                    String orderId = task.getResult().getString(\"orderId\");\r\n                    String orderStatus = task.getResult().getString(\"orderStatus\");\r\n                    String orderTime = task.getResult().getString(\"orderTime\");\r\n                    String orderAddress = task.getResult().getString(\"address\");\r\n                    String orderEmail = task.getResult().getString(\"email\");\r\n                    String orderPhone = task.getResult().getString(\"phone\");\r\n                    String orderItem = task.getResult().getString(\"items\");\r\n\r\n\r\n                    //status of order\r\n                    if (orderStatus.equals(\"In Progress\")){\r\n                        orderStatusTv.setTextColor(getResources().getColor(R.color.colorPrimary));\r\n                    }\r\n                    else if(orderStatus.equals(\"Completed\")){\r\n                        orderStatusTv.setTextColor(getResources().getColor(R.color.colorGreen));\r\n                    }\r\n                    else if(orderStatus.equals(\"Cancelled\")){\r\n                        orderStatusTv.setTextColor(getResources().getColor(R.color.colorRed));\r\n                    }\r\n//\r\n                    orderIdTv.setText(orderId);\r\n                    dateTv.setText(orderTime);\r\n                    emailTv.setText(orderEmail);\r\n                    phoneTv.setText(orderPhone);\r\n                    totalItemsTv.setText(orderItem);\r\n                    amountTv.setText(orderCost);\r\n                    addressTv.setText(orderAddress);\r\n\r\n                }\r\n            }\r\n        });\r\n    }\r\n\r\n    private void loadOrderDetails(){\r\n        // based on order id, load the the details of order\r\n        DocumentReference reference;\r\n        FirebaseFirestore firestore = FirebaseFirestore.getInstance();\r\n        reference = firestore.collection(\"Orders\").document(\"0KxYWa4CbfNVBe4odiMscRbe5a63\");\r\n        reference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {\r\n            @Override\r\n            public void onComplete(@NonNull Task<DocumentSnapshot> task) {\r\n                if (task.getResult().exists()) {\r\n\r\n                    String orderCost = task.getResult().getString(\"orderCost\");\r\n                    String orderId = task.getResult().getString(\"orderId\");\r\n                    String orderStatus = task.getResult().getString(\"orderStatus\");\r\n                    String orderTime = task.getResult().getString(\"orderTime\");\r\n                    String orderAddress = task.getResult().getString(\"address\");\r\n                    String orderEmail = task.getResult().getString(\"email\");\r\n                    String orderPhone = task.getResult().getString(\"phone\");\r\n                    String orderItem = task.getResult().getString(\"items\");\r\n\r\n\r\n                    //status of order\r\n                    if (orderStatus.equals(\"In Progress\")){\r\n                        orderStatusTv.setTextColor(getResources().getColor(R.color.colorPrimary));\r\n                    }\r\n                    else if(orderStatus.equals(\"Completed\")){\r\n                        orderStatusTv.setTextColor(getResources().getColor(R.color.colorGreen));\r\n                    }\r\n                    else if(orderStatus.equals(\"Cancelled\")){\r\n                        orderStatusTv.setTextColor(getResources().getColor(R.color.colorRed));\r\n                    }\r\n//\r\n                    orderIdTv.setText(orderId);\r\n                    dateTv.setText(orderTime);\r\n                    emailTv.setText(orderEmail);\r\n                    phoneTv.setText(orderPhone);\r\n                    totalItemsTv.setText(orderItem);\r\n                    amountTv.setText(orderCost);\r\n                    addressTv.setText(orderAddress);\r\n\r\n                }\r\n            }\r\n        });\r\n    }\r\n\r\n    private void findAddress(String latitude, String longitude) {\r\n        double la = Double.parseDouble(latitude);\r\n        double lo = Double.parseDouble(longitude);\r\n\r\n        Geocoder geocoder;\r\n        List<Address> addresses;\r\n        geocoder = new Geocoder(this, Locale.getDefault());\r\n\r\n        try{\r\n            addresses = geocoder.getFromLocation(la, lo, 1);\r\n\r\n            //the complete address\r\n            String address = addresses.get(0).getAddressLine(0);\r\n            addressTv.setText(address);\r\n        }\r\n        catch (Exception e){\r\n            Toast.makeText(this, \"\"+e.getMessage(), Toast.LENGTH_SHORT).show();\r\n        }\r\n    }\r\n\r\n    private void loadOrderedItems(){\r\n        // loading the products/items of the order\r\n\r\n        //initialize list\r\n        cartItems = new ArrayList<>();\r\n\r\n        firestore.collection(\"Cart\").document(\"0KxYWa4CbfNVBe4odiMscRbe5a63\").collection(\"CartList\").orderBy(\"title\", Query.Direction.ASCENDING).addSnapshotListener(new EventListener<QuerySnapshot>() {\r\n            @Override\r\n            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {\r\n\r\n                cartItems.clear();\r\n                if(error !=null){\r\n                    Log.e(\"Firestore error\", error.getMessage());\r\n                    return;\r\n                }\r\n                for (DocumentChange dc : value.getDocumentChanges()) {\r\n\r\n                    if (dc.getType() == DocumentChange.Type.ADDED) {\r\n                        cartItems.add(dc.getDocument().toObject(ModelCartItem.class));\r\n                    }\r\n                }\r\n                adapterOrderedItem = new AdapterOrderedItem(OrderDetailsAdminActivity.this, orderedItemArrayList);\r\n                //setting adapter to recyclerView\r\n                itemsRv.setAdapter(adapterOrderedItem);\r\n            }\r\n        });\r\n\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/gas4u/OrderDetailsAdminActivity.java b/app/src/main/java/com/example/gas4u/OrderDetailsAdminActivity.java
+--- a/app/src/main/java/com/example/gas4u/OrderDetailsAdminActivity.java	(revision 10d1e63025bdf47245027ec4ffbd1d6bdd2cf246)
++++ b/app/src/main/java/com/example/gas4u/OrderDetailsAdminActivity.java	(date 1675102117867)
+@@ -1,7 +1,6 @@
+ package com.example.gas4u;
+ 
+ import androidx.annotation.NonNull;
+-import androidx.annotation.Nullable;
+ import androidx.appcompat.app.AlertDialog;
+ import androidx.appcompat.app.AppCompatActivity;
+ import androidx.recyclerview.widget.RecyclerView;
+@@ -14,32 +13,19 @@
+ import android.net.Uri;
+ import android.os.Bundle;
+ import android.text.format.DateFormat;
+-import android.util.Log;
+ import android.view.View;
+ import android.widget.ImageButton;
+ import android.widget.TextView;
+ import android.widget.Toast;
+ 
+-import com.google.android.gms.tasks.OnCompleteListener;
+ import com.google.android.gms.tasks.OnFailureListener;
+ import com.google.android.gms.tasks.OnSuccessListener;
+-import com.google.android.gms.tasks.Task;
+ import com.google.firebase.auth.FirebaseAuth;
+-import com.google.firebase.auth.FirebaseUser;
+ import com.google.firebase.database.DataSnapshot;
+ import com.google.firebase.database.DatabaseError;
+ import com.google.firebase.database.DatabaseReference;
+ import com.google.firebase.database.FirebaseDatabase;
+ import com.google.firebase.database.ValueEventListener;
+-import com.google.firebase.firestore.DocumentChange;
+-import com.google.firebase.firestore.DocumentReference;
+-import com.google.firebase.firestore.DocumentSnapshot;
+-import com.google.firebase.firestore.EventListener;
+-import com.google.firebase.firestore.FirebaseFirestore;
+-import com.google.firebase.firestore.FirebaseFirestoreException;
+-import com.google.firebase.firestore.Query;
+-import com.google.firebase.firestore.QuerySnapshot;
+-import com.squareup.picasso.Picasso;
+ 
+ import java.util.ArrayList;
+ import java.util.Calendar;
+@@ -50,17 +36,15 @@
+ public class OrderDetailsAdminActivity extends AppCompatActivity {
+ 
+     // view of ui
+-    private ImageButton backBtn, editBtn, mapBtn;
++    private ImageButton backBtn, mapBtn;
+     private TextView orderIdTv, dateTv, orderStatusTv, emailTv, phoneTv,totalItemsTv, amountTv, addressTv;
+     private RecyclerView itemsRv;
+ 
+     String orderId, orderBy;
+     // open in map the destination
+     String sourceLatitude,sourceLongitude, destinationLatitude, destinationLongitude;
+-    FirebaseAuth firebaseAuth;
+-    FirebaseFirestore firestore;
+ 
+-    ArrayList<ModelCartItem> cartItems;
++    private FirebaseAuth firebaseAuth;
+     private ArrayList<ModelOrderedItem> orderedItemArrayList;
+     private AdapterOrderedItem adapterOrderedItem;
+     @Override
+@@ -70,7 +54,6 @@
+ 
+         // initialize view of ui
+         backBtn = findViewById(R.id.backBtn);
+-        editBtn = findViewById(R.id.editBtn);
+         mapBtn = findViewById(R.id.mapBtn);
+         orderIdTv = findViewById(R.id.orderIdTv);
+         dateTv = findViewById(R.id.dateTv);
+@@ -87,7 +70,6 @@
+         orderBy = getIntent().getStringExtra("orderBy");
+ 
+         firebaseAuth = FirebaseAuth.getInstance();
+-        firestore = FirebaseFirestore.getInstance();
+         loadMyInfo();
+         loadBuyerInfo();
+         loadOrderDetails();
+@@ -107,60 +89,7 @@
+                 openMap();
+             }
+         });
+-        editBtn.setOnClickListener(new View.OnClickListener() {
+-            @Override
+-            public void onClick(View v) {
+-                //edit order status
+-                editOrderStatusDialog();
+-            }
+-        });
+-
+-    }
+ 
+-    private void editOrderStatusDialog() {
+-        //options to display in dialog
+-        final String[] options = {"In Progress", "Completed", "Cancelled"};
+-
+-        //dialog
+-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+-        builder.setTitle("Edit Order Status")
+-                .setItems(options, new DialogInterface.OnClickListener() {
+-                    @Override
+-                    public void onClick(DialogInterface dialog, int which) {
+-                        // handle the click of item
+-                        String selectedOption = options[which];
+-                        editOrderStatus(selectedOption);
+-                    }
+-                });
+-    }
+-
+-    private void editOrderStatus(String selectedOption) {
+-
+-        //setting data to place in firebase db
+-        HashMap<String, Object> hashMap = new HashMap<>();
+-        hashMap.put("OrderStatus", "" + selectedOption);
+-
+-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users");
+-        ref.child(firebaseAuth.getUid()).child("Orders").child(orderId)
+-                .updateChildren(hashMap)
+-                .addOnSuccessListener(new OnSuccessListener<Void>() {
+-                    @Override
+-                    public void onSuccess(Void unused) {
+-
+-                        //status is update
+-                        Toast.makeText(OrderDetailsAdminActivity.this, "Order is now " + selectedOption, Toast.LENGTH_SHORT).show();
+-
+-                    }
+-                })
+-                .addOnFailureListener(new OnFailureListener() {
+-                    @Override
+-                    public void onFailure(@NonNull Exception e) {
+-
+-                        //status fail to update, display reason
+-                        Toast.makeText(OrderDetailsAdminActivity.this, "" + e.getMessage(), Toast.LENGTH_SHORT).show();
+-
+-                    }
+-                });
+     }
+ 
+     private void openMap() {
+@@ -172,168 +101,93 @@
+     }
+ 
+     private void loadMyInfo() {
+-//        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users");
+-//        ref.child(firebaseAuth.getUid())
+-//                .addValueEventListener(new ValueEventListener() {
+-//                    @Override
+-//                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+-//                        sourceLatitude = ""+snapshot.child("latitude").getValue();
+-//                        sourceLongitude = ""+snapshot.child("longitude").getValue();
+-//                    }
+-//
+-//                    @Override
+-//                    public void onCancelled(@NonNull DatabaseError error) {
+-//
+-//                    }
+-//                });
+-        DocumentReference reference;
+-        FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+-        reference = firestore.collection("Orders").document("0KxYWa4CbfNVBe4odiMscRbe5a63");
+-        reference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+-            @Override
+-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+-                if (task.getResult().exists()) {
+-
+-                    String orderCost = task.getResult().getString("orderCost");
+-                    String orderId = task.getResult().getString("orderId");
+-                    String orderStatus = task.getResult().getString("orderStatus");
+-                    String orderTime = task.getResult().getString("orderTime");
+-                    String orderAddress = task.getResult().getString("address");
+-                    String orderEmail = task.getResult().getString("email");
+-                    String orderPhone = task.getResult().getString("phone");
+-                    String orderItem = task.getResult().getString("items");
++        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users");
++        ref.child(firebaseAuth.getUid())
++                .addValueEventListener(new ValueEventListener() {
++                    @Override
++                    public void onDataChange(@NonNull DataSnapshot snapshot) {
++                        sourceLatitude = ""+snapshot.child("latitude").getValue();
++                        sourceLongitude = ""+snapshot.child("longitude").getValue();
++                    }
+ 
++                    @Override
++                    public void onCancelled(@NonNull DatabaseError error) {
+ 
+-                    //status of order
+-                    if (orderStatus.equals("In Progress")){
+-                        orderStatusTv.setTextColor(getResources().getColor(R.color.colorPrimary));
+                     }
+-                    else if(orderStatus.equals("Completed")){
+-                        orderStatusTv.setTextColor(getResources().getColor(R.color.colorGreen));
+-                    }
+-                    else if(orderStatus.equals("Cancelled")){
+-                        orderStatusTv.setTextColor(getResources().getColor(R.color.colorRed));
+-                    }
+-//
+-                    orderIdTv.setText(orderId);
+-                    dateTv.setText(orderTime);
+-                    emailTv.setText(orderEmail);
+-                    phoneTv.setText(orderPhone);
+-                    totalItemsTv.setText(orderItem);
+-                    amountTv.setText(orderCost);
+-                    addressTv.setText(orderAddress);
+-
+-                }
+-            }
+-        });
++                });
+     }
+ 
+     private void loadBuyerInfo() {
+-//        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users");
+-//        ref.child(orderBy)
+-//                .addValueEventListener(new ValueEventListener() {
+-//                    @Override
+-//                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+-//                        //get info of buyer
+-//                        destinationLatitude = ""+snapshot.child("latitude").getValue();
+-//                        destinationLongitude = ""+snapshot.child("longitude").getValue();
+-//                        String email = ""+snapshot.child("email").getValue();
+-//                        String phone = ""+snapshot.child("phone").getValue();
+-//
+-//                        // set buyer info
+-//                        emailTv.setText(email);
+-//                        phoneTv.setText(phone);
+-//                    }
+-//
+-//                    @Override
+-//                    public void onCancelled(@NonNull DatabaseError error) {
+-//
+-//                    }
+-//                });
+-        DocumentReference reference;
+-        FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+-        reference = firestore.collection("Orders").document("0KxYWa4CbfNVBe4odiMscRbe5a63");
+-        reference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+-            @Override
+-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+-                if (task.getResult().exists()) {
+-
+-                    String orderCost = task.getResult().getString("orderCost");
+-                    String orderId = task.getResult().getString("orderId");
+-                    String orderStatus = task.getResult().getString("orderStatus");
+-                    String orderTime = task.getResult().getString("orderTime");
+-                    String orderAddress = task.getResult().getString("address");
+-                    String orderEmail = task.getResult().getString("email");
+-                    String orderPhone = task.getResult().getString("phone");
+-                    String orderItem = task.getResult().getString("items");
++        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users");
++        ref.child(orderBy)
++                .addValueEventListener(new ValueEventListener() {
++                    @Override
++                    public void onDataChange(@NonNull DataSnapshot snapshot) {
++                        //get info of buyer
++                        destinationLatitude = ""+snapshot.child("latitude").getValue();
++                        destinationLongitude = ""+snapshot.child("longitude").getValue();
++                        String email = ""+snapshot.child("email").getValue();
++                        String phone = ""+snapshot.child("phone").getValue();
+ 
+-
+-                    //status of order
+-                    if (orderStatus.equals("In Progress")){
+-                        orderStatusTv.setTextColor(getResources().getColor(R.color.colorPrimary));
+-                    }
+-                    else if(orderStatus.equals("Completed")){
+-                        orderStatusTv.setTextColor(getResources().getColor(R.color.colorGreen));
+-                    }
+-                    else if(orderStatus.equals("Cancelled")){
+-                        orderStatusTv.setTextColor(getResources().getColor(R.color.colorRed));
++                        // set buyer info
++                        emailTv.setText(email);
++                        phoneTv.setText(phone);
+                     }
+-//
+-                    orderIdTv.setText(orderId);
+-                    dateTv.setText(orderTime);
+-                    emailTv.setText(orderEmail);
+-                    phoneTv.setText(orderPhone);
+-                    totalItemsTv.setText(orderItem);
+-                    amountTv.setText(orderCost);
+-                    addressTv.setText(orderAddress);
+ 
+-                }
+-            }
+-        });
++                    @Override
++                    public void onCancelled(@NonNull DatabaseError error) {
++
++                    }
++                });
+     }
+ 
+     private void loadOrderDetails(){
+         // based on order id, load the the details of order
+-        DocumentReference reference;
+-        FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+-        reference = firestore.collection("Orders").document("0KxYWa4CbfNVBe4odiMscRbe5a63");
+-        reference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+-            @Override
+-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+-                if (task.getResult().exists()) {
++        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users");
++        ref.child(firebaseAuth.getUid()).child("Orders").child(orderId)
++                .addValueEventListener(new ValueEventListener() {
++                    @Override
++                    public void onDataChange(@NonNull DataSnapshot snapshot) {
++                        // get info of the order
++                        String orderBy = ""+ snapshot.child("orderBy").getValue();
++                        String orderCost = ""+ snapshot.child("orderCost").getValue();
++                        String orderId = ""+ snapshot.child("orderId").getValue();
++                        String orderStatus = ""+ snapshot.child("orderStatus").getValue();
++                        String orderTime = ""+ snapshot.child("orderTime").getValue();
++                        String orderTo = ""+ snapshot.child("orderTo").getValue();
++                        String latitude = ""+ snapshot.child("latitude").getValue();
++                        String longitude = ""+ snapshot.child("longitude").getValue();
+ 
+-                    String orderCost = task.getResult().getString("orderCost");
+-                    String orderId = task.getResult().getString("orderId");
+-                    String orderStatus = task.getResult().getString("orderStatus");
+-                    String orderTime = task.getResult().getString("orderTime");
+-                    String orderAddress = task.getResult().getString("address");
+-                    String orderEmail = task.getResult().getString("email");
+-                    String orderPhone = task.getResult().getString("phone");
+-                    String orderItem = task.getResult().getString("items");
+-
++                        //converting timestamp
++                        Calendar calendar = Calendar.getInstance();
++                        calendar.setTimeInMillis(Long.parseLong(orderTime));
++                        String dateFormated = DateFormat.format("dd/MM/yyyy", calendar).toString();
+ 
+-                    //status of order
+-                    if (orderStatus.equals("In Progress")){
+-                        orderStatusTv.setTextColor(getResources().getColor(R.color.colorPrimary));
+-                    }
+-                    else if(orderStatus.equals("Completed")){
+-                        orderStatusTv.setTextColor(getResources().getColor(R.color.colorGreen));
+-                    }
+-                    else if(orderStatus.equals("Cancelled")){
+-                        orderStatusTv.setTextColor(getResources().getColor(R.color.colorRed));
+-                    }
+-//
+-                    orderIdTv.setText(orderId);
+-                    dateTv.setText(orderTime);
+-                    emailTv.setText(orderEmail);
+-                    phoneTv.setText(orderPhone);
+-                    totalItemsTv.setText(orderItem);
+-                    amountTv.setText(orderCost);
+-                    addressTv.setText(orderAddress);
++                        //status of order
++                        if (orderStatus.equals("In Progress")){
++                            orderStatusTv.setTextColor(getResources().getColor(R.color.colorPrimary));
++                        }
++                        else if(orderStatus.equals("Completed")){
++                            orderStatusTv.setTextColor(getResources().getColor(R.color.colorGreen));
++                        }
++                        else if(orderStatus.equals("Cancelled")){
++                            orderStatusTv.setTextColor(getResources().getColor(R.color.colorRed));
++                        }
++
++                        //data setting
++                        orderIdTv.setText(orderId);
++                        orderStatusTv.setText(orderStatus);
++                        amountTv.setText("RM"+ orderCost);
++                        dateTv.setText(dateFormated);
+ 
+-                }
+-            }
+-        });
++                        findAddress(latitude, longitude); // to find the address for delivery
++                    }
++
++                    @Override
++                    public void onCancelled(@NonNull DatabaseError error) {
++
++                    }
++                });
+     }
+ 
+     private void findAddress(String latitude, String longitude) {
+@@ -360,28 +214,34 @@
+         // loading the products/items of the order
+ 
+         //initialize list
+-        cartItems = new ArrayList<>();
++        orderedItemArrayList = new ArrayList<>();
+ 
+-        firestore.collection("Cart").document("0KxYWa4CbfNVBe4odiMscRbe5a63").collection("CartList").orderBy("title", Query.Direction.ASCENDING).addSnapshotListener(new EventListener<QuerySnapshot>() {
+-            @Override
+-            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+-
+-                cartItems.clear();
+-                if(error !=null){
+-                    Log.e("Firestore error", error.getMessage());
+-                    return;
+-                }
+-                for (DocumentChange dc : value.getDocumentChanges()) {
++        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users");
++        ref.child(firebaseAuth.getUid()).child("Orders").child(orderId).child("Items")
++                .addValueEventListener(new ValueEventListener() {
++                    @Override
++                    public void onDataChange(@NonNull DataSnapshot snapshot) {
++                        orderedItemArrayList.clear(); // clear the list before data is added
+ 
+-                    if (dc.getType() == DocumentChange.Type.ADDED) {
+-                        cartItems.add(dc.getDocument().toObject(ModelCartItem.class));
+-                    }
+-                }
+-                adapterOrderedItem = new AdapterOrderedItem(OrderDetailsAdminActivity.this, orderedItemArrayList);
+-                //setting adapter to recyclerView
+-                itemsRv.setAdapter(adapterOrderedItem);
+-            }
+-        });
++                        for(DataSnapshot ds: snapshot.getChildren()){
++                            ModelOrderedItem modelOrderedItem = ds.getValue(ModelOrderedItem.class);
++                            //adding to list
++                            orderedItemArrayList.add(modelOrderedItem);
++                        }
++                        //setting adapter
++                        adapterOrderedItem = new AdapterOrderedItem(OrderDetailsAdminActivity.this, orderedItemArrayList);
++                        //setting adapter to recyclerView
++                        itemsRv.setAdapter(adapterOrderedItem);
++
++                        //setting total number od products in the order
++                        totalItemsTv.setText(""+snapshot.getChildren());
++
++                    }
++
++                    @Override
++                    public void onCancelled(@NonNull DatabaseError error) {
+ 
++                    }
++                });
+     }
+ }
+\ No newline at end of file
