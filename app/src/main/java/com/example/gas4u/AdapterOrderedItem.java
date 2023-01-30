@@ -34,10 +34,9 @@ public class AdapterOrderedItem extends RecyclerView.Adapter<AdapterOrderedItem.
 
         //get position of data
         ModelOrderedItem modelOrderedItem = orderedItemArrayList.get(position);
-        String getpID = modelOrderedItem.getpID();
-        String name = modelOrderedItem.getName();
-        String cost = modelOrderedItem.getCost();
-        String price = modelOrderedItem.getPrice();
+        String name = modelOrderedItem.getTitle();
+        String cost = modelOrderedItem.getPrice();
+        String price = modelOrderedItem.getPriceEach();
         String quantity = modelOrderedItem.getQuantity();
 
         //setting data

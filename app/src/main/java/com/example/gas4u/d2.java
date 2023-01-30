@@ -49,7 +49,7 @@ public class d2 extends DrawerAdminActivity{
     ActivityD2Binding activityD2Binding;
     TextView nameTv,emailTv, phoneTv, tabOrdersTv;
     EditText searchProductEt;
-    ImageButton logoutBtn;
+    ImageButton logoutBtn,addToCart,filterProductBtn, filterOrderBtn;
     ImageView profileIv;
     RelativeLayout ordersRl;
     RecyclerView ordersRv;

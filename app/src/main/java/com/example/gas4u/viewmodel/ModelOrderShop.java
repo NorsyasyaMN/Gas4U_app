@@ -2,19 +2,25 @@ package com.example.gas4u.viewmodel;
 
 public class ModelOrderShop {
 
-    String orderId, orderTime, orderStatus, orderCost, orderBy, orderTo, latitude, longitude;
+    String orderId, orderTime, orderStatus, orderCost, orderBy, orderTo, email;
 
     public ModelOrderShop() {
     }
 
-    public ModelOrderShop(String orderId, String orderTime, String orderStatus, String orderCost, String orderBy, String orderTo) {
+
+    public ModelOrderShop(String orderId, String orderTime, String orderStatus, String orderCost, String orderBy, String orderTo, String email) {
         this.orderId = orderId;
         this.orderTime = orderTime;
         this.orderStatus = orderStatus;
         this.orderCost = orderCost;
         this.orderBy = orderBy;
         this.orderTo = orderTo;
+        this.email = email;
     }
+
+    public String getEmail() { return email;}
+
+    public void setEmail(String email) { this.email = email;}
 
     public String getOrderId() {
         return orderId;
