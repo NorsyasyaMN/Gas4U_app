@@ -105,30 +105,8 @@
         android:layout_height="match_parent">
 
         <!--Search view-->
-        <EditText
-            android:id="@+id/searchProductEt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="5dp"
-            android:layout_marginBottom="5dp"
-            android:background="@drawable/shapre_rect02"
-            android:drawableStart="@drawable/ic_search"
-            android:drawablePadding="10dp"
-            android:hint="Search"
-            android:padding="10dp" />
 
         <!--Show filter products title-->
-        <TextView
-            android:id="@+id/filterProductsTv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/searchProductEt"
-            android:textColor="@color/colorPrimaryDark"
-            android:text="Showing All"
-            android:layout_marginStart="5dp"
-            android:layout_marginBottom="5dp"/>
 
         <!--RecyclerView:show products-->
         <androidx.recyclerview.widget.RecyclerView
