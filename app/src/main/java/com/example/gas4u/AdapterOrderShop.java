@@ -74,11 +74,11 @@ public class AdapterOrderShop extends RecyclerView.Adapter<AdapterOrderShop.Hold
         }
 
         //convert the time according format e.g. dd/mm/yyyy
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(Long.parseLong(orderTime));
-        String formatedDate = DateFormat.format("dd/MM/yyyy", calendar).toString();
+//        Calendar calendar = Calendar.getInstance();
+//        calendar.setTimeInMillis(Long.parseLong(orderTime));
+//        String formatedDate = DateFormat.format("dd/MM/yyyy", calendar).toString();
 
-        holder.orderDateTv.setText(formatedDate);
+        holder.orderDateTv.setText(orderTime);
 
         holder.itemView.setOnClickListener(new View.OnClickListener(){
             @Override
