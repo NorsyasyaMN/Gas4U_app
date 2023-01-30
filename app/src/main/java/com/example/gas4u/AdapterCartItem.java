@@ -1,7 +1,10 @@
 package com.example.gas4u;
 
+import static android.content.ContentValues.TAG;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +14,19 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.collection.CircularArray;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 import java.util.ArrayList;
 
 import p32929.androideasysql_library.Column;
@@ -36,7 +52,7 @@ public class AdapterCartItem extends RecyclerView.Adapter<AdapterCartItem.Holder
     }
 
     @Override
-    public void onBindViewHolder(@NonNull HolderCart holder, int position) {
+    public void onBindViewHolder(@NonNull HolderCart holder, @SuppressLint("RecyclerView") int position) {
         // get data
         ModelCartItem modelCartItem = cartItems.get(position);
 
@@ -55,20 +71,23 @@ public class AdapterCartItem extends RecyclerView.Adapter<AdapterCartItem.Holder
         holder.itemRemoveTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // table will be created if not exists, however will exist
-                EasyDB easyDB =  EasyDB.init(context, "ITEMS_DB")
-                        .setTableName("ITEMS_TABLE")
-                        .addColumn(new Column("Item_Id", new String[]{"text", "unique"}))
-                        .addColumn(new Column("Item_PID", new String[]{"text", "not null"}))
-                        .addColumn(new Column("Item_Name", new String[]{"text", "not null"}))
-                        .addColumn(new Column("Item_Price_Each", new String[]{"text", "not null"}))
-                        .addColumn(new Column("Item_Price", new String[]{"text", "not null"}))
-                        .addColumn(new Column("Item_Quantity", new String[]{"text", "not null"}))
-                        .doneTableColumn();
 
+                FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-                easyDB.deleteRow(1, modelCartItem.productId);
-                Toast.makeText(context, "Removed from cart...", Toast.LENGTH_SHORT).show();
+                db.collection("Cart").document("CartList")
+                        .delete()
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                Log.d(TAG, "DocumentSnapshot successfully deleted!");
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Log.w(TAG, "Error deleting document", e);
+                            }
+                        });
 
                 // refresh list
                 cartItems.remove(position);

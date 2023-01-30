@@ -1,0 +1,126 @@
+Index: app/src/main/java/com/example/gas4u/AdapterCartItem.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.gas4u;\r\n\r\nimport android.annotation.SuppressLint;\r\nimport android.content.Context;\r\nimport android.view.LayoutInflater;\r\nimport android.view.View;\r\nimport android.view.ViewGroup;\r\nimport android.widget.TextView;\r\nimport android.widget.Toast;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.collection.CircularArray;\r\nimport androidx.recyclerview.widget.RecyclerView;\r\nimport java.util.ArrayList;\r\n\r\nimport p32929.androideasysql_library.Column;\r\nimport p32929.androideasysql_library.EasyDB;\r\n\r\n\r\npublic class AdapterCartItem extends RecyclerView.Adapter<AdapterCartItem.HolderCart> {\r\n\r\n\r\n    Context context;\r\n    ArrayList<ModelCartItem> cartItems;\r\n\r\n    public AdapterCartItem(UserCart context, ArrayList<ModelCartItem> cartItems) {\r\n        this.context = context;\r\n        this.cartItems = cartItems;\r\n    }\r\n\r\n    @NonNull\r\n    @Override\r\n    public HolderCart onCreateViewHolder(@NonNull ViewGroup parent, int viewType){\r\n        View view = LayoutInflater.from(context).inflate(R.layout.row_cartitem, parent, false);\r\n        return new HolderCart(view);\r\n    }\r\n\r\n    @Override\r\n    public void onBindViewHolder(@NonNull HolderCart holder, int position) {\r\n        // get data\r\n        ModelCartItem modelCartItem = cartItems.get(position);\r\n\r\n        String title = modelCartItem.getTitle();\r\n        String cost = modelCartItem.getPrice();\r\n        String price = modelCartItem.getPriceEach();\r\n        String quantity = modelCartItem.getQuantity();\r\n\r\n        // set data\r\n        holder.itemTitleTv.setText(\"\"+title);\r\n        holder.itemPriceTv.setText(\"\"+cost);\r\n        holder.itemQuantityTv.setText(\"[\"+quantity+\"]\");\r\n        holder.itemPriceEachTv.setText(\"\"+price);\r\n\r\n        // handle remove click listener, delete item from cart\r\n        holder.itemRemoveTv.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                // table will be created if not exists, however will exist\r\n                EasyDB easyDB =  EasyDB.init(context, \"ITEMS_DB\")\r\n                       .setTableName(\"ITEMS_TABLE\")\r\n                        .addColumn(new Column(\"Item_Id\", new String[]{\"text\", \"unique\"}))\r\n                        .addColumn(new Column(\"Item_PID\", new String[]{\"text\", \"not null\"}))\r\n                        .addColumn(new Column(\"Item_Name\", new String[]{\"text\", \"not null\"}))\r\n                        .addColumn(new Column(\"Item_Price_Each\", new String[]{\"text\", \"not null\"}))\r\n                        .addColumn(new Column(\"Item_Price\", new String[]{\"text\", \"not null\"}))\r\n                        .addColumn(new Column(\"Item_Quantity\", new String[]{\"text\", \"not null\"}))\r\n                        .doneTableColumn();\r\n\r\n\r\n                easyDB.deleteRow(1, modelCartItem.productId);\r\n                Toast.makeText(context, \"Removed from cart...\", Toast.LENGTH_SHORT).show();\r\n\r\n                // refresh list\r\n                cartItems.remove(position);\r\n                notifyItemChanged(position);\r\n                notifyDataSetChanged();\r\n\r\n            }\r\n        });\r\n    }\r\n\r\n    @Override\r\n    public int getItemCount() {\r\n        return cartItems.size(); // return number of records\r\n    }\r\n\r\n    // view holder class\r\n    class HolderCart extends RecyclerView.ViewHolder{\r\n        private TextView itemTitleTv, itemPriceTv, itemPriceEachTv, itemQuantityTv, itemRemoveTv;\r\n        // ui views of row_cartitems.xml\r\n        public HolderCart(@NonNull View itemView) {\r\n            super(itemView);\r\n\r\n            //init views\r\n            itemTitleTv = itemView.findViewById(R.id.itemTitleTv);\r\n            itemPriceTv = itemView.findViewById(R.id.itemPriceTv);\r\n            itemPriceEachTv = itemView.findViewById(R.id.itemPriceEachTv);\r\n            itemQuantityTv = itemView.findViewById(R.id.itemQuantityTv);\r\n            itemRemoveTv = itemView.findViewById(R.id.itemRemoveTv);\r\n        }\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/gas4u/AdapterCartItem.java b/app/src/main/java/com/example/gas4u/AdapterCartItem.java
+--- a/app/src/main/java/com/example/gas4u/AdapterCartItem.java	(revision d178789860a0cf21b258123761d976370299229a)
++++ b/app/src/main/java/com/example/gas4u/AdapterCartItem.java	(date 1675087247230)
+@@ -1,7 +1,10 @@
+ package com.example.gas4u;
+ 
++import static android.content.ContentValues.TAG;
++
+ import android.annotation.SuppressLint;
+ import android.content.Context;
++import android.util.Log;
+ import android.view.LayoutInflater;
+ import android.view.View;
+ import android.view.ViewGroup;
+@@ -11,6 +14,19 @@
+ import androidx.annotation.NonNull;
+ import androidx.collection.CircularArray;
+ import androidx.recyclerview.widget.RecyclerView;
++
++import com.google.android.gms.tasks.OnFailureListener;
++import com.google.android.gms.tasks.OnSuccessListener;
++import com.google.firebase.auth.FirebaseAuth;
++import com.google.firebase.auth.FirebaseUser;
++import com.google.firebase.database.DataSnapshot;
++import com.google.firebase.database.DatabaseError;
++import com.google.firebase.database.DatabaseReference;
++import com.google.firebase.database.FirebaseDatabase;
++import com.google.firebase.database.Query;
++import com.google.firebase.database.ValueEventListener;
++import com.google.firebase.firestore.FirebaseFirestore;
++
+ import java.util.ArrayList;
+ 
+ import p32929.androideasysql_library.Column;
+@@ -36,7 +52,7 @@
+     }
+ 
+     @Override
+-    public void onBindViewHolder(@NonNull HolderCart holder, int position) {
++    public void onBindViewHolder(@NonNull HolderCart holder, @SuppressLint("RecyclerView") int position) {
+         // get data
+         ModelCartItem modelCartItem = cartItems.get(position);
+ 
+@@ -56,24 +72,42 @@
+             @Override
+             public void onClick(View v) {
+                 // table will be created if not exists, however will exist
+-                EasyDB easyDB =  EasyDB.init(context, "ITEMS_DB")
+-                       .setTableName("ITEMS_TABLE")
+-                        .addColumn(new Column("Item_Id", new String[]{"text", "unique"}))
+-                        .addColumn(new Column("Item_PID", new String[]{"text", "not null"}))
+-                        .addColumn(new Column("Item_Name", new String[]{"text", "not null"}))
+-                        .addColumn(new Column("Item_Price_Each", new String[]{"text", "not null"}))
+-                        .addColumn(new Column("Item_Price", new String[]{"text", "not null"}))
+-                        .addColumn(new Column("Item_Quantity", new String[]{"text", "not null"}))
+-                        .doneTableColumn();
++//                EasyDB easyDB =  EasyDB.init(context, "ITEMS_DB")
++//                       .setTableName("ITEMS_TABLE")
++//                        .addColumn(new Column("Item_Id", new String[]{"text", "unique"}))
++//                        .addColumn(new Column("Item_PID", new String[]{"text", "not null"}))
++//                        .addColumn(new Column("Item_Name", new String[]{"text", "not null"}))
++//                        .addColumn(new Column("Item_Price_Each", new String[]{"text", "not null"}))
++//                        .addColumn(new Column("Item_Price", new String[]{"text", "not null"}))
++//                        .addColumn(new Column("Item_Quantity", new String[]{"text", "not null"}))
++//                        .doneTableColumn();
++//
++//
++//                easyDB.deleteRow(3, modelCartItem.productId);
++//                System.out.println(modelCartItem.productId);
++//                Toast.makeText(context, "Removed from cart...", Toast.LENGTH_SHORT).show();
++//                DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("productId").removeValue();
++//                Query applesQuery = ref.child("CartList");
++                //applesQuery.getRef().removeValue();
++//                applesQuery.addListenerForSingleValueEvent(new ValueEventListener() {
++//                    @Override
++//                    public void onDataChange(DataSnapshot dataSnapshot) {
++//                        for (DataSnapshot appleSnapshot: dataSnapshot.getChildren()) {
++//                            appleSnapshot.getRef().removeValue();
++//                        }
++//                    }
++//
++//                    @Override
++//                    public void onCancelled(DatabaseError databaseError) {
++//                        Log.e(TAG, "onCancelled", databaseError.toException());
++//                    }
++//                });
+ 
+-
+-                easyDB.deleteRow(1, modelCartItem.productId);
+-                Toast.makeText(context, "Removed from cart...", Toast.LENGTH_SHORT).show();
+ 
+                 // refresh list
+-                cartItems.remove(position);
+-                notifyItemChanged(position);
+-                notifyDataSetChanged();
++//                cartItems.remove(position);
++//                notifyItemChanged(position);
++//                notifyDataSetChanged();
+ 
+             }
+         });
+Index: app/src/main/java/com/example/gas4u/ModelCartItem.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.gas4u;\r\n\r\npublic class ModelCartItem {\r\n    String price,  priceEach, productId, quantity, title;\r\n\r\n    public ModelCartItem(){\r\n\r\n    }\r\n    public ModelCartItem(String price, String priceEach, String productId, String quantity, String title) {\r\n        this.price = price;\r\n        this.priceEach = priceEach;\r\n        this.productId = productId;\r\n        this.quantity = quantity;\r\n        this.title = title;\r\n    }\r\n\r\n    public String getPrice() {\r\n        return price;\r\n    }\r\n\r\n    public void setPrice(String price) {\r\n        this.price = price;\r\n    }\r\n\r\n    public String getPriceEach() {\r\n        return priceEach;\r\n    }\r\n\r\n    public void setPriceEach(String priceEach) {\r\n        this.priceEach = priceEach;\r\n    }\r\n\r\n    public String getProductId() {\r\n        return productId;\r\n    }\r\n\r\n    public void setProductId(String productId) {\r\n        this.productId = productId;\r\n    }\r\n\r\n    public String getQuantity() {\r\n        return quantity;\r\n    }\r\n\r\n    public void setQuantity(String quantity) {\r\n        this.quantity = quantity;\r\n    }\r\n\r\n    public String getTitle() {\r\n        return title;\r\n    }\r\n\r\n    public void setTitle(String title) {\r\n        this.title = title;\r\n    }\r\n}\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/gas4u/ModelCartItem.java b/app/src/main/java/com/example/gas4u/ModelCartItem.java
+--- a/app/src/main/java/com/example/gas4u/ModelCartItem.java	(revision d178789860a0cf21b258123761d976370299229a)
++++ b/app/src/main/java/com/example/gas4u/ModelCartItem.java	(date 1675068715599)
+@@ -26,6 +26,7 @@
+         return priceEach;
+     }
+ 
++
+     public void setPriceEach(String priceEach) {
+         this.priceEach = priceEach;
+     }
