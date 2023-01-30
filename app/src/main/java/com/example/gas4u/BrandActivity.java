@@ -49,7 +49,7 @@ public class BrandActivity extends DrawerBaseActivity {
 
     TextView nameTv,emailTv,phoneTv, tabProductsTv, filterProductsTv;
     EditText searchProductEt;
-    ImageButton logoutBtn,addToCart,filterProductBtn;
+    ImageButton logoutBtn,addToCart;
     ImageView profileIv;
     RelativeLayout productsRl;
     RecyclerView productsRv;
@@ -75,7 +75,6 @@ public class BrandActivity extends DrawerBaseActivity {
         searchProductEt = findViewById(R.id.searchProductEt);
         logoutBtn = findViewById(R.id.logoutBtn);
         addToCart = findViewById(R.id.addToCart);
-        filterProductBtn = findViewById(R.id.filterProductBtn);
         profileIv = findViewById(R.id.profileIv);
         productsRl = findViewById(R.id.productsRl);
         productsRv = findViewById(R.id.productsRv);
@@ -130,28 +129,7 @@ public class BrandActivity extends DrawerBaseActivity {
                 showProductsUI();
             }
         });
-        filterProductBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(BrandActivity.this);
-                builder.setTitle("Choose Category:").setItems(Constants.productCategories1, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        //get selected item
-                        String selected = Constants.productCategories1[which];
-                        filterProductsTv.setText(selected);
-                        if(selected.equals("All")){
-                            //load all
-                            loadAllProducts();
-                        }
-                        else{
-                            //load filter
-                            loadFilteredProducts(selected);
-                        }
-                    }
-                }).show();
-            }
-        });
+
     }
 
     private void loadFilteredProducts(String selected) {
