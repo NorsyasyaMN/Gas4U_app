@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:layout_editor_absoluteY="25dp"
-    android:background="@drawable/admin_bg">
+    android:background="@drawable/cust_bg">
 
     <ImageView
         android:id="@+id/imageView3"
@@ -16,7 +16,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.120000005"
-        app:srcCompat="@drawable/gas" />
+        app:srcCompat="@drawable/nlogo" />
 
     <TextView
         android:id="@+id/textView9"
