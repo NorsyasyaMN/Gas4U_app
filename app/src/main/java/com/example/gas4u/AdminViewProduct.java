@@ -44,7 +44,7 @@ public class AdminViewProduct extends DrawerAdminActivity{
 
     TextView nameTv,emailTv,phoneTv, tabProductsTv, filterProductsTv;
     EditText searchProductEt;
-    ImageButton logoutBtn,addToCart,filterProductBtn;
+    ImageButton logoutBtn;
     ImageView profileIv;
     RelativeLayout productsRl;
     RecyclerView productsRv;
@@ -69,12 +69,9 @@ public class AdminViewProduct extends DrawerAdminActivity{
         filterProductsTv = findViewById(R.id.filterProductsTv);
         searchProductEt = findViewById(R.id.searchProductEt);
         logoutBtn = findViewById(R.id.logoutBtn);
-        addToCart = findViewById(R.id.addToCart);
-        filterProductBtn = findViewById(R.id.filterProductBtn);
         profileIv = findViewById(R.id.profileIv);
         productsRl = findViewById(R.id.productsRl);
         productsRv = findViewById(R.id.adminProductsRV);
-
         progressDialog = new ProgressDialog(this);
         progressDialog.setTitle("Please wait");
         progressDialog.setCanceledOnTouchOutside(false);
@@ -99,14 +96,6 @@ public class AdminViewProduct extends DrawerAdminActivity{
                 showProductsUI();
             }
         });
-        addToCart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(AdminViewProduct.this, d1.class));
-            }
-        });
-
-
     }
 
     private void loadAllProducts() {

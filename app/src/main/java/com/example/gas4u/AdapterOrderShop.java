@@ -53,6 +53,7 @@ public class AdapterOrderShop extends RecyclerView.Adapter<AdapterOrderShop.Hold
         String orderStatus = modelOrderShop.getOrderStatus();
         String orderTime = modelOrderShop.getOrderTime();
         String orderTo = modelOrderShop.getOrderTo();
+        String email = modelOrderShop.getEmail();
 
         //loads the customer info
         loadUserInfo(modelOrderShop, holder);
@@ -61,6 +62,7 @@ public class AdapterOrderShop extends RecyclerView.Adapter<AdapterOrderShop.Hold
         holder.amountTv.setText("Amount: RM" + orderCost);
         holder.statusTv.setText(orderStatus);
         holder.orderIdTv.setText("Order ID: "+orderId);
+        holder.emailTv.setText(email);
 
         //change the color of order status
         if(orderStatus.equals("In Progress")){

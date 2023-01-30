@@ -29,7 +29,7 @@ public class UserTrackOrder extends DrawerBaseActivity {
     //initialize to extract from database (the green one must be exactly same with db)
     private static final String productt = "Products";
     private static final String quantityy = "Quantity";
-    private static final String totalpricee = "Total price";
+    private static final String totalpricee = "Total Price";
     private static final String Addresss = "Address";
     private static final String shipstatus = "Order Status";
 

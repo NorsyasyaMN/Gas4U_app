@@ -1,43 +1,14 @@
 package com.example.gas4u;
 
 public class ModelOrderedItem {
-    String id, pID, name, price, cost, quantity;
+    String price, priceEach, productId, quantity, title;
 
-    public ModelOrderedItem(){
-
-    }
-
-    public ModelOrderedItem(String id, String pID, String name, String price, String cost, String quantity) {
-        this.id = id;
-        this.pID = pID;
-        this.name = name;
+    public ModelOrderedItem(String price, String priceEach, String productId, String quantity, String title) {
         this.price = price;
-        this.cost = cost;
+        this.priceEach = priceEach;
+        this.productId = productId;
         this.quantity = quantity;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getpID() {
-        return pID;
-    }
-
-    public void setpID(String pID) {
-        this.pID = pID;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+        this.title = title;
     }
 
     public String getPrice() {
@@ -48,12 +19,20 @@ public class ModelOrderedItem {
         this.price = price;
     }
 
-    public String getCost() {
-        return cost;
+    public String getPriceEach() {
+        return priceEach;
     }
 
-    public void setCost(String cost) {
-        this.cost = cost;
+    public void setPriceEach(String priceEach) {
+        this.priceEach = priceEach;
+    }
+
+    public String getProductId() {
+        return productId;
+    }
+
+    public void setProductId(String productId) {
+        this.productId = productId;
     }
 
     public String getQuantity() {
@@ -63,5 +42,12 @@ public class ModelOrderedItem {
     public void setQuantity(String quantity) {
         this.quantity = quantity;
     }
-}
 
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+}

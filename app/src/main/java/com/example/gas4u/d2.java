@@ -47,12 +47,12 @@ import java.util.HashMap;
 public class d2 extends DrawerAdminActivity{
 
     ActivityD2Binding activityD2Binding;
-    TextView nameTv,emailTv, phoneTv, tabProductsTv, tabOrdersTv, filterProductsTv, filteredOrdersTv;
+    TextView nameTv,emailTv, phoneTv, tabOrdersTv;
     EditText searchProductEt;
     ImageButton logoutBtn,addToCart,filterProductBtn, filterOrderBtn;
     ImageView profileIv;
-    RelativeLayout productsRl, ordersRl;
-    RecyclerView productsRv, ordersRv;
+    RelativeLayout ordersRl;
+    RecyclerView ordersRv;
 
     FirebaseFirestore db;
     FirebaseAuth firebaseAuth;
@@ -83,8 +83,6 @@ public class d2 extends DrawerAdminActivity{
         //productsRl = findViewById(R.id.productsRl);
         //productsRv = findViewById(R.id.productsRv);
         ordersRl = findViewById(R.id.ordersRl);
-        filteredOrdersTv = findViewById(R.id.filteredOrdersTv);
-        filterOrderBtn = findViewById(R.id.filterOrderBtn);
         ordersRv = findViewById(R.id.ordersRv); // creates the layout for recyclerview
 
 
@@ -116,36 +114,6 @@ public class d2 extends DrawerAdminActivity{
 
         });
 
-        filterOrderBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // options of dialog that will be displayed
-                String[] options = {"All", "In Progress", "Completed", "Cancelled"};
-                // dialog
-                AlertDialog.Builder builder = new AlertDialog.Builder(d2.this);
-                builder.setTitle("Filter Orders:")
-                        .setItems(options, new DialogInterface.OnClickListener(){
-                            @Override
-                            public void onClick(DialogInterface dialog, int which){
-
-                                //handle clicking of item
-                                if(which==0){
-                                    // All is clicked
-                                    filteredOrdersTv.setText("Showing All Orders");
-                                    adapterOrderShop.getFilter().filter(""); //all orders are shown
-                                }
-                                else {
-                                    String optionClicked = options[which];
-                                    filteredOrdersTv.setText("Showing " + optionClicked + " Orders"); // like Showing The Completed Orders
-                                    adapterOrderShop.getFilter().filter(optionClicked);
-
-                                }
-
-                            }
-                        })
-                        .show();
-            }
-        });
     /*
         reviewsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
