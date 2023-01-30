@@ -6,14 +6,14 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".d2">
-    
+
     <!--Toolbar-->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/shape_rect03"
         android:padding="10dp">
-        
+
         <ImageButton
             android:id="@+id/backBtn"
             android:layout_width="30dp"

@@ -9,8 +9,8 @@
 
     <ImageView
         android:id="@+id/imageOrderPlaced"
-        android:layout_width="53dp"
-        android:layout_height="53dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:contentDescription="@string/app_name"
         android:src="@drawable/order_place"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -41,28 +41,29 @@
         android:src="@drawable/deliver"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.119"
+        app:layout_constraintHorizontal_bias="0.139"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.608" />
+        app:layout_constraintVertical_bias="0.591" />
 
     <TextView
         android:id="@+id/textView7"
         android:layout_width="99dp"
         android:layout_height="23dp"
         android:text="Order Placed"
+        android:textColor="#4CAF50"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.387"
+        app:layout_constraintHorizontal_bias="0.391"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.313" />
+        app:layout_constraintVertical_bias="0.326" />
 
     <TextView
         android:id="@+id/ordplace"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="We have received your order!!!"
+        android:text="We have received your order!"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.545"
@@ -75,12 +76,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Order Confirmation"
+        android:textColor="#4CAF50"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.415"
+        app:layout_constraintHorizontal_bias="0.402"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.45" />
+        app:layout_constraintVertical_bias="0.452" />
 
     <TextView
         android:id="@+id/ordconfirm"
@@ -98,6 +100,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Out for Delivery"
+        android:textColor="#4CAF50"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.375"
@@ -171,13 +174,13 @@
 
     <TextView
         android:id="@+id/address"
-        android:layout_width="147dp"
-        android:layout_height="22dp"
+        android:layout_width="373dp"
+        android:layout_height="24dp"
         android:text="Address: "
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.06"
+        app:layout_constraintHorizontal_bias="0.394"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.251" />
