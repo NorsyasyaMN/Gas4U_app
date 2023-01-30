@@ -157,8 +157,8 @@ public class AdapterProductSeller extends RecyclerView.Adapter<AdapterProductSel
             priceDiscountedTv.setVisibility(View.GONE);
             price = modelProduct.getOriginalPrice();
         }
-        cost = Double.parseDouble(price.replaceAll("$", ""));
-        finalCost = Double.parseDouble(price.replaceAll("$", ""));
+        cost = Double.parseDouble(price.replaceAll("RM", ""));
+        finalCost = Double.parseDouble(price.replaceAll("RM", ""));
         quantity = 1;
 
         //dialog
@@ -176,9 +176,9 @@ public class AdapterProductSeller extends RecyclerView.Adapter<AdapterProductSel
         descriptionTv.setText(""+description);
         discountedNoteTv.setText(""+discountNote);
         quantityTv.setText(""+quantity);
-        originalPriceTv.setText("$"+modelProduct.getOriginalPrice());
-        priceDiscountedTv.setText("$"+modelProduct.getDiscountPrice());
-        finalPriceTv.setText("$"+finalCost);
+        originalPriceTv.setText("RM"+modelProduct.getOriginalPrice());
+        priceDiscountedTv.setText("RM"+modelProduct.getDiscountPrice());
+        finalPriceTv.setText("RM"+finalCost);
 
         AlertDialog dialog = builder.create();
         dialog.show();
@@ -190,7 +190,7 @@ public class AdapterProductSeller extends RecyclerView.Adapter<AdapterProductSel
                 finalCost = finalCost + cost;
                 quantity++;
 
-                finalPriceTv.setText("$"+finalCost);
+                finalPriceTv.setText("RM"+finalCost);
                 quantityTv.setText(""+quantity);
             }
         });
@@ -202,7 +202,7 @@ public class AdapterProductSeller extends RecyclerView.Adapter<AdapterProductSel
                     finalCost = finalCost - cost;
                     quantity --;
 
-                    finalPriceTv.setText("$"+finalCost);
+                    finalPriceTv.setText("RM"+finalCost);
                     quantityTv.setText(""+quantity);
                 }
             }
@@ -212,8 +212,8 @@ public class AdapterProductSeller extends RecyclerView.Adapter<AdapterProductSel
             public void onClick(View v) {
                 firebaseFirestore = FirebaseFirestore.getInstance();
                 String title = titleTv.getText().toString();
-                String priceEach = originalPriceTv.getText().toString().replace("$", "");
-                String price = finalPriceTv.getText().toString().replace("$","");
+                String priceEach = originalPriceTv.getText().toString().replace("RM", "");
+                String price = finalPriceTv.getText().toString().replace("RM","");
                 String quantity = quantityTv.getText().toString();
 
                 //add to database
