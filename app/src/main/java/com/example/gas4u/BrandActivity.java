@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -120,7 +121,6 @@ public class BrandActivity extends DrawerBaseActivity {
         addToCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(BrandActivity.this, AdapterProductSeller.class));
             }
         });
 
@@ -153,6 +153,7 @@ public class BrandActivity extends DrawerBaseActivity {
             }
         });
     }
+
     private void loadFilteredProducts(String selected) {
 //        productList = new ArrayList<>();
 //        //get all products

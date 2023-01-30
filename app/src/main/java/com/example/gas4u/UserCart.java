@@ -57,6 +57,8 @@ public class UserCart extends DrawerBaseActivity {
         setContentView(activityUserCartBinding.getRoot());
         allocateActivityTitle("Carts");
 
+        View view = LayoutInflater.from(this).inflate(R.layout.activity_user_cart, null);
+
         sTotalLabelTv = findViewById(R.id.sTotalLabelTv);
         sTotalTv = findViewById(R.id.sTotalTv);
         dFeeLabelTv = findViewById(R.id.dFeeLabelTv);
@@ -65,8 +67,8 @@ public class UserCart extends DrawerBaseActivity {
         totalTv = findViewById(R.id.totalTv);
         firebaseAuth = FirebaseAuth.getInstance();
 
-        loadAllCart();
-        showProductsUI();
+//        loadAllCart();
+//        showProductsUI();
     }
 
     private void showProductsUI() {
@@ -75,12 +77,7 @@ public class UserCart extends DrawerBaseActivity {
 
     private void loadAllCart() {
 
-        View view = LayoutInflater.from(this).inflate(R.layout.activity_user_cart, null);
         cartItems = new ArrayList<>();
-        //setup adapter
-        adapterCartItem = new AdapterCartItem(this, cartItems);
-        //set adapter
-        cartItemsRv.setAdapter(adapterCartItem);
         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
 
         db.collection("Cart").document(firebaseUser.getUid()).collection("CartList").orderBy("title", Query.Direction.ASCENDING).addSnapshotListener(new EventListener<QuerySnapshot>() {
@@ -101,6 +98,10 @@ public class UserCart extends DrawerBaseActivity {
                 }
             }
         });
+        //setup adapter
+        adapterCartItem = new AdapterCartItem(this, cartItems);
+        //set adapter
+        cartItemsRv.setAdapter(adapterCartItem);
     }
 
 
