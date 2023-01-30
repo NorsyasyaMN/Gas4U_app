@@ -7,6 +7,18 @@
     tools:context=".LogoutActivity"
     android:background="@drawable/admin_bg">
 
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        app:srcCompat="@drawable/door1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.50"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.34"/>
+
     <Button
         android:id="@+id/logoutBtn"
         android:layout_width="0dp"
@@ -22,13 +34,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
-
-    <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="249dp"
-        android:layout_height="363dp"
-        app:srcCompat="@drawable/door1"
-        tools:layout_editor_absoluteX="81dp"
-        tools:layout_editor_absoluteY="68dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
