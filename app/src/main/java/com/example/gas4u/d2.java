@@ -22,8 +22,6 @@ import android.widget.TextView;
 
 import com.example.gas4u.databinding.ActivityD2Binding;
 import com.example.gas4u.viewmodel.ModelOrderShop;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -32,14 +30,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentChange;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -47,18 +42,18 @@ import java.util.HashMap;
 public class d2 extends DrawerAdminActivity{
 
     ActivityD2Binding activityD2Binding;
-    TextView nameTv,emailTv, phoneTv, tabProductsTv, tabOrdersTv, filterProductsTv, filteredOrdersTv;
+    TextView nameTv,emailTv,phoneTv, tabProductsTv, tabOrdersTv, filterProductsTv, filteredOrdersTv;
     EditText searchProductEt;
     ImageButton logoutBtn,addToCart,filterProductBtn, filterOrderBtn;
     ImageView profileIv;
-    RelativeLayout productsRl, ordersRl;
+    RelativeLayout productsRl, ordersRL;
     RecyclerView productsRv, ordersRv;
-    //firebase
+
     FirebaseFirestore db;
     FirebaseAuth firebaseAuth;
     ProgressDialog progressDialog;
-    //ArrayList<ModelOrderedItem> productList;
-    //AdapterOrderedItem adapterOrderedItem;
+    ArrayList<ModelProduct> productList;
+    AdapterProductSeller adapterProductSeller;
     ArrayList<ModelOrderShop> orderShopArrayList;
     AdapterOrderShop adapterOrderShop;
     @Override
@@ -66,23 +61,22 @@ public class d2 extends DrawerAdminActivity{
         super.onCreate(savedInstanceState);
         activityD2Binding = ActivityD2Binding.inflate(getLayoutInflater());
         setContentView(activityD2Binding.getRoot());
-        //setContentView(R.layout.activity_d2);
         allocateActivityTitle("Orders");
 
         nameTv = findViewById(R.id.nameTv);
         emailTv = findViewById(R.id.emailTv);
         phoneTv = findViewById(R.id.phoneTv);
-        //tabProductsTv = findViewById(R.id.tabProductsTv);
+        tabProductsTv = findViewById(R.id.tabProductsTv);
         tabOrdersTv = findViewById(R.id.tabOrdersTv);
-        //filterProductsTv = findViewById(R.id.filterProductsTv);
-        //searchProductEt = findViewById(R.id.searchProductEt);
+        filterProductsTv = findViewById(R.id.filterProductsTv);
+        searchProductEt = findViewById(R.id.searchProductEt);
         logoutBtn = findViewById(R.id.logoutBtn);
-        //addToCart = findViewById(R.id.addToCart);
-        //filterProductBtn = findViewById(R.id.filterProductBtn);
+        addToCart = findViewById(R.id.addToCart);
+        filterProductBtn = findViewById(R.id.filterProductBtn);
         profileIv = findViewById(R.id.profileIv);
-        //productsRl = findViewById(R.id.productsRl);
-        //productsRv = findViewById(R.id.productsRv);
-        ordersRl = findViewById(R.id.ordersRl);
+        productsRl = findViewById(R.id.productsRl);
+        productsRv = findViewById(R.id.productsRv);
+        ordersRL = findViewById(R.id.ordersRl);
         filteredOrdersTv = findViewById(R.id.filteredOrdersTv);
         filterOrderBtn = findViewById(R.id.filterOrderBtn);
         ordersRv = findViewById(R.id.ordersRv); // creates the layout for recyclerview
@@ -94,11 +88,31 @@ public class d2 extends DrawerAdminActivity{
         firebaseAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
         checkUser();
-        //loadAllProducts();
+        loadAllProducts();
         loadAllOrders();
-        loadMyInfo();
 
-        //showProductsUI();
+        showProductsUI();
+
+        //search
+        searchProductEt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                try{
+                    adapterProductSeller.getFilter().filter(s);
+                }catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
 
         logoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -107,15 +121,49 @@ public class d2 extends DrawerAdminActivity{
             }
         });
 
-
-        tabOrdersTv.setOnClickListener(new View.OnClickListener() {
+        addToCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showOrdersUI();
+                startActivity(new Intent(d2.this, AdapterProductSeller.class));
+            }
+        });
+
+        tabProductsTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showProductsUI();
             }
 
         });
 
+        tabOrdersTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        filterProductBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(d2.this);
+                builder.setTitle("Choose Category:").setItems(Constants.productCategories1, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //get selected item
+                        String selected = Constants.productCategories1[which];
+                        filterProductsTv.setText(selected);
+                        if(selected.equals("All")){
+                            //load all
+                            loadAllProducts();
+                        }
+                        else{
+                            //load filter
+                            loadFilteredProducts(selected);
+                        }
+                    }
+                }).show();
+            }
+        });
         filterOrderBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -156,45 +204,12 @@ public class d2 extends DrawerAdminActivity{
         });*/
     }
 
-    private void showOrdersUI() {
-        ordersRl.setVisibility(View.VISIBLE);
-
-        tabOrdersTv.setTextColor(getResources().getColor(R.color.textColor));
-        tabOrdersTv.setBackgroundResource(R.drawable.shape_rect02);
-    }
-
     private void loadAllOrders() {
-        // initialize array list
+        // initializa array list
         orderShopArrayList = new ArrayList<>();
-        //setting the adapter
-        adapterOrderShop = new AdapterOrderShop(d2.this, orderShopArrayList);
-        //setting the adapter to recyclerview
-        ordersRv.setAdapter(adapterOrderShop);
 
-        db.collection("Users").orderBy("Orders", Query.Direction.ASCENDING)
-                .addSnapshotListener(new EventListener<QuerySnapshot>() {
-
-                    @Override
-                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-
-                        orderShopArrayList.clear();
-                        if (error != null) {
-
-                            Log.e("Firestore error", error.getMessage());
-                            return;
-                        }
-                        for (DocumentChange dc : value.getDocumentChanges()) {
-
-                            if (dc.getType() == DocumentChange.Type.ADDED) {
-                                orderShopArrayList.add(dc.getDocument().toObject(ModelOrderShop.class));
-                            }
-                            adapterOrderShop.notifyDataSetChanged();
-                        }
-
-                    }
-                });
         // loading orders
-        /*DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users");
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users");
         ref.child(firebaseAuth.getUid()).child("Orders")
                 .addValueEventListener(new ValueEventListener() {
                     @Override
@@ -209,13 +224,17 @@ public class d2 extends DrawerAdminActivity{
                             orderShopArrayList.add(modelOrderShop);
                         }
 
+                        //setting the adapter
+                        adapterOrderShop = new AdapterOrderShop(d2.this, orderShopArrayList);
+                        //setting the adapter to recyclerview
+                        ordersRv.setAdapter(adapterOrderShop);
                     }
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
 
                     }
-                });*/
+                });
     }
 
     private void loadFilteredProducts(String selected) {
@@ -249,7 +268,41 @@ public class d2 extends DrawerAdminActivity{
 //            }
 //        });
     }
+    private void loadAllProducts() {
+        productList = new ArrayList<>();
+        //setup adapter
+        adapterProductSeller = new AdapterProductSeller(d2.this, productList);
+        //set adapter
+        productsRv.setAdapter(adapterProductSeller);
+        db.collection("Product").orderBy("productTitle", Query.Direction.ASCENDING)
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
 
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+
+                        productList.clear();
+                        if (error != null) {
+
+                            Log.e("Firestore error", error.getMessage());
+                            return;
+                        }
+                        for (DocumentChange dc : value.getDocumentChanges()) {
+
+                            if (dc.getType() == DocumentChange.Type.ADDED) {
+                                productList.add(dc.getDocument().toObject(ModelProduct.class));
+                            }
+                            adapterProductSeller.notifyDataSetChanged();
+                        }
+
+                    }
+                });
+    }
+    private void showProductsUI() {
+        productsRl.setVisibility(View.VISIBLE);
+
+        tabProductsTv.setTextColor(getResources().getColor(R.color.colorPrimary));
+        tabProductsTv.setBackgroundResource((R.drawable.shape_rect01));
+    }
     private void checkUser() {
         FirebaseUser user = firebaseAuth.getCurrentUser();
         if(user==null){
@@ -257,10 +310,10 @@ public class d2 extends DrawerAdminActivity{
             finish();
         }
         else{
-            loadMyInfo();
+            //loadMyInfo();
         }
     }
-    private void loadMyInfo() {
+    /*   private void loadMyInfo() {
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         DocumentReference reference;
@@ -289,7 +342,7 @@ public class d2 extends DrawerAdminActivity{
                 }
             }
         });
-    }
+    }*/
 
     private void makeMeOffline() {
         progressDialog.setMessage("Logging Out...");
