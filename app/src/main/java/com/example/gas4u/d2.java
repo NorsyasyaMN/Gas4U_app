@@ -171,7 +171,7 @@ public class d2 extends DrawerAdminActivity{
         //setting the adapter to recyclerview
         ordersRv.setAdapter(adapterOrderShop);
 
-        db.collection("Orders").orderBy("orderID", Query.Direction.ASCENDING)
+        db.collection("Orders").orderBy("orderId", Query.Direction.ASCENDING)
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
 
                     @Override
