@@ -5,7 +5,7 @@
     android:layout_height="200dp"
     android:layout_width="match_parent"
     android:padding="20dp"
-    android:background="@color/splash_blue"
+    android:background="@color/pastel_green"
     android:orientation="vertical">
     
     <ImageView
@@ -19,7 +19,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="GAS DELIVERY APP"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:layout_gravity="center"
         android:textSize="18sp"
         android:textStyle="bold">

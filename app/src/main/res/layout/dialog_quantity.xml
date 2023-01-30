@@ -7,7 +7,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/shape_rect03">
+        android:background="@color/pastel_blue">
 
         <com.blogspot.atifsoftwares.circularimageview.CircularImageView
             android:id="@+id/productIv"
@@ -25,7 +25,7 @@
             android:layout_below="@id/productIv"
             android:layout_marginTop="5dp"
             android:text="Product Title"
-            android:textColor="@color/white"/>
+            android:textColor="@color/black"/>
 
         <TextView
             android:id="@+id/pQuantityTv"
@@ -35,7 +35,7 @@
             android:layout_below="@id/titleTv"
             android:text="Quantity"
             android:textSize="10sp"
-            android:textColor="@color/white"/>
+            android:textColor="@color/black"/>
 
         <TextView
             android:id="@+id/descriptionTv"
@@ -45,7 +45,7 @@
             android:layout_below="@id/pQuantityTv"
             android:layout_marginTop="5dp"
             android:text="Product Description"
-            android:textColor="@color/white"/>
+            android:textColor="@color/black"/>
 
         <TextView
             android:id="@+id/discountedNoteTv"
@@ -138,10 +138,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:background="@color/colorPrimary"
+        android:background="@drawable/button_sign_up"
         android:padding="5dp"
         android:text="Add To Cart"
         android:textColor="@color/white"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:textAllCaps="false">
     </Button>
 
